@@ -13,7 +13,6 @@ DROP TABLE IF EXISTS auteurs;
 CREATE TABLE IF NOT EXISTS fonctions (
 	id 			INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	nom 		VARCHAR(50) NOT NULL,
-	auteur		VARCHAR(50) NOT NULL,
 	dateAudit	DATE,
 	lien		VARCHAR(100) NOT NULL,
 	descTech	TEXT,
@@ -44,6 +43,6 @@ CREATE TABLE IF NOT EXISTS fonct_auteur (
 
 INSERT INTO auteurs VALUES (NULL, "Claire Smets");
 INSERT INTO auteurs VALUES (NULL, "Julien Legras");
-INSERT INTO auteurs VALUES (NULL, "William Boisseleau");
+INSERT INTO auteurs VALUES (NULL, "William BYoisseleau");
 INSERT INTO auteurs VALUES (NULL, "Mathieu Latimier");
 INSERT INTO auteurs VALUES (NULL, "Pascal Edouard");
