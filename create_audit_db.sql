@@ -42,6 +42,7 @@ CREATE TABLE IF NOT EXISTS fonct_auteur (
 );
 
 CREATE TABLE IF NOT EXISTS certificats (
+	id 				INT AUTO_INCREMENT PRIMARY KEY,
 	sig				TINYTEXT NOT NULL,
 	version			INT NOT NULL,
 	serie			INT NOT NULL,
@@ -54,9 +55,10 @@ CREATE TABLE IF NOT EXISTS certificats (
 	sujet_CN		VARCHAR(20) NOT NULL,
 	sujet_OU		VARCHAR(20),
 	sujet_O			VARCHAR(20),
-	clef_pub		TEXT,
+	clef_pub		TINYTEXT,
 	algo_clef_pub	VARCHAR(20),
-	PRIMARY KEY(sig(200))
+	ip				VARCHAR(15),
+	pid				INT
 );
 
 INSERT INTO auteurs VALUES (NULL, "Claire Smets");
