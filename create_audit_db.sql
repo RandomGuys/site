@@ -41,6 +41,24 @@ CREATE TABLE IF NOT EXISTS fonct_auteur (
 	FOREIGN KEY(idAuteur) REFERENCES auteurs(id)
 );
 
+CREATE TABLE IF NOT EXISTS certificats (
+	sig				TINYTEXT NOT NULL,
+	version			INT NOT NULL,
+	serie			INT NOT NULL,
+	algo_sig		VARCHAR(20),
+	emetteur_CN		VARCHAR(20) NOT NULL,
+	emetteur_OU		VARCHAR(20),
+	emetteur_O		VARCHAR(20),
+	debut_val		DATE NOT NULL,
+	fin_val			DATE NOT NULL,
+	sujet_CN		VARCHAR(20) NOT NULL,
+	sujet_OU		VARCHAR(20),
+	sujet_O			VARCHAR(20),
+	clef_pub		TEXT,
+	algo_clef_pub	VARCHAR(20),
+	PRIMARY KEY(sig(200))
+);
+
 INSERT INTO auteurs VALUES (NULL, "Claire Smets");
 INSERT INTO auteurs VALUES (NULL, "Julien Legras");
 INSERT INTO auteurs VALUES (NULL, "William BYoisseleau");
