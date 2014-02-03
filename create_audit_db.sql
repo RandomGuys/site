@@ -47,18 +47,12 @@ CREATE TABLE IF NOT EXISTS certificats (
 	version			INT NOT NULL,
 	serie			INT NOT NULL,
 	algo_sig		VARCHAR(20),
-	emetteur_CN		VARCHAR(20) NOT NULL,
-	emetteur_OU		VARCHAR(20),
-	emetteur_O		VARCHAR(20),
+	emetteur_CN		VARCHAR(60) NOT NULL,
 	debut_val		DATE NOT NULL,
 	fin_val			DATE NOT NULL,
-	sujet_CN		VARCHAR(20) NOT NULL,
-	sujet_OU		VARCHAR(20),
-	sujet_O			VARCHAR(20),
+	sujet_CN		VARCHAR(60) NOT NULL,
 	clef_pub		TINYTEXT,
-	algo_clef_pub	VARCHAR(20),
-	ip				VARCHAR(15),
-	pid				INT
+	pid				INT #si doublon : id du premier
 );
 
 INSERT INTO auteurs VALUES (NULL, "Claire Smets");
