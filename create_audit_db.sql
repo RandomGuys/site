@@ -9,6 +9,7 @@ DROP TABLE IF EXISTS fonct_auteur;
 DROP TABLE IF EXISTS implantations;
 DROP TABLE IF EXISTS fonctions;
 DROP TABLE IF EXISTS auteurs;
+DROP TABLE IF EXISTS certificats;
 
 CREATE TABLE IF NOT EXISTS fonctions (
 	id 			INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -43,13 +44,13 @@ CREATE TABLE IF NOT EXISTS fonct_auteur (
 
 CREATE TABLE IF NOT EXISTS certificats (
 	id 				INT AUTO_INCREMENT PRIMARY KEY,
-	sig				TINYTEXT NOT NULL,
+	sig				TEXT NOT NULL,
 	version			INT NOT NULL,
-	serie			INT NOT NULL,
+	serie			TINYTEXT NOT NULL,
 	algo_sig		VARCHAR(20),
 	emetteur_CN		VARCHAR(60) NOT NULL,
-	debut_val		DATE NOT NULL,
-	fin_val			DATE NOT NULL,
+	debut_val		VARCHAR(20) NOT NULL,
+	fin_val			VARCHAR(20) NOT NULL,
 	sujet_CN		VARCHAR(60) NOT NULL,
 	clef_pub		TINYTEXT,
 	pid				INT #si doublon : id du premier
