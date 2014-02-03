@@ -57,6 +57,6 @@ CREATE TABLE IF NOT EXISTS certificats (
 
 INSERT INTO auteurs VALUES (NULL, "Claire Smets");
 INSERT INTO auteurs VALUES (NULL, "Julien Legras");
-INSERT INTO auteurs VALUES (NULL, "William Boisseleau");
+INSERT INTO auteurs VALUES (NULL, "William BYoisseleau");
 INSERT INTO auteurs VALUES (NULL, "Mathieu Latimier");
 INSERT INTO auteurs VALUES (NULL, "Pascal Edouard");
