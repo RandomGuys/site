@@ -1,0 +1,14 @@
+Dans la base :
+- Le format de la date doit être JJ/MM/AA ou AAAA
+- Auteur doit être une clé étrangère sur la table auteurs 
+	* On peut développer un peu plus le champs auteur du coup
+
+
+Sur le site :
+- la liste implantations (CSS)
+
+
+Gérer l'insertion dans la base:
+	- Lors de l'insertion récupérer TOUT (même les balises html qui seront dans ce cas interprétés par le echo de l'affichage.
+
+Lien : http://fr.openclassrooms.com/informatique/cours/concevez-votre-site-web-avec-php-et-mysql/insert-ajouter-des-donnees

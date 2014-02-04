@@ -15,5 +15,11 @@
 		</ul>
 	  </div><!--/.nav-collapse -->
 	</div>
+  </div>  
+  <div id="alert-success" class="alert alert-success fade container" style="display:none">
+    <p>Sauvegarde réussie</p>
+  </div>
+  <div id="alert-error" class="alert alert-block alert-error fade container" style="display:none">
+    <p>Erreur</p>
   </div>
 </div>
