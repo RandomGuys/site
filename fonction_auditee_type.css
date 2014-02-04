@@ -1,0 +1,18 @@
+#liens {
+	font-size : 17px;
+	font-weight : normal;
+}
+h1>strong {
+	font-size : 22px;
+}
+
+h3>strong {
+	font-size : 17px;
+	font-weight : normal;
+}
+
+.imp {
+	color : #1E91FF;
+	font-weight : normal;
+	font-size : 17px;
+}

@@ -16,10 +16,17 @@ CREATE TABLE IF NOT EXISTS fonctions (
 	id 			INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	nom 		VARCHAR(50) UNIQUE NOT NULL,
 	dateAudit	DATE,
+	nomLien		VARCHAR(100),
 	lien		VARCHAR(100),
 	descTech	TEXT,
 	norme		TEXT,
 	audit 		TEXT
+);
+
+CREATE TABLE IF NOT EXISTS fnc_conforme (
+	id 			INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	idFonction 	INT,
+	FOREIGN KEY(idFonction) REFERENCES fonctions(id)
 );
 
 CREATE TABLE IF NOT EXISTS auteurs (
