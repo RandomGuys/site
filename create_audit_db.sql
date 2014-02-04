@@ -10,6 +10,8 @@ DROP TABLE IF EXISTS implantations;
 DROP TABLE IF EXISTS fonctions;
 DROP TABLE IF EXISTS auteurs;
 DROP TABLE IF EXISTS certificats;
+DROP TABLE IF EXISTS mod_and_fact;
+DROP TABLE IF EXISTS facteurs;
 
 CREATE TABLE IF NOT EXISTS fonctions (
 	id 			INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -53,7 +55,18 @@ CREATE TABLE IF NOT EXISTS certificats (
 	fin_val			VARCHAR(20) NOT NULL,
 	sujet_CN		VARCHAR(60) NOT NULL,
 	clef_pub		TINYTEXT,
+	algo_sig2		VARCHAR(20),
 	pid				INT #si doublon : id du premier
+);
+
+CREATE TABLE IF NOT EXISTS mod_and_fact (
+	id_mod			INT, 	-- id du modulo, fait référence au champ id de certificats
+	id_fact			INT 	-- id du facteur commun calculé, fait référence à id de la table facteurs
+);
+
+CREATE TABLE IF NOT EXISTS facteurs (
+	id				INT,
+	facteur			TEXT
 );
 
 INSERT INTO auteurs VALUES (NULL, "Claire Smets");
