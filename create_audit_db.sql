@@ -57,13 +57,14 @@ CREATE TABLE IF NOT EXISTS certificats (
 	pid				INT #si doublon : id du premier
 );
 
+--fait le lien entre les moduli factorisables et leurs facteurs
 CREATE TABLE IF NOT EXISTS mod_and_fact (
 	id_mod			INT, 	-- id du modulo, fait référence au champ id de certificats
 	id_fact			INT 	-- id du facteur commun calculé, fait référence à id de la table facteurs
 );
 
 CREATE TABLE IF NOT EXISTS facteurs (
-	id				INT,
+	id				INT AUTO_INCREMENT PRIMARY KEY,
 	facteur			TEXT
 );
 
