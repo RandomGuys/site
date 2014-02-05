@@ -1,0 +1,17 @@
+Nombre,Premier scan,Deuxième scan
+Serveurs scanés,,
+Certificats,85363,523017
+Certificats vulnérables,125,2022
+Proportion vulnérables/scanés,0.001464334664902,0.003866031123271
+Doublons de moduli,,
+Proportion doublons/scanés,,
+Certificats par défaut,,
+,,
+Taille de clef 128,,2345
+Taille de clef 192,,31888
+Taille de clef 256,,318558
+Taille de clef 512,,152413
+Taille de clef 768,,19532
+Taille de clef 1024,,2843
+Taille de clef 2048,,32
+Taille de clef 4096,,2

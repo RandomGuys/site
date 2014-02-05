@@ -9,9 +9,9 @@
 			$lignes = $bdd->query($sql);
 			$fonction = $lignes->fetchAll();
 
-
+			$lignes->closeCursor();
+			closeDB();
 		} catch(PDOException $e) {
-			echo "errur : ".$e;
 
 		}
   ?>
