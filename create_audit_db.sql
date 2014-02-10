@@ -59,6 +59,12 @@ CREATE TABLE IF NOT EXISTS facteurs (
 	facteur			TEXT
 );
 
+CREATE TABLE IF NOT EXISTS clefs (
+	id 		INT AUTO_INCREMENT PRIMARY KEY,
+	taille  INT,
+	nbCerts INT
+);
+
 # Insertion des auteurs
 INSERT INTO auteurs VALUES (NULL, "Claire Smets");
 INSERT INTO auteurs VALUES (NULL, "Julien Legras");
