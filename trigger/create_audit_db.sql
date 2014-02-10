@@ -1,10 +1,18 @@
 # CREATING USER if not exist:
 GRANT ALL ON AUDIT_DB.* TO randomguys@'localhost' IDENTIFIED BY 'm2ssi1314';
 
-DROP DATABASE IF EXISTS AUDIT_DB;
 # Test if table exists
 CREATE DATABASE IF NOT EXISTS AUDIT_DB;
 USE AUDIT_DB;
+
+DROP TABLE IF EXISTS fonct_auteur;
+DROP TABLE IF EXISTS implantations;		# for older versions of the script
+DROP TABLE IF EXISTS fonctions;
+DROP TABLE IF EXISTS auteurs;
+--DROP TABLE IF EXISTS certificats;
+DROP TABLE IF EXISTS mod_and_fact;
+DROP TABLE IF EXISTS facteurs;
+DROP TABLE IF EXISTS vulnerable;
 
 CREATE TABLE IF NOT EXISTS fonctions (
 	id 			INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -45,6 +53,7 @@ CREATE TABLE IF NOT EXISTS certificats (
 	fin_val			VARCHAR(20) NOT NULL,
 	sujet_CN		VARCHAR(60) NOT NULL,
 	clef_pub		TINYTEXT,
+	algo_sig2		VARCHAR(20),
 	pid				INT #si doublon : id du premier
 );
 
@@ -59,18 +68,15 @@ CREATE TABLE IF NOT EXISTS facteurs (
 	facteur			TEXT
 );
 
+CREATE TABLE IF NOT EXISTS vulnerable (
+	id 		INT AUTO_INCREMENT PRIMARY KEY,
+	idCert	INT,
+	FOREIGN KEY(idCert) REFERENCES certificats(id)
+);
+
 # Insertion des auteurs
 INSERT INTO auteurs VALUES (NULL, "Claire Smets");
 INSERT INTO auteurs VALUES (NULL, "Julien Legras");
 INSERT INTO auteurs VALUES (NULL, "William Boisseleau");
 INSERT INTO auteurs VALUES (NULL, "Mathieu Latimier");
 INSERT INTO auteurs VALUES (NULL, "Pascal Edouard");
-
-INSERT INTO clefs VALUES (NULL, 512, 2345);
-INSERT INTO clefs VALUES (NULL, 768, 31888);
-INSERT INTO clefs VALUES (NULL, 1024, 318558);
-INSERT INTO clefs VALUES (NULL, 2048, 152413);
-INSERT INTO clefs VALUES (NULL, 3072, 19532);
-INSERT INTO clefs VALUES (NULL, 4096, 2843);
-INSERT INTO clefs VALUES (NULL, 8192, 32);
-INSERT INTO clefs VALUES (NULL, 16384, 2);
