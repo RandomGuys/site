@@ -45,6 +45,7 @@ CREATE TABLE IF NOT EXISTS certificats (
 	fin_val			VARCHAR(20) NOT NULL,
 	sujet_CN		VARCHAR(60) NOT NULL,
 	clef_pub		TINYTEXT,
+	algo_sig2		VARCHAR(20),
 	pid				INT #si doublon : id du premier
 );
 
