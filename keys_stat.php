@@ -71,9 +71,10 @@
                         <?php
                             $ait = new ArrayIterator($clefs);
                             $cit = new CachingIterator($ait);
-                            foreach ($cit as $key) {
-                                echo "['".$key["taille"]."', ";
-                                echo $key["nbCerts"]."] ";
+
+                            foreach ($cit as $k) {
+                                echo "['".$k["taille"]."', ";
+                                echo $k["nbCerts"]."] ";
                                 if($cit->hasNext()) {
                                     echo ", ";
                                 }
@@ -119,7 +120,7 @@
             window.setTimeout(function() { alert.addClass('out').removeClass('in').css("display", "none") }, delay);
         }
 
-        function createIssuerChart() {
+        function createIssuerChart(dataFromServer) {
             $('#stats_issuer').highcharts({
                 chart: {
                     type: 'column'
@@ -137,6 +138,7 @@
                     ]
                 },
                 yAxis: {
+                    type: 'logarithmic',
                     title: 'Nbr Certificats'
 
                 },
@@ -155,32 +157,36 @@
                     }
                 },
                 series: [{ 
-                    name: 'google',
-                    data: [15000, 2540]
+                    name: 'Nombre de certificats',
+                    data: dataFromServer
                 }]
             });
         }
 
         function getChartData() {
-            var issuer = "";
-            var tailleClef = "";
+            var issuer = $("#issuer").val();
+            var tailleClef = $("#keysize").val();
+            var sujet = $("#subject").val();
 
             $.ajax({
                 type:"POST",
-                url:"save_audit.php",
-                dataType: 'json',
-                data:{issuer: issuer, tailleClef:tailleClef},
-                error:function(err){createAutoClosingAlert("#alert-error", 4000);},
+                url:"getChartData.php",
+                dataType: "json",
+                data:{issuer: issuer, tailleClef:tailleClef, sujet:sujet},
+                error:function(request, status, error){createAutoClosingAlert("#alert-error", 4000);},
                 success: function(dataFromServer) {
+                    
                     if (dataFromServer != null) {
-                        generateIssuerChart(dataFromServer);
+                        dataFromServer = JSON.parse("[" + dataFromServer + "]")
+                        alert(dataFromServer);
+                        createIssuerChart(dataFromServer);
                     } else {
+                        alert("erreur");
                         createAutoClosingAlert("#alert-error", 4000);
                     }
                 }
             });
         }
-
 
         $( document ).ready( function () {
             $('#graphesTab a').click(function (e) {
@@ -190,45 +196,6 @@
             $('#general').tab('show');
             
             createCertsChart();
-            
-            /*$.get('stats_nbp.csv', function(data) {
-                // Split the lines
-                var lines = data.split('\n');
-                
-                // Iterate over the lines and add categories or series
-                $.each(lines, function(lineNo, line) {
-                    var items = line.split(',');
-                    
-                    // header line containes categories
-                    if (lineNo == 0) {
-                        $.each(items, function(itemNo, item) {
-                            if (itemNo > 0) column_options.xAxis.categories.push(item);
-                        });
-                    }
-                    
-                    // the rest of the lines contain data with their name in the first 
-                    // position
-                    else {
-                        var series = {
-                            data: []
-                        };
-                        $.each(items, function(itemNo, item) {
-                            if (itemNo == 0) {
-                                series.name = item;
-                            } else {
-                                series.data.push(parseFloat(item));
-                            }
-                        });
-                        
-                        column_options.series.push(series);
-                
-                    }
-                    
-                });
-                
-                // Create the chart
-                var chart = new Highcharts.Chart(column_options);
-            });*/
         });    
 
     </script>
@@ -241,7 +208,7 @@
         <ul class="nav nav-tabs" id="graphesTab">
             <li><a href="#general" data-toggle="tab" onClick="createCertsChart()">Général</a></li>
             <li><a href="#tailleClef" data-toggle="tab" onClick="createPieChart()">Taille de Clefs</a></li>
-            <li><a href="#issuer" data-toggle="tab" onClick="createIssuerChart()">Issuer</a></li>
+            <li><a href="#issuer" data-toggle="tab" onClick="">Issuer</a></li>
             <li><a href="#nbPremier" data-toggle="tab">Nombre Premier</a></li>
         </ul>
         <div class="tab-content">
@@ -263,13 +230,13 @@
                             <tbody>
                                 <tr>
                                     <td>Certificats récupérés</td>
-                                    <td>85363 </td> <!-- 85363 -->
-                                    <td>523017</td> <!-- 523017 -->
+                                    <td>85363 </td> 
+                                    <td>527711</td> 
                                 </tr>
                                 <tr>
                                     <td>Certificats vulnérables</td>
                                     <td>125</td>
-                                    <td>2022</td>
+                                    <td>2382</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -284,18 +251,18 @@
                             <tbody>
                                 <tr>
                                     <td>Certificats récupérés</td>
-                                    <td>85363 </td> <!-- 85363 -->
-                                    <td>523017</td> <!-- 523017 -->
+                                    <td>85363 </td> 
+                                    <td>527711</td> 
                                 </tr>
                                 <tr>
                                     <td>Certificats vulnérables</td>
                                     <td>125</td>
-                                    <td>2022</td>
+                                    <td>2382</td>
                                 </tr>
                                 <tr>
                                     <td>Pourcentage</td>
                                     <td>0.1464</td>
-                                    <td>0.3866</td>
+                                    <td>0.4514</td>
                                 </tr>
                           </tbody>  
                         </table>
@@ -335,8 +302,8 @@
             </div>
             <div class="tab-pane" id="issuer">
                 <form method="GET" action="keys_stat.php" class="form-inline">
-                    <input class="input-large" type="text" name="subject" placeholder="Subject" value="<?php echo $_GET["subject"]; ?>">
-                    <input type="text" name="issuer" placeholder="Issuer" value="<?php echo $_GET["issuer"]; ?>">
+                    <input class="input-large" type="text" id="subject" name="subject" placeholder="Subject" value="<?php if (isset($_GET["subject"])) { echo $_GET["subject"]; } ?>">
+                    <input type="text" id="issuer" name="issuer" placeholder="Issuer" value="<?php if (isset($_GET["issuer"])) { echo $_GET["issuer"]; } ?>">
                     <label for="keysize">Taille de clef :</label>
                     <select id="keysize" name="keysize" class="input-small">
                     <option value="0" <?php if (isset($_GET["keysize"]) && $_GET["keysize"] === "") { echo "selected=\"selected\""; } ?>>Toutes</option>

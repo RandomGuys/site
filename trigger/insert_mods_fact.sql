@@ -33,7 +33,7 @@ FOR EACH ROW
 	BEGIN
 	DECLARE id_facteur INT;
 	DECLARE id_modulo INT;
-	set id_modulo = (select id from certificats C where C.clef_pub LIKE (NEW.modulo));
+	set id_modulo = (select id from certificats C where C.clef_pub LIKE (NEW.modulo) LIMIT 1);
 	set id_facteur = (select id from facteurs F where F.facteur LIKE (NEW.facteur));
 	insert into mod_and_fact values (id_modulo, id_facteur);
 END;//
