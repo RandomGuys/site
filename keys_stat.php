@@ -120,53 +120,59 @@
             window.setTimeout(function() { alert.addClass('out').removeClass('in').css("display", "none") }, delay);
         }
 
-        function createIssuerChart(dataFromServer) {
+        function createIssuerChart(dataFromServer, title, size) {
             $('#stats_issuer').highcharts({
                 chart: {
-                    type: 'column'
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
                 },
                 title: {
-                    text: 'Certificats vulnérables'
-                },
-                subtitle: {
-                    text: 'issuer : Google'
-                },
-                xAxis: {
-                    categories: [
-                        'récupérés',
-                        'Vulnérables'
-                    ]
-                },
-                yAxis: {
-                    type: 'logarithmic',
-                    title: 'Nbr Certificats'
-
+                    text: title
                 },
                 tooltip: {
-                    headerFormat:   '<span style="font-size:10px">{point.title}</span><table>',
-                    pointFormat:    '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                                    '<td style="padding:0"><b>{point.y:.1f} certificats</b></td></tr>',
-                    footerFormat:   '</table>',
-                    shared: true,
-                    useHTML: true
+                    pointFormat: '<b>{point.y:.1f} certificats</b>'
                 },
                 plotOptions: {
-                    column: {
-                        pointPadding: 0.2,
-                        borderWidth: 0
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            color: '#000000',
+                            connectorColor: '#000000',
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                        }
                     }
                 },
-                series: [{ 
-                    name: 'Nombre de certificats',
-                    data: dataFromServer
+                series: [{
+                    type: 'pie',
+                    name: title,
+                    data: [
+                        ['Récupérés',   dataFromServer[0]],
+                        ['Vulnérables', dataFromServer[1]]
+                    ]
                 }]
             });
+            
         }
 
         function getChartData() {
-            var issuer = $("#issuer").val();
+            var issuer = $("#emetteur").val();
             var tailleClef = $("#keysize").val();
             var sujet = $("#subject").val();
+            var title = "";    
+            var size = "toutes les tailles";
+
+            if (issuer.length > 0) {
+                title = issuer;    
+            } else if (sujet.length > 0) {
+                title = sujet;    
+            }
+
+            if (tailleClef > 0) {
+                size = "< " + tailleClef;
+            }
 
             $.ajax({
                 type:"POST",
@@ -179,7 +185,7 @@
                     if (dataFromServer != null) {
                         dataFromServer = JSON.parse("[" + dataFromServer + "]")
                         alert(dataFromServer);
-                        createIssuerChart(dataFromServer);
+                        createIssuerChart(dataFromServer, title, size);
                     } else {
                         alert("erreur");
                         createAutoClosingAlert("#alert-error", 4000);
@@ -196,6 +202,17 @@
             $('#general').tab('show');
             
             createCertsChart();
+
+            $(function() {
+                $("form input").keypress(function (e) {
+                    if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
+                        $('#submitBtn').click();
+                        return false;
+                    } else {
+                        return true;
+                    }
+                });
+            });
         });    
 
     </script>
@@ -209,7 +226,6 @@
             <li><a href="#general" data-toggle="tab" onClick="createCertsChart()">Général</a></li>
             <li><a href="#tailleClef" data-toggle="tab" onClick="createPieChart()">Taille de Clefs</a></li>
             <li><a href="#issuer" data-toggle="tab" onClick="">Issuer</a></li>
-            <li><a href="#nbPremier" data-toggle="tab">Nombre Premier</a></li>
         </ul>
         <div class="tab-content">
             <div class="tab-pane active" id="general">
@@ -301,18 +317,19 @@
                 </div>
             </div>
             <div class="tab-pane" id="issuer">
-                <form method="GET" action="keys_stat.php" class="form-inline">
+                <form method="GET" id="getChart" action="keys_stat.php" class="form-inline">
                     <input class="input-large" type="text" id="subject" name="subject" placeholder="Subject" value="<?php if (isset($_GET["subject"])) { echo $_GET["subject"]; } ?>">
-                    <input type="text" id="issuer" name="issuer" placeholder="Issuer" value="<?php if (isset($_GET["issuer"])) { echo $_GET["issuer"]; } ?>">
+                    <input type="text" id="emetteur" name="issuer" placeholder="Issuer" value="<?php if (isset($_GET["issuer"])) { echo $_GET["issuer"]; } ?>">
                     <label for="keysize">Taille de clef :</label>
-                    <select id="keysize" name="keysize" class="input-small">
-                    <option value="0" <?php if (isset($_GET["keysize"]) && $_GET["keysize"] === "") { echo "selected=\"selected\""; } ?>>Toutes</option>
-                    <option value="512" <?php if (isset($_GET["keysize"]) && $_GET["keysize"] === "512") { echo "selected=\"selected\""; } ?>> &lt; 512</option>
-                    <option value="1024" <?php if (isset($_GET["keysize"]) && $_GET["keysize"] === "1024") { echo "selected=\"selected\""; } ?>>1024</option>
-                    <option value="2048" <?php if (isset($_GET["keysize"]) && $_GET["keysize"] === "2048") { echo "selected=\"selected\""; } ?>>2048</option>
-                    <option value="4096" <?php if (isset($_GET["keysize"]) && $_GET["keysize"] === "4096") { echo "selected=\"selected\""; } ?>>4096 &gt;</option>
+                    <select id="keysize" name="keysize" class="input-medium">
+                    <option value="0" >Toutes</option>
+                    <option value="512"> &le; 512</option>
+                    <option value="1024">512 - 1024</option>
+                    <option value="2048">1024 - 2048</option>
+                    <option value="4096">2048 - 4096</option>
+                    <option value="16384">4096 &gt;</option>
                     </select>
-                    <button type="button" class="btn" onClick="getChartData()">Rechercher</button>
+                    <button type="button" id="submitBtn" class="btn" onClick="getChartData()">Rechercher</button>
                 </form>
                 <div class="row">
                     <div class="span6">
@@ -324,7 +341,7 @@
                     </div>
                 </div>
             </div>
-            <div class="tab-pane" id="nbPremier">...</div>
+            
         </div>
       </div>
 
