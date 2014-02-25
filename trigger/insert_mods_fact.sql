@@ -3,6 +3,7 @@ DROP TABLE facteurs;
 DROP TABLE mod_and_fact;
 DROP TABLE IF EXISTS tmp;
 DROP TRIGGER IF EXISTS insert_line;
+DROP TABLE IF EXISTS stats_issuer;
 
 CREATE TABLE IF NOT EXISTS facteurs (
 	id INT AUTO_INCREMENT PRIMARY KEY,
@@ -46,3 +47,14 @@ INTO TABLE tmp
 FIELDS TERMINATED BY ','
 (modulo, facteur);
 
+CREATE TABLE IF NOT EXISTS stats_issuer (
+  emetteur_CN VARCHAR(60) NOT NULL,
+  total INT,
+  vuln INT
+);
+
+INSERT INTO stats_issuer SELECT DISTINCT c.emetteur_CN, 
+	(SELECT COUNT(id_mod) FROM mod_and_fact m1 join certificats c1 ON m1.id_mod = c1.id 
+	WHERE c1.emetteur_CN=c.emetteur_CN) AS VULN
+from mod_and_fact m JOIN certificats c ON m.id_mod = c.id;
+# INSERT INTO stats_issuer SELECT DISTINCT emetteur_CN, COUNT(emetteur_CN), (SELECT count(*) from mod_and_fact m where m.id_mod = c.id) AS VULN FROM certificats c GROUP BY emetteur_CN HAVING VULN > 0;

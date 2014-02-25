@@ -38,13 +38,13 @@ CREATE TABLE IF NOT EXISTS certificats (
 	id 				INT AUTO_INCREMENT PRIMARY KEY,
 	sig				TEXT NOT NULL,
 	version			INT NOT NULL,
-	serie			TINYTEXT NOT NULL,
+	serie			TEXT NOT NULL,
 	algo_sig		VARCHAR(20),
-	emetteur_CN		VARCHAR(60) NOT NULL,
+	emetteur_CN		TEXT NOT NULL,
 	debut_val		VARCHAR(20) NOT NULL,
 	fin_val			VARCHAR(20) NOT NULL,
-	sujet_CN		VARCHAR(60) NOT NULL,
-	clef_pub		TINYTEXT,
+	sujet_CN		TEXT NOT NULL,
+	clef_pub		TEXT,
 	algo_sig2		VARCHAR(20),
 	pid				INT #si doublon : id du premier
 );

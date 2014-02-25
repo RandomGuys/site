@@ -38,8 +38,11 @@
     <script src="highcharts/js/highcharts.js"></script>
     <script src="highcharts/js/modules/data.js"></script>
     <script src="highcharts/js/modules/exporting.js"></script>
+    <script src="ladda-bootstrap-master/dist/spin.min.js"></script>
+    <script src="ladda-bootstrap-master/dist/ladda.min.js"></script>
 
     <script type="text/javascript">
+        var done = false;
         var pie_options = {
                 chart: {
                     renderTo: 'stats_clefs',
@@ -154,7 +157,27 @@
                     ]
                 }]
             });
-            
+        }
+
+        function getIssuerStats() {
+           if(!done) {
+                $("#loader").show();
+                $.ajax({
+                    type:"POST",
+                    url:"getIssuerStats.php",
+                    data:{  },
+                    error:function(request, status, error){createAutoClosingAlert("#alert-error", 4000);},
+                    success: function(dataFromServer) {
+                        if (dataFromServer != null) {
+                            $("#tblOutput").replaceWith(dataFromServer);
+                            $("#loader").hide();
+                            done=true;
+                        } else {
+                            createAutoClosingAlert("#alert-error", 4000);
+                        }
+                    }
+                });
+           }
         }
 
         function getChartData() {
@@ -163,6 +186,9 @@
             var sujet = $("#subject").val();
             var title = "";    
             var size = "toutes les tailles";
+            var l = Ladda.create(document.querySelector('#submitBtn'));
+        
+            l.start();
 
             if (issuer.length > 0) {
                 title = issuer;    
@@ -184,17 +210,17 @@
                     
                     if (dataFromServer != null) {
                         dataFromServer = JSON.parse("[" + dataFromServer + "]")
-                        alert(dataFromServer);
                         createIssuerChart(dataFromServer, title, size);
                     } else {
-                        alert("erreur");
                         createAutoClosingAlert("#alert-error", 4000);
                     }
+                    l.stop();
                 }
             });
         }
 
         $( document ).ready( function () {
+            $('.test').tooltip();
             $('#graphesTab a').click(function (e) {
                 e.preventDefault();
                 $(this).tab('show');
@@ -225,7 +251,8 @@
         <ul class="nav nav-tabs" id="graphesTab">
             <li><a href="#general" data-toggle="tab" onClick="createCertsChart()">Général</a></li>
             <li><a href="#tailleClef" data-toggle="tab" onClick="createPieChart()">Taille de Clefs</a></li>
-            <li><a href="#issuer" data-toggle="tab" onClick="">Issuer</a></li>
+            <li><a href="#issuer" data-toggle="tab" onClick="getIssuerStats()">Issuer</a></li>
+            <li><a href="#recherche" data-toggle="tab" >Recherche Issuer</a></li>
         </ul>
         <div class="tab-content">
             <div class="tab-pane active" id="general">
@@ -317,6 +344,14 @@
                 </div>
             </div>
             <div class="tab-pane" id="issuer">
+                <div class="row">
+                    <div class="span9">
+                        <table id="tblOutput"></table>
+                        <img id="loader" style="display:none; height: 50px;padding:150px;" src="images/loader.gif">
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="recherche">
                 <form method="GET" id="getChart" action="keys_stat.php" class="form-inline">
                     <input class="input-large" type="text" id="subject" name="subject" placeholder="Subject" value="<?php if (isset($_GET["subject"])) { echo $_GET["subject"]; } ?>">
                     <input type="text" id="emetteur" name="issuer" placeholder="Issuer" value="<?php if (isset($_GET["issuer"])) { echo $_GET["issuer"]; } ?>">
@@ -329,15 +364,12 @@
                     <option value="4096">2048 - 4096</option>
                     <option value="16384">4096 &gt;</option>
                     </select>
-                    <button type="button" id="submitBtn" class="btn" onClick="getChartData()">Rechercher</button>
+                    <button id="submitBtn" class="btn ladda-button" data-style="expand-right" data-spinner-color="#4f4f4f" onClick="getChartData()" type="button"><span class="ladda-label">Rechercher</span></button>
                 </form>
                 <div class="row">
                     <div class="span6">
-                        <div id="stats_issuer" style="min-width: 500px; height: 400px; margin: 0 auto"></div>
-                    </div>
-                
-                    <div class="span6">
-                        <div id="stats_issuer_bar" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                        <div id="stats_issuer" style="min-width: 500px; height: 400px; margin: 0 auto">
+                        </div>
                     </div>
                 </div>
             </div>
