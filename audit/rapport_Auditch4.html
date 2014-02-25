@@ -1,0 +1,1602 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html xml:lang="fr" > 
+<head><title>4 Signature et authentification</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html,2,sections+ --> 
+<meta name="src" content="rapport_Audit.tex"> 
+<meta name="date" content="2014-02-25 17:35:00"> 
+<link rel="stylesheet" type="text/css" href="rapport_Audit.css"> 
+</head><body 
+>
+   <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+href="rapport_Auditli5.html" >next</a>] [<a 
+href="rapport_Auditch3.html" >prev</a>] [<a 
+href="rapport_Auditch3.html#tailrapport_Auditch3.html" >prev-tail</a>] [<a 
+href="rapport_Auditch2.html#tailrapport_Auditch4.html">tail</a>] [<a 
+href="rapport_Audit.html#rapport_Auditch6.html" >up</a>] </p></div>
+   <h2 class="chapterHead"><span class="titlemark">Chapitre&#x00A0;4</span><br /><a 
+href="#x11-1580004" id="x11-1580004">Signature et authentification</a></h2>
+<a 
+ id="x11-158001r144"></a>
+<h3 class="sectionHead"><span class="titlemark">4.1   </span> <a 
+href="#x11-1590001" id="x11-1590001">Définitions et contexte</a></h3>
+<!--l. 4--><p class="noindent" >Une signature électronique utilise le concept de la traditionnelle signature sur papier et la tourne en une empreinte
+électronique. Cette empreinte est un message encodé et est unique pour chaque document et chaque signataire. La
+signature permet alors de garantir l&#8217;authenticité du signataire pour son document. Toute modification dans le
+document après l&#8217;avoir signé rend la signature invalide, ce qui protège alors contre les fausses informations et la
+contrefaçon des signatures.<br 
+class="newline" />
+<!--l. 6--><p class="indent" >   De ce fait, il est important de faire attention à toute les formes de vulnérabilités des signatures afin de
+comprendre les attaques possibles sur la contrefaçon des signatures. Cette partie est consacrée à la bonne
+compréhension et l&#8217;implémentation qui sont définies dans la RFC, afin de se prémunir des différentes attaques
+possibles. On verra, cependant, qu&#8217;il existe quand même des failles au niveau des injections, surtout lorsque la
+librairie dépend trop du matériel.
+<a 
+ id="x11-159001r182"></a>
+<h3 class="sectionHead"><span class="titlemark">4.2   </span> <a 
+href="#x11-1600002" id="x11-1600002">Audits</a></h3>
+<a 
+ id="x11-160001r174"></a>
+<h4 class="subsectionHead"><span class="titlemark">4.2.1   </span> <a 
+href="#x11-1610001" id="x11-1610001">Audit 4.1<span class="frenchb-nbsp">&nbsp;</span>: Attaque par injection de fautes sur les certificats RSA</a></h4>
+<a 
+ id="x11-161001r180"></a>
+<h5 class="subsubsectionHead"><span class="titlemark">4.2.1.1   </span> <a 
+href="#x11-1620001" id="x11-1620001">Normes visées</a></h5>
+<!--l. 12--><p class="noindent" >Dans la RFC 3447 <span class="cite">[<a 
+href="rapport_Auditli5.html#Xrfc3447">31</a>]</span>, la signature est décrite telle une primitive de signature qui produit la représentation de la
+signature depuis un message sous le contrôle d&#8217;une clef privée. La vérification se fait alors en récupérant la
+représentation du message depuis la représentation de la signature sous le contrôle de la clef publique
+correspondante.<br 
+class="newline" />
+<!--l. 14--><p class="indent" >   La signature se déroule en deux opérations qui sont la génération et la vérification. L&#8217;opération de génération
+consiste donc à générer une signature depuis un message avec la clef privée de l&#8217;utilisateur (signataire) et
+l&#8217;opération de vérification consiste à vérifier la signature en se basant sur le message en utilisant la clef publique
+du signataire. Ce schéma peut être utilisé dans de multiples applications telles que les certificats
+X.509.<br 
+class="newline" />
+<!--l. 18--><p class="indent" >   La norme spécifie deux types de schéma de signature qui sont<span class="frenchb-nbsp">&nbsp;</span>:
+      <ul class="itemize1">
+      <li class="itemize"><span 
+class="ec-lmtt-10x-x-109">RSASSA-PSS</span><span class="frenchb-thinspace">&nbsp;</span>;
+      </li>
+      <li class="itemize"><span 
+class="ec-lmtt-10x-x-109">RSASSA-PKCS1-v1_5</span>. <br 
+class="newline" /></li></ul>
+<!--l. 24--><p class="indent" >   Même si aucune attaque n&#8217;est connue contre <span 
+class="ec-lmtt-10x-x-109">RSASSA-PKCS1-v1_5</span>, <span 
+class="ec-lmtt-10x-x-109">RSASSA-PSS </span>est recommandé dans l&#8217;intérêt
+d&#8217;augmenter la robustesse d&#8217;un système. <span 
+class="ec-lmtt-10x-x-109">RSASSA-PKCS1-v1_5 </span>est toujours inclue pour des raisons de compatibilité
+avec les applications existantes et, même si elle est toujours appropriée dans les nouvelles applications, une
+transition vers <span 
+class="ec-lmtt-10x-x-109">RSASSA-PSS </span>est encouragée.<br 
+class="newline" />
+<!--l. 27--><p class="indent" >   La norme décrit un modèle général à suivre (qui est également utilisé pour IEEE Std 1363-2000)
+combinant les primitives de signature et de vérification avec une méthode d&#8217;encodage sur les signatures.
+L&#8217;opération de génération de signature applique une opération d&#8217;encodage de message à un message
+pour produire un message encodé, qui est ensuite converti en un entier représentatif du message.
+Une primitive de signature est alors appliquée sur la représentation du message pour produire la
+signature.<br 
+class="newline" />
+<!--l. 30--><p class="indent" >   Dans le sens inverse, l&#8217;opération de vérification de signature applique une primitive de vérification de signature
+à la signature pour récupérer la représentation du message, qui est alors convertie dans un message de chaîne de
+caractères encodé. L&#8217;opération de vérification est appliquée au message et au message encodé pour déterminer s&#8217;ils
+consistent bien en l&#8217;un et l&#8217;autre.<br 
+class="newline" />
+<!--l. 33--><p class="noindent" ><span class="paragraphHead"><a 
+href="#x11-1630001" id="x11-1630001"><span 
+class="ec-lmbx-10x-x-109">RSASSA-PSS</span><span class="frenchb-nbsp">&nbsp;</span><span 
+class="ec-lmbx-10x-x-109">: </span><br 
+class="newline" /></a></span>
+   <span 
+class="ec-lmtt-10x-x-109">RSASSA-PSS </span>combine les primitives <span 
+class="ec-lmtt-10x-x-109">RSASP1 </span>et <span 
+class="ec-lmtt-10x-x-109">RSAVP1 </span>avec la méthode d&#8217;encodage <span 
+class="ec-lmtt-10x-x-109">EMSA-PSS</span>. La longueur du
+message sur laquelle <span 
+class="ec-lmtt-10x-x-109">RSASSA-PSS </span>peut travailler est soit illimitée, soit contrainte par une très grande valeur,
+dépendant de la fonction de hachage. Contrairement à <span 
+class="ec-lmtt-10x-x-109">RSASSA-PKCS1-v1_5</span>, un identificateur de fonction de
+hachage n&#8217;est pas inclue dans le message encodé par <span 
+class="ec-lmtt-10x-x-109">EMSA-PSS</span>. De ce fait, en théorie, il est possible pour un
+attaquant de substituer une autre fonction de hachage (potentiellement plus faible) que celle sélectionnée par le
+signataire. Il est alors recommandé que la fonction de génération de masquage d&#8217;<span 
+class="ec-lmtt-10x-x-109">EMSA-PSS </span>soit basée sur la même
+fonction de hachage. De cette façon, l&#8217;encodage de tout entier dépendra de la fonction de hachage et il sera
+plus difficile pour un adversaire de substituer une autre fonction que ce qui a été sélectionné par le
+signataire.<br 
+class="newline" />
+<!--l. 37--><p class="indent" >   La comparaison entre fonctions de hachage est seulement utilisée pour empêcher la substitution de fonction de
+hachage, et n&#8217;est pas nécessaire si la fonction de hachage est substituée d&#8217;une autre façon (e.g., le vérificateur
+n&#8217;accepte qu&#8217;une fonction de hachage désignée).<br 
+class="newline" />
+<!--l. 40--><p class="indent" >   Ce qui est différent pour <span 
+class="ec-lmtt-10x-x-109">RSASSA-PSS </span>des autres méthodes de signature RSA, c&#8217;est qu&#8217;il est probabiliste plutôt
+que déterministe, du fait de l&#8217;incorporation d&#8217;un aléa. Cette valeur d&#8217;aléa augmente la sécurité de la méthode.
+Cependant, le fait que la valeur soit aléatoire n&#8217;est pas critique pour la sécurité. Dans les situations où l&#8217;aléatoire
+n&#8217;est pas possible, une valeur fixe ou une séquence de nombres peut être employée plutôt, et avec une sécurité
+similaire.
+<a 
+ id="x11-163001r185"></a>
+<h5 class="subsubsectionHead"><span class="titlemark">4.2.1.2   </span> <a 
+href="#x11-1640002" id="x11-1640002">Description de la faille</a></h5>
+     L&#8217;Université du Michigan a réussi l&#8217;exploit de récupérer la clef privée d&#8217;un certificat RSA en un peu plus de
+100h <span class="cite">[<a 
+href="rapport_Auditli5.html#Xandrea2010RSA">53</a>]</span> <span class="cite">[<a 
+href="rapport_Auditli5.html#Xopensslvuln2010">23</a>]</span>. L&#8217;attaque fonctionne par injection de fautes <span class="cite">[<a 
+href="rapport_Auditli5.html#Xfault2008lawson">36</a>]</span> sur la méthode d&#8217;authentification. La technique
+est donc très poussée, mais le résultat en vaut la chandelle. L&#8217;injection de fautes doit se faire sur
+quelques bits pour ne pas faire dysfonctionner le système tout entier. Les signatures erronées produites
+révéleront de l&#8217;information sur la clef privée. Avec le bon matériel et 100h d&#8217;attente, la clef peut être
+reforgée.<br 
+class="newline" />
+                                                                                                  
+
+                                                                                                  
+   La technique consite à renseigner de fausses signatures afin de vérifier les fautes avec la clef publique de la
+machine. Lorsque la signature est identifiée comme fausse, elle est envoyée à un analyseur contenant l&#8217;algorithme du
+<span 
+class="ec-lmri-10x-x-109">Listing </span><a 
+href="#x11-164001r1">4.1<!--tex4ht:ref: windowssearch --></a>
+   <!--l. 48-->
+<a 
+ id="x11-164001r1"></a>
+<a 
+ id="x11-164002"></a>
+   <div class="lstlisting" id="listing-11"><span class="label"><a 
+ id="x11-164003r1"></a><span 
+class="ec-lmr-6">1</span></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">window</span><span 
+class="ec-lmtt-9">\</span><span 
+class="ec-lmtt-9">_search</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">m</span><span 
+class="ec-lmtt-9">,</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">s</span><span 
+class="ec-lmtt-9">,</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">e</span><span 
+class="ec-lmtt-9">,</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">win</span><span 
+class="ec-lmtt-9">\</span><span 
+class="ec-lmtt-9">_size</span><span 
+class="ec-lmtt-9">,</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">win</span><span 
+class="ec-lmtt-9">\</span><span 
+class="ec-lmtt-9">_idx</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-164004r2"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">found</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">=</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-164005r3"></a><span 
+class="ec-lmr-6">3</span></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtk-10x-x-90">for</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">d</span><span 
+class="ec-lmtt-9">[</span><span 
+class="ec-lmtt-9">win</span><span 
+class="ec-lmtt-9">\</span><span 
+class="ec-lmtt-9">_idx</span><span 
+class="ec-lmtt-9">]</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">in</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">[0..2^</span><span 
+class="ec-lmtt-9">win</span><span 
+class="ec-lmtt-9">\</span><span 
+class="ec-lmtt-9">_size</span><span 
+class="ec-lmtt-9">-1];</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-164006r4"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">sqr</span><span 
+class="ec-lmtt-9">\</span><span 
+class="ec-lmtt-9">_iter</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">in</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">[0..</span><span 
+class="ec-lmtt-9">win</span><span 
+class="ec-lmtt-9">\</span><span 
+class="ec-lmtt-9">_size</span><span 
+class="ec-lmtt-9">-1];</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-164007r5"></a><span 
+class="ec-lmr-6">5</span></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">fault</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">in</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">[0..</span><span 
+class="ec-lmtt-9">card</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">bits</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">d</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">-1])</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-164008r6"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">found</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">+=</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">test</span><span 
+class="ec-lmtt-9">\</span><span 
+class="ec-lmtt-9">_equation</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">10(</span><span 
+class="ec-lmtt-9">m</span><span 
+class="ec-lmtt-9">,</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">s</span><span 
+class="ec-lmtt-9">,</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">e</span><span 
+class="ec-lmtt-9">,</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-164009r7"></a><span 
+class="ec-lmr-6">7</span></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">win</span><span 
+class="ec-lmtt-9">\</span><span 
+class="ec-lmtt-9">_idx</span><span 
+class="ec-lmtt-9">,</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">d</span><span 
+class="ec-lmtt-9">[</span><span 
+class="ec-lmtt-9">win</span><span 
+class="ec-lmtt-9">\</span><span 
+class="ec-lmtt-9">_idx</span><span 
+class="ec-lmtt-9">],</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">sqr</span><span 
+class="ec-lmtt-9">\</span><span 
+class="ec-lmtt-9">_iter</span><span 
+class="ec-lmtt-9">,</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">fault</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">loc</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-164010r8"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-164011r9"></a><span 
+class="ec-lmr-6">9</span></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtk-10x-x-90">if</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">found</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">==</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">1)</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-164012r10"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtk-10x-x-90">return</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">d</span><span 
+class="ec-lmtt-9">[</span><span 
+class="ec-lmtt-9">win</span><span 
+class="ec-lmtt-9">\</span><span 
+class="ec-lmtt-9">_idx</span><span 
+class="ec-lmtt-9">]</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-164013r11"></a><span 
+class="ec-lmr-6">11</span></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtk-10x-x-90">else</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-164014r12"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtk-10x-x-90">return</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">-1</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-164015r13"></a><span 
+class="ec-lmr-6">13</span></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-164016r14"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span>
+   
+   
+       <div class="caption" 
+><span class="id">Listing&#x00A0;4.1:
+       </span><span  
+class="content">window_search.c</span></div><!--tex4ht:label?: x11-164001r4 -->
+   </div>
+   <span 
+class="lmmi-10x-x-109">d</span><span class="frenchb-nbsp">&nbsp;</span>: fenêtre, <span 
+class="lmmi-10x-x-109">win</span>_<span 
+class="lmmi-10x-x-109">size</span><span class="frenchb-nbsp">&nbsp;</span>: taille fixée sur la fenêtre, w<span 
+class="lmmi-10x-x-109">in</span>_<span 
+class="lmmi-10x-x-109">idx</span><span class="frenchb-nbsp">&nbsp;</span>: index de la fenêtre. Et <span 
+class="lmmi-10x-x-109">m</span>, <span 
+class="lmmi-10x-x-109">s</span>, <span 
+class="lmmi-10x-x-109">e </span>des entiers pour
+l&#8217;opération d&#8217;exponentiation modulaire<span class="frenchb-nbsp">&nbsp;</span>:
+   <center class="math-display" >
+<img 
+src="rapport_Audit48x.png" alt="me [s]
+" class="math-display" ></center>
+   En contrôlant le voltage, on arrive à savoir qu&#8217;un bit en particulier est mauvais. Bit après bit on reconstruit
+la clef privée, avec une signature erronée pour chacun des exposants de toute les fenêtres. L&#8217;étude
+montre que 650 signatures corrompues suffisent pour retrouver 100% d&#8217;une clef privée RSA de 1024
+bits.
+<a 
+ id="x11-164017r187"></a>
+<h5 class="subsubsectionHead"><span class="titlemark">4.2.1.3   </span> <a 
+href="#x11-1650003" id="x11-1650003">Implémentation</a></h5>
+<!--l. 72--><p class="noindent" ><span class="paragraphHead"><a 
+href="#x11-1660003" id="x11-1660003"><span 
+class="ec-lmbx-10x-x-109">Configuration utilis</span><span 
+class="ec-lmbx-10x-x-109">ée.</span><br 
+class="newline" /></a></span>
+   Le logiciel utilisé pour l&#8217;étude est OpenSSL 0.9.8i. L&#8217;attaque se fait sur la librairie d&#8217;authentification OpenSSL
+sous un système SPARC Linux qui implémente FPGA pour les systèmes cartes à puces.
+<!--l. 76--><p class="noindent" ><span class="paragraphHead"><a 
+href="#x11-1670003" id="x11-1670003"><span 
+class="ec-lmbx-10x-x-109">Fonction Fixed-window modular exponentiation.</span><br 
+class="newline" /></a></span>
+   Cette fonction est accessible dans plusieurs fonctions de chiffrement<span class="frenchb-nbsp">&nbsp;</span>:
+      <ul class="itemize1">
+      <li class="itemize">RSA<span class="frenchb-thinspace">&nbsp;</span>;
+      </li>
+      <li class="itemize">ElGamal<span class="frenchb-thinspace">&nbsp;</span>;
+                                                                                                  
+
+                                                                                                  
+      </li>
+      <li class="itemize">DSA<span class="frenchb-thinspace">&nbsp;</span>;
+      </li>
+      <li class="itemize">Diffie-Hellman<span class="frenchb-thinspace">&nbsp;</span>;
+      </li>
+      <li class="itemize">etc.<br 
+class="newline" /></li></ul>
+<!--l. 87--><p class="indent" >   Elle garantit des opérations en temps constant afin d&#8217;éviter des attaques par timing, et elle reste très
+performante. Elle s&#8217;apparente à la technique <span 
+class="ec-lmri-10x-x-109">square-and-multiply </span>à la seule différence qu&#8217;elle utilise des fenêtres de
+largeur <span 
+class="lmmi-10x-x-109">w </span>bits, et partitionne l&#8217;exposant dans ces fenêtres au lieu d&#8217;examiner l&#8217;exposant pour différentes opérations
+comme <span 
+class="ec-lmri-10x-x-109">square-and-multiply</span>. <br 
+class="newline" />
+<!--l. 89--><p class="indent" >   C&#8217;est le fait que la fenêtre soit fixe qui la rend insensible à une attaque par timing.<br 
+class="newline" />
+<!--l. 91--><p class="indent" >   L&#8217;algorithme FWE est donnée en <span 
+class="ec-lmri-10x-x-109">Listing </span><a 
+href="#x11-167001r2">4.2<!--tex4ht:ref: fwe --></a>
+   <!--l. 93-->
+<a 
+ id="x11-167001r2"></a>
+<a 
+ id="x11-167002"></a>
+   <div class="lstlisting" id="listing-12"><span class="label"><a 
+ id="x11-167003r1"></a><span 
+class="ec-lmr-6">1</span></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">FWE</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">m</span><span 
+class="ec-lmtt-9">,</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">d</span><span 
+class="ec-lmtt-9">,</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">n</span><span 
+class="ec-lmtt-9">,</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">win_size</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-167004r2"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">num_win</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">=</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">card</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">bits</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">d</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">/</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">win_size</span><span 
+class="ec-lmtt-9">;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-167005r3"></a><span 
+class="ec-lmr-6">3</span></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">acc</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">=</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">1;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-167006r4"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtk-10x-x-90">for</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">win_idx</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">in</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">[</span><span 
+class="ec-lmtt-9">num_win</span><span 
+class="ec-lmtt-9">-1..0])</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-167007r5"></a><span 
+class="ec-lmr-6">5</span></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtk-10x-x-90">for</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">sqr_iter</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">in</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">[0..</span><span 
+class="ec-lmtt-9">win_size</span><span 
+class="ec-lmtt-9">-1])</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-167008r6"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">acc</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">=</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">acc</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">*</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">acc</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">mod</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">n</span><span 
+class="ec-lmtt-9">;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-167009r7"></a><span 
+class="ec-lmr-6">7</span></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">d</span><span 
+class="ec-lmtt-9">[</span><span 
+class="ec-lmtt-9">win_idx</span><span 
+class="ec-lmtt-9">]</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">=</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-167010r8"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">bits</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">d</span><span 
+class="ec-lmtt-9">,</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">win_idx</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">*</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">win_size</span><span 
+class="ec-lmtt-9">,</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">win_size</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-167011r9"></a><span 
+class="ec-lmr-6">9</span></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">acc</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">=</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">acc</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">*</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">m</span><span 
+class="ec-lmtt-9">^</span><span 
+class="ec-lmtt-9">d</span><span 
+class="ec-lmtt-9">[</span><span 
+class="ec-lmtt-9">win_idx</span><span 
+class="ec-lmtt-9">])</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">mod</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">n</span><span 
+class="ec-lmtt-9">;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-167012r10"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtk-10x-x-90">return</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">acc</span><span 
+class="ec-lmtt-9">;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-167013r11"></a><span 
+class="ec-lmr-6">11</span></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-167014r12"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span>
+   
+   <br />
+       <div class="caption" 
+><span class="id">Listing&#x00A0;4.2:
+       </span><span  
+class="content">fwe.c</span></div><!--tex4ht:label?: x11-167001r4 -->
+   </div>
+<!--l. 108--><p class="indent" >   L&#8217;inconvénient de cet algorithme est qu&#8217;il utilise plus de 1 000 multiplications. Or, il est connu que pour une
+attaque par injection de fautes, la multiplication est l&#8217;opération la plus sensible en cas de dégradation du
+microprocesseur. <span 
+class="ec-lmri-10x-x-109">"The fixed-window exponentiation algorithm in the OpenSSL library does not validate the</span>
+<span 
+class="ec-lmri-10x-x-109">correctness of the signature produced before sending it to the client, a vulnerability that we exploit in our</span>
+<span 
+class="ec-lmri-10x-x-109">attack"</span><br 
+class="newline" />
+<a 
+ id="x11-167015r189"></a>
+<h5 class="subsubsectionHead"><span class="titlemark">4.2.1.4   </span> <a 
+href="#x11-1680004" id="x11-1680004">Conclusion</a></h5>
+     Lorsque le système est vulnérable, OpenSSL ne le détecte pas forcément. Le risque est donc très fort,
+et les contre-mesures sont parfois difficiles à trouver dans les phases de tests. Toutefois, cette étude
+soulève un choix de programmation qui semble à première vue anodin, mais qui peut avoir de lourdes
+conséquences.<br 
+class="newline" />
+   Toutefois, il faut pouvoir contrôler la machine (en ayant un accès au BIOS par exemple) pour pouvoir exploiter
+cette faille car il faut pouvoir toucher directement à l&#8217;alimentation de la faille.<br 
+class="newline" />
+   Cependant, cette erreur n&#8217;est pas à prendre à la légère, car une attaque à base de faiseaux lumineux est en
+cours de développement afin de réaliser cette attaque à distance.
+<a 
+ id="x11-168001r184"></a>
+                                                                                                  
+
+                                                                                                  
+<h4 class="subsectionHead"><span class="titlemark">4.2.2   </span> <a 
+href="#x11-1690002" id="x11-1690002">Audit 4.2<span class="frenchb-nbsp">&nbsp;</span>: Malformation des signatures DSA/ECDSA</a></h4>
+<a 
+ id="x11-169001r193"></a>
+<h5 class="subsubsectionHead"><span class="titlemark">4.2.2.1   </span> <a 
+href="#x11-1700001" id="x11-1700001">Normes visées</a></h5>
+<!--l. 122--><p class="noindent" >La RFC R979 <span class="cite">[<a 
+href="rapport_Auditli5.html#Xrfc6979">54</a>]</span> définit l&#8217;utilisation de DSA (<span 
+class="ec-lmri-10x-x-109">Digital Signature Algorithm</span>) et ECDSA (<span 
+class="ec-lmri-10x-x-109">Elliptic Curve Digital</span>
+<span 
+class="ec-lmri-10x-x-109">Signature Algorithm</span>) de façon déterministe. DSA et ECDSA sont deux standards de signature électronique qui
+offrent l&#8217;intégrité et authenticité dans de nombreux protocoles.<br 
+class="newline" />
+<!--l. 124--><p class="indent" >   Une caractéristique de DSA et ECDSA est qu&#8217;ils ont besoin de produire, pour chaque génération de signature,
+une valeur aléatoire toute fraîche (<span 
+class="ec-lmtt-10x-x-109">k</span>). Pour une bonne sécurité, <span 
+class="ec-lmtt-10x-x-109">k </span>doit être choisi aléatoirement et
+uniformément depuis un groupe d&#8217;entiers modulaires, en utilisant un processus cryptographiquement sûr.
+Même une petite erreur dans le processus peut devenir une attaque sur la méthode de signature.
+De ce fait, un système qui génère mal ou pas suffisamment d&#8217;entropie lors de la génération d&#8217;un
+nombre aléatoire peut poser de grosses failles dans le déploiement du schéma de signature DSA et
+ECDSA.<br 
+class="newline" />
+<!--l. 126--><p class="indent" >   Cette méthode d&#8217;utilisation de l&#8217;aléatoire avec DSA et ECDSA fait son implémentation plus difficile à tester.
+Les tests automatiques ne sont pas fiables lorsqu&#8217;il s&#8217;agit de détecter si l&#8217;implémentation utilise une source
+aléatoire de grande qualité. De ce fait, le processus d&#8217;implémentation est alors plus vulnérable à un
+échec catastrophique, souvent découvert après le déploiement du système et suite à des attaques
+réussies.<br 
+class="newline" />
+<!--l. 128--><p class="indent" >   Il est possible de retourner DSA et ECDSA en une utilisation déterministe en utilisant un processus
+déterministe de génération d&#8217;une valeur "aléatoire", k. Ce processus doit remplir quelques caractéristiques
+cryptographique afin de maintenir les propriétés de vérifiabilité et d&#8217;infalsifiabilité attendues par cette méthode de
+signature. De ce fait, pour une personne ne connaissent pas la clef privée de la signature, la transformation du
+message en valeur correspondante, <span 
+class="ec-lmtt-10x-x-109">k</span>, doit être calculatoirement indiscernable du retour de la fonction aléatoire et
+uniforme.
+<a 
+ id="x11-170001r195"></a>
+<h5 class="subsubsectionHead"><span class="titlemark">4.2.2.2   </span> <a 
+href="#x11-1710002" id="x11-1710002">Description de la faille</a></h5>
+<!--l. 132--><p class="noindent" >En 2008, une vulnérabilité sur la malformation des signatures survient sur OpenSSL (re-analysé en Novembre 2012)
+<span class="cite">[<a 
+href="rapport_Auditli5.html#Xopenssl2009secadv">61</a>]</span> <span class="cite">[<a 
+href="rapport_Auditli5.html#Xcve-2008-5077">68</a>]</span>.
+<!--l. 134--><p class="indent" >   La cause vient de plusieurs fonctions implémentant la fonction EVP_VerifyFinal(). Elles valident
+de fausses signatures au lieu de retourner des erreurs, parmi les signatures corrompues peuvent se
+trouver<span class="frenchb-nbsp">&nbsp;</span>:
+      <ul class="itemize1">
+      <li class="itemize">des signatures DSA<span class="frenchb-thinspace">&nbsp;</span>;
+      </li>
+      <li class="itemize">des signatures ECDSA.<br 
+class="newline" /></li></ul>
+<!--l. 140--><p class="indent" >   En 2009, un cas similaire a été trouvé dans un autre protocole (NTP) avec la même fonction <span 
+class="ec-lmtt-10x-x-109">EVP_VerifyFinal</span>
+<span class="cite">[<a 
+href="rapport_Auditli5.html#Xcve-2009-0021">67</a>]</span>.
+<!--l. 142--><p class="indent" >   La conséquence est très grave, car cette faille permet une attaque en <span 
+class="ec-lmri-10x-x-109">Man in the Middle</span>, en faisant
+par exemple une attaque par <span 
+class="ec-lmri-10x-x-109">phishing </span>en HTTPS où la validation de la chaîne des certificats serait
+valide.
+                                                                                                  
+
+                                                                                                  
+<a 
+ id="x11-171001r196"></a>
+<h5 class="subsubsectionHead"><span class="titlemark">4.2.2.3   </span> <a 
+href="#x11-1720003" id="x11-1720003">Tests</a></h5>
+<!--l. 146--><p class="noindent" >Si la faille est toujours exploitable, les conséquences sont très graves. Nous pouvons tester sur d&#8217;anciennes versions
+OpenSSL si cette faille persiste.
+<a 
+ id="x11-172001r197"></a>
+<h5 class="subsubsectionHead"><span class="titlemark">4.2.2.4   </span> <a 
+href="#x11-1730004" id="x11-1730004">Implémentation</a></h5>
+<!--l. 150--><p class="noindent" ><span class="paragraphHead"><a 
+href="#x11-1740004" id="x11-1740004"><span 
+class="ec-lmbx-10x-x-109">Configuration vis</span><span 
+class="ec-lmbx-10x-x-109">ée.</span><br 
+class="newline" /></a></span>
+   La faille concerne toutes les versions antérieures à OpenSSL 0.9.8j, lorsqu&#8217;un client SSL/TLS utilise des clefs
+DSA/ECDSA pour s&#8217;authentifier sur un serveur.
+<!--l. 154--><p class="noindent" ><span class="paragraphHead"><a 
+href="#x11-1750004" id="x11-1750004"><span 
+class="ec-lmbx-10x-x-109">Fonction.</span><br 
+class="newline" /></a></span>
+   La fonction EVP_VerifyFinal() (cf. <span 
+class="ec-lmri-10x-x-109">Listing </span><a 
+href="#x11-175001r3">4.3<!--tex4ht:ref: evp --></a>) est accessible sous le paquetage <span 
+class="ec-lmtt-10x-x-109">openssl/crypto/evp/p_verify.c</span>.
+   <!--l. 158-->
+<a 
+ id="x11-175001r3"></a>
+<a 
+ id="x11-175002"></a>
+   <div class="lstlisting" id="listing-13"><span class="label"><a 
+ id="x11-175003r1"></a><span 
+class="ec-lmr-6">1</span></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtk-10x-x-90">int</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">EVP_VerifyFinal</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">EVP_MD_CTX</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">*</span><span 
+class="ec-lmtt-9">ctx</span><span 
+class="ec-lmtt-9">,</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtk-10x-x-90">const</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtk-10x-x-90">unsigned</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtk-10x-x-90">char</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">*</span><span 
+class="ec-lmtt-9">sigbuf</span><span 
+class="ec-lmtt-9">,</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-175004r2"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtk-10x-x-90">unsigned</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtk-10x-x-90">int</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">siglen</span><span 
+class="ec-lmtt-9">,</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">EVP_PKEY</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">*</span><span 
+class="ec-lmtt-9">pkey</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-175005r3"></a><span 
+class="ec-lmr-6">3</span></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-175006r4"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtk-10x-x-90">unsigned</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtk-10x-x-90">char</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">m</span><span 
+class="ec-lmtt-9">[</span><span 
+class="ec-lmtt-9">EVP_MAX_MD_SIZE</span><span 
+class="ec-lmtt-9">];</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-175007r5"></a><span 
+class="ec-lmr-6">5</span></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtk-10x-x-90">unsigned</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtk-10x-x-90">int</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">m_len</span><span 
+class="ec-lmtt-9">;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-175008r6"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtk-10x-x-90">int</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">i</span><span 
+class="ec-lmtt-9">,</span><span 
+class="ec-lmtt-9">ok</span><span 
+class="ec-lmtt-9">=0,</span><span 
+class="ec-lmtt-9">v</span><span 
+class="ec-lmtt-9">;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-175009r7"></a><span 
+class="ec-lmr-6">7</span></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">MS_STATIC</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">EVP_MD_CTX</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">tmp_ctx</span><span 
+class="ec-lmtt-9">;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-175010r8"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-175011r9"></a><span 
+class="ec-lmr-6">9</span></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtk-10x-x-90">for</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">i</span><span 
+class="ec-lmtt-9">=0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">i</span><span 
+class="ec-lmtt-9">&#x003C;4;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">i</span><span 
+class="ec-lmtt-9">++)</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-175012r10"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-175013r11"></a><span 
+class="ec-lmr-6">11</span></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">v</span><span 
+class="ec-lmtt-9">=</span><span 
+class="ec-lmtt-9">ctx</span><span 
+class="ec-lmtt-9">-&#x003E;</span><span 
+class="ec-lmtt-9">digest</span><span 
+class="ec-lmtt-9">-&#x003E;</span><span 
+class="ec-lmtt-9">required_pkey_type</span><span 
+class="ec-lmtt-9">[</span><span 
+class="ec-lmtt-9">i</span><span 
+class="ec-lmtt-9">];</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-175014r12"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtk-10x-x-90">if</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">v</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">==</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">0)</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtk-10x-x-90">break</span><span 
+class="ec-lmtt-9">;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-175015r13"></a><span 
+class="ec-lmr-6">13</span></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtk-10x-x-90">if</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">pkey</span><span 
+class="ec-lmtt-9">-&#x003E;</span><span 
+class="ec-lmtt-9">type</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">==</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">v</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-175016r14"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-175017r15"></a><span 
+class="ec-lmr-6">15</span></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">ok</span><span 
+class="ec-lmtt-9">=1;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-175018r16"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtk-10x-x-90">break</span><span 
+class="ec-lmtt-9">;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-175019r17"></a><span 
+class="ec-lmr-6">17</span></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-175020r18"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-175021r19"></a><span 
+class="ec-lmr-6">19</span></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtk-10x-x-90">if</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">(!</span><span 
+class="ec-lmtt-9">ok</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-175022r20"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-175023r21"></a><span 
+class="ec-lmr-6">21</span></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">EVPerr</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">EVP_F_EVP_VERIFYFINAL</span><span 
+class="ec-lmtt-9">,</span><span 
+class="ec-lmtt-9">EVP_R_WRONG_PUBLIC_KEY_TYPE</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-175024r22"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtk-10x-x-90">return</span><span 
+class="ec-lmtt-9">(-1)</span><span 
+class="ec-lmtt-9">;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-175025r23"></a><span 
+class="ec-lmr-6">23</span></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-175026r24"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">EVP_MD_CTX_init</span><span 
+class="ec-lmtt-9">(&amp;</span><span 
+class="ec-lmtt-9">tmp_ctx</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-175027r25"></a><span 
+class="ec-lmr-6">25</span></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">EVP_MD_CTX_copy_ex</span><span 
+class="ec-lmtt-9">(&amp;</span><span 
+class="ec-lmtt-9">tmp_ctx</span><span 
+class="ec-lmtt-9">,</span><span 
+class="ec-lmtt-9">ctx</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-175028r26"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">EVP_DigestFinal_ex</span><span 
+class="ec-lmtt-9">(&amp;</span><span 
+class="ec-lmtt-9">tmp_ctx</span><span 
+class="ec-lmtt-9">,&amp;(</span><span 
+class="ec-lmtt-9">m</span><span 
+class="ec-lmtt-9">[0])</span><span 
+class="ec-lmtt-9">,&amp;</span><span 
+class="ec-lmtt-9">m_len</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-175029r27"></a><span 
+class="ec-lmr-6">27</span></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">EVP_MD_CTX_cleanup</span><span 
+class="ec-lmtt-9">(&amp;</span><span 
+class="ec-lmtt-9">tmp_ctx</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-175030r28"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtk-10x-x-90">if</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">ctx</span><span 
+class="ec-lmtt-9">-&#x003E;</span><span 
+class="ec-lmtt-9">digest</span><span 
+class="ec-lmtt-9">-&#x003E;</span><span 
+class="ec-lmtt-9">verify</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">==</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">NULL</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-175031r29"></a><span 
+class="ec-lmr-6">29</span></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-175032r30"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">EVPerr</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">EVP_F_EVP_VERIFYFINAL</span><span 
+class="ec-lmtt-9">,</span><span 
+class="ec-lmtt-9">EVP_R_NO_VERIFY_FUNCTION_CONFIGURED</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-175033r31"></a><span 
+class="ec-lmr-6">31</span></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtk-10x-x-90">return</span><span 
+class="ec-lmtt-9">(0)</span><span 
+class="ec-lmtt-9">;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-175034r32"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-175035r33"></a><span 
+class="ec-lmr-6">33</span></span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-175036r34"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtk-10x-x-90">return</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">ctx</span><span 
+class="ec-lmtt-9">-&#x003E;</span><span 
+class="ec-lmtt-9">digest</span><span 
+class="ec-lmtt-9">-&#x003E;</span><span 
+class="ec-lmtt-9">verify</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">ctx</span><span 
+class="ec-lmtt-9">-&#x003E;</span><span 
+class="ec-lmtt-9">digest</span><span 
+class="ec-lmtt-9">-&#x003E;</span><span 
+class="ec-lmtt-9">type</span><span 
+class="ec-lmtt-9">,</span><span 
+class="ec-lmtt-9">m</span><span 
+class="ec-lmtt-9">,</span><span 
+class="ec-lmtt-9">m_len</span><span 
+class="ec-lmtt-9">,</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-175037r35"></a><span 
+class="ec-lmr-6">35</span></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">sigbuf</span><span 
+class="ec-lmtt-9">,</span><span 
+class="ec-lmtt-9">siglen</span><span 
+class="ec-lmtt-9">,</span><span 
+class="ec-lmtt-9">pkey</span><span 
+class="ec-lmtt-9">-&#x003E;</span><span 
+class="ec-lmtt-9">pkey</span><span 
+class="ec-lmtt-9">.</span><span 
+class="ec-lmtt-9">ptr</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-175038r36"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">}</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x11-175039r37"></a><span 
+class="ec-lmr-6">37</span></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span>
+   
+   <br />
+       <div class="caption" 
+><span class="id">Listing&#x00A0;4.3:
+       </span><span  
+class="content">EVP_VerifyFinal.c</span></div><!--tex4ht:label?: x11-175001r4 -->
+   </div>
+<!--l. 197--><p class="indent" >   La fonction retourne &#8217;1&#8217; si la signature est valide, &#8217;0&#8217; si la signature est incorrecte et &#8217;-1&#8217; pour toute autre raison.
+Mais dans certains cas cette fonction retournait toujours &#8217;0&#8217;.
+<a 
+ id="x11-175040r198"></a>
+<h5 class="subsubsectionHead"><span class="titlemark">4.2.2.5   </span> <a 
+href="#x11-1760005" id="x11-1760005">Conclusion</a></h5>
+     Ici, la faille persistera tant que le serveur et le client resteront à une version antérieure à OpenSSL 0.9.8j<span class="frenchb-thinspace">&nbsp;</span>; les
+clefs, quant à elles, ne sont pas vulnérables, et peuvent être conservées. Malheureusement, le nombre de serveurs
+tournant sous OpenSSL 0.9.8 et versions antérieures est très élevé.<br 
+class="newline" />
+   Il est également recommandé aux développeurs utilisant OpenSSL de faire des audits réguliers de la fonction
+EVP_VerifyFinal() pour s&#8217;assurer que les vérifications sont bonnes. Les tests étants assez simples à
+effectuer.
+                                                                                                  
+
+                                                                                                  
+                                                                                                  
+
+                                                                                                  
+                                                                                                  
+
+                                                                                                  
+   <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+href="rapport_Auditli5.html" >next</a>] [<a 
+href="rapport_Auditch3.html" >prev</a>] [<a 
+href="rapport_Auditch3.html#tailrapport_Auditch3.html" >prev-tail</a>] [<a 
+href="rapport_Auditch4.html" >front</a>] [<a 
+href="rapport_Audit.html#rapport_Auditch6.html" >up</a>] </p></div>
+   <a 
+ id="tailrapport_Auditch4.html"></a>        
+</body></html> 

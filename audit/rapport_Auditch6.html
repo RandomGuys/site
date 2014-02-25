@@ -1,0 +1,452 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html xml:lang="fr" > 
+<head><title>6 Observations et alternatives</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html,2,sections+ --> 
+<meta name="src" content="rapport_Audit.tex"> 
+<meta name="date" content="2014-02-25 17:35:00"> 
+<link rel="stylesheet" type="text/css" href="rapport_Audit.css"> 
+</head><body 
+>
+   <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+href="rapport_Auditch5.html" >prev</a>] [<a 
+href="rapport_Auditch5.html#tailrapport_Auditch5.html" >prev-tail</a>] [<a 
+href="rapport_Auditch4.html#tailrapport_Auditch6.html">tail</a>] [<a 
+href="rapport_Audit.html# " >up</a>] </p></div>
+   <h2 class="chapterHead"><span class="titlemark">Chapitre&#x00A0;6</span><br /><a 
+href="#x13-2190006" id="x13-2190006">Observations et alternatives</a></h2>
+<a 
+ id="x13-219001r208"></a>
+<h3 class="sectionHead"><span class="titlemark">6.1   </span> <a 
+href="#x13-2200001" id="x13-2200001">Code OpenSSL</a></h3>
+<a 
+ id="x13-220001r252"></a>
+<h4 class="subsectionHead"><span class="titlemark">6.1.1   </span> <a 
+href="#x13-2210001" id="x13-2210001">Documentation</a></h4>
+<!--l. 7--><p class="noindent" >Nos observations sur la documentation d&#8217;OpenSSL va se développer sur trois axes<span class="frenchb-nbsp">&nbsp;</span>: dans le code, le manuel et les
+commentaires git.<br 
+class="newline" />
+<!--l. 10--><p class="indent" >   La documentation d&#8217;OpenSSL est quasi inexistante dans le code lui-même. Ce problème vient principalement du
+fait que le code était originellement développé par Eric A. Young et Tim Hudson seulement, et ce pendant environ
+6 ans. Puis ces deux développeurs ont rejoint RSA Security en 1998, léguant le code à la communauté
+pour devenir OpenSSL. Ce code était très peu commenté au vu des premiers commits d&#8217;OpenSSL.
+<br 
+class="newline" />
+<!--l. 14--><p class="indent" >   Actuellement, OpenSSL est principalement en développement réactif, c&#8217;est-à-dire qu&#8217;il y a surtout des
+corrections ou des implémentations de nouveaux standards. En revanche, les corrections de failles sont souvent
+accompagnées de commentaires dans le code et cela est très appréciable.<br 
+class="newline" />
+<!--l. 17--><p class="indent" >   Au-delà de la documentation dans le code, le manuel d&#8217;utilisation n&#8217;est pas très bien fourni non plus, regroupant
+très souvent plusieurs fonctions dans une même entrée <span 
+class="ec-lmri-10x-x-109">man </span>et oubliant certaines fonctions. Un exemple très
+intéressant est la vérification du pair connecté. En effet, lorsqu&#8217;on fait un <span class="obeylines-h"><span class="verb"><span 
+class="ec-lmtt-10x-x-109">SSL_accept</span></span></span>, il est important
+de vérifier l&#8217;identité du pair connecté avec la commande la fonction <span class="obeylines-h"><span class="verb"><span 
+class="ec-lmtt-10x-x-109">SSL_set_verify_result</span></span></span>, cela
+est assez connu lorsqu&#8217;on lit des recommandations en ligne. Or, le manuel de <span class="obeylines-h"><span class="verb"><span 
+class="ec-lmtt-10x-x-109">SSL_accept</span></span></span> n&#8217;en fait
+pas mention et tout novice de la libssl peut se limiter à cette fonction, croyant que la connexion est
+sûre.<br 
+class="newline" />
+<!--l. 20--><p class="indent" >   Une autre source de documentation est les commentaires des commits git. Ces derniers sont en général assez
+clairs et bien développés lorsque cela est nécessaire.
+<a 
+ id="x13-221001r264"></a>
+<h4 class="subsectionHead"><span class="titlemark">6.1.2   </span> <a 
+href="#x13-2220002" id="x13-2220002">Lisibilité du code</a></h4>
+<!--l. 25--><p class="noindent" >Au niveau de la lisibilité du code, notre analyse va se porter sur<span class="frenchb-nbsp">&nbsp;</span>: l&#8217;architecture du projet, les conventions de
+nommage, le <span 
+class="ec-lmri-10x-x-109">coding style </span>et l&#8217;utilisation des constantes et des macros C.<br 
+class="newline" />
+<!--l. 28--><p class="indent" >   Pour ce qui est de l&#8217;architecture, bien que le code soit assez conséquent (plus de 450 000 lignes de code dont
+66% de C &#8211; <a 
+href="http://www.ohloh.net/p/openssl" class="url" ><span 
+class="ec-lmtt-10x-x-109">http://www.ohloh.net/p/openssl</span></a>), il est relativement bien organisé, notamment les dossiers <span class="obeylines-h"><span class="verb"><span 
+class="ec-lmtt-10x-x-109">crypto/</span></span></span>
+et <span class="obeylines-h"><span class="verb"><span 
+class="ec-lmtt-10x-x-109">ssl/</span></span></span>. On accède vite au fichier recherché grâce à des noms de dossiers assez explicites et une convention de
+nommage des fichiers.<br 
+class="newline" />
+<!--l. 31--><p class="indent" >   En effet, les noms de fichiers sont souvent précédés d&#8217;un indicateur de quelques caractères qui permettent
+d&#8217;identifier rapidement de quel morceau un fichier fait partie. Par exemple, les fichiers commençant par <span class="obeylines-h"><span class="verb"><span 
+class="ec-lmtt-10x-x-109">s3_</span></span></span> sont des
+fichiers <span class="obeylines-h"><span class="verb"><span 
+class="ec-lmtt-10x-x-109">.c</span></span></span> relatifs à SSL version 3. On retrouve un peu la même logique dans le nommage des fonctions.
+                                                                                                  
+
+                                                                                                  
+Ainsi pour la partie chiffrement, on aura un préfixe <span class="obeylines-h"><span class="verb"><span 
+class="ec-lmtt-10x-x-109">EVP_</span></span></span>, pour SSL version 3 <span class="obeylines-h"><span class="verb"><span 
+class="ec-lmtt-10x-x-109">SSL3_</span></span></span> etc. Il arrive de
+trouver quelques incohérences comme dans le fichier <span class="obeylines-h"><span class="verb"><span 
+class="ec-lmtt-10x-x-109">s3_cbc.c</span></span></span> qui gère donc le mode CBC de SSL
+version 3, on retrouve la fonction <span class="obeylines-h"><span class="verb"><span 
+class="ec-lmtt-10x-x-109">tls1_cbc_remove_padding</span></span></span> ou <span class="obeylines-h"><span class="verb"><span 
+class="ec-lmtt-10x-x-109">tls1_md5_final_raw</span></span></span> alors qu&#8217;il
+aurait fallu créer un nouveau fichier <span class="obeylines-h"><span class="verb"><span 
+class="ec-lmtt-10x-x-109">t1_cbc.c</span></span></span> ou changer le nom du fichier pour regrouper plusieurs
+protocoles.<br 
+class="newline" />
+<!--l. 34--><p class="indent" >   Pour ce qui est du <span 
+class="ec-lmri-10x-x-109">coding style</span>, il se rapproche beaucoup du <span 
+class="ec-lmri-10x-x-109">Whitesmiths </span>mais peut être s&#8217;agit-il d&#8217;une variante.
+Ce style est peut être moins clair que celui de GNU, du Kernel Linux ou même du K&amp;R mais ce choix reste à
+l&#8217;appréciation des mainteneurs du projet.<br 
+class="newline" />
+<!--l. 37--><p class="indent" >   Les constantes sont assez largement utilisées et déclarées massivement dans les <span 
+class="ec-lmri-10x-x-109">headers </span>C en code hexadécimal.
+Cela dit, on retrouve beaucoup de tests comparant octet par octet, avec des valeurs hexadécimales écrites en dur
+dans le code. Un bon exemple de ce mauvais code est dans le fichier <span class="obeylines-h"><span class="verb"><span 
+class="ec-lmtt-10x-x-109">s23_srvr.c</span></span></span> qui gère la rétro-compatibilité des
+versions de SSL/TLS. On y retrouve la ligne <!--l. 38-->
+<a 
+ id="x13-222001r1"></a>
+<a 
+ id="x13-222002"></a>
+   <div class="lstlisting" id="listing-20"><span class="label"><a 
+ id="x13-222003r1"></a></span><span 
+class="ec-lmtt-9">n</span><span 
+class="ec-lmtt-9">=((</span><span 
+class="ec-lmtt-9">p</span><span 
+class="ec-lmtt-9">[0]&amp;0</span><span 
+class="ec-lmtt-9">x7f</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">&#x003C;&#x003C;8)</span><span 
+class="ec-lmtt-9">|</span><span 
+class="ec-lmtt-9">p</span><span 
+class="ec-lmtt-9">[1];</span>
+   
+   <br />
+       <div class="caption" 
+><span class="id">Listing&#x00A0;6.1:
+       </span><span  
+class="content">Exemple
+       de
+       mauvais
+       code
+       d&#8217;OpenSSL</span></div><!--tex4ht:label?: x13-222001r6 -->
+   </div>
+<!--l. 42--><p class="indent" >   où un commentaire, une constante avec un nom explicite pour <span class="obeylines-h"><span class="verb"><span 
+class="ec-lmtt-10x-x-109">0x7f</span></span></span> et même des espaces auraient été largement
+appréciés. Dans ce même fichier, des comparaisons d&#8217;octets sont faites également sans constante avec un nom
+explicite comme ce test<span class="frenchb-nbsp">&nbsp;</span>:
+   <!--l. 44-->
+<a 
+ id="x13-222004r2"></a>
+<a 
+ id="x13-222005"></a>
+   <div class="lstlisting" id="listing-21"><span class="label"><a 
+ id="x13-222006r1"></a><span 
+class="ec-lmr-6">1</span></span><span 
+class="ec-lmtti-10x-x-90">/*</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x13-222007r2"></a></span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">*</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">SSLv2</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">header</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x13-222008r3"></a><span 
+class="ec-lmr-6">3</span></span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">*/</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x13-222009r4"></a></span><span 
+class="ec-lmtk-10x-x-90">if</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">((</span><span 
+class="ec-lmtt-9">p</span><span 
+class="ec-lmtt-9">[3]</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">==</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">0</span><span 
+class="ec-lmtt-9">x00</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&amp;&amp;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">p</span><span 
+class="ec-lmtt-9">[4]</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">==</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">0</span><span 
+class="ec-lmtt-9">x02</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">)</span>
+   
+   <br />
+       <div class="caption" 
+><span class="id">Listing&#x00A0;6.2:
+       </span><span  
+class="content">Exemple
+       de
+       mauvais
+       test
+       d&#8217;OpenSSL</span></div><!--tex4ht:label?: x13-222004r6 -->
+   </div>
+<!--l. 51--><p class="indent" >   Ici un petit commentaire nous met sur la voie mais le code suivant aurait été plus clair<span class="frenchb-nbsp">&nbsp;</span>: <!--l. 52-->
+<a 
+ id="x13-222010r3"></a>
+<a 
+ id="x13-222011"></a>
+   <div class="lstlisting" id="listing-22"><span class="label"><a 
+ id="x13-222012r1"></a></span><span 
+class="ec-lmtti-10x-x-90">/*</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x13-222013r2"></a><span 
+class="ec-lmr-6">2</span></span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">*</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">SSLv2</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">header</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x13-222014r3"></a></span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">*/</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x13-222015r4"></a><span 
+class="ec-lmr-6">4</span></span><span 
+class="ec-lmtk-10x-x-90">if</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">((</span><span 
+class="ec-lmtt-9">p</span><span 
+class="ec-lmtt-9">[3]</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">==</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">SSL2_VERSION_MAJOR</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&amp;&amp;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">p</span><span 
+class="ec-lmtt-9">[4]</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">==</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">SSL2_VERSION_MINOR</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">)</span>
+                                                                                                  
+
+                                                                                                  
+   
+   <br />
+       <div class="caption" 
+><span class="id">Listing&#x00A0;6.3:
+       </span><span  
+class="content">Exemple
+       de
+       mauvais
+       test
+       d&#8217;OpenSSL
+       corrigé</span></div><!--tex4ht:label?: x13-222010r6 -->
+   </div>
+<!--l. 59--><p class="indent" >   Ces constantes existent dans le <span 
+class="ec-lmri-10x-x-109">header </span><span class="obeylines-h"><span class="verb"><span 
+class="ec-lmtt-10x-x-109">ssl2.h</span></span></span> mais n&#8217;ont pourtant pas été utilisées.
+<!--l. 61--><p class="indent" >   Du côté des macros C, on regrettera les nombreux morceaux de code mis en commentaire avec des
+macros<span class="frenchb-nbsp">&nbsp;</span>:
+   <!--l. 63-->
+<a 
+ id="x13-222016r4"></a>
+<a 
+ id="x13-222017"></a>
+   <div class="lstlisting" id="listing-23"><span class="label"><a 
+ id="x13-222018r1"></a></span><span 
+class="ec-lmtk-10x-x-90">#</span><span 
+class="ec-lmtk-10x-x-90">if</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">0</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x13-222019r2"></a><span 
+class="ec-lmr-6">2</span></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">SSLerr</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">SSL_F_SSL23_GET_CLIENT_HELLO</span><span 
+class="ec-lmtt-9">,</span><span 
+class="ec-lmtt-9">SSL_R_RECORD_TOO_SMALL</span><span 
+class="ec-lmtt-9">)</span><span 
+class="ec-lmtt-9">;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x13-222020r3"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtk-10x-x-90">goto</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">err</span><span 
+class="ec-lmtt-9">;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x13-222021r4"></a><span 
+class="ec-lmr-6">4</span></span><span 
+class="ec-lmtk-10x-x-90">#</span><span 
+class="ec-lmtk-10x-x-90">else</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x13-222022r5"></a></span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">v</span><span 
+class="ec-lmtt-9">[1]</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">=</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">TLS1_VERSION_MINOR</span><span 
+class="ec-lmtt-9">;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x13-222023r6"></a><span 
+class="ec-lmr-6">6</span></span><span 
+class="ec-lmtk-10x-x-90">#</span><span 
+class="ec-lmtk-10x-x-90">endif</span>
+   
+   <br />
+       <div class="caption" 
+><span class="id">Listing&#x00A0;6.4:
+       </span><span  
+class="content">Exemple
+       de
+       mauvais
+       #if
+       0
+       d&#8217;OpenSSL</span></div><!--tex4ht:label?: x13-222016r6 -->
+   </div>
+<!--l. 72--><p class="indent" >   Il y en a énormément et cela complique beaucoup la lecture du code car on croit parfois être dans du code alors
+que ce code est commenté. Certains morceaux de code sont enlevés à cause de failles mais ils restent présents pour
+une raison que nous ignorons.
+<a 
+ id="x13-222024r263"></a>
+<h3 class="sectionHead"><span class="titlemark">6.2   </span> <a 
+href="#x13-2230002" id="x13-2230002">Construction du projet</a></h3>
+<!--l. 76--><p class="noindent" >La construction d&#8217;OpenSSL se fait avec <span 
+class="ec-lmri-10x-x-109">autotools </span>qui permet de générer les makefile nécessaires à la compilation. Il
+existe une page wiki officielle à ce sujet mais elle n&#8217;est pas toujours très précise. Ils n&#8217;expliquent d&#8217;ailleurs pas très
+bien comment compiler les bibliothèques <span class="obeylines-h"><span class="verb"><span 
+class="ec-lmtt-10x-x-109">libssl.so</span></span></span> et <span class="obeylines-h"><span class="verb"><span 
+class="ec-lmtt-10x-x-109">libcrypto.so</span></span></span>. Il faut en fait spécifier les options
+suivantes<span class="frenchb-nbsp">&nbsp;</span>:
+                                                                                                  
+
+                                                                                                  
+   <div class="verbatim" id="verbatim-5">
+$&#x00A0;./config&#x00A0;shared&#x00A0;zlib-dynamic
+&#x00A0;<br />$&#x00A0;make
+</div>
+<!--l. 80--><p class="nopar" >
+<!--l. 82--><p class="indent" >   On regrettera ce type de construction qui vieillit. De nos jours, beaucoup de projets migrent vers
+cmake (comme MySQL par exemple) qui est plus simple à configurer et génèrent des sorties claires et
+colorées qui améliore le suivi de la compilation. De plus, il permet de compiler les binaires dans un
+dossier séparé, ce qui permet de ne pas perturber l&#8217;arborescence de travail qui ne contient que les
+sources.
+<a 
+ id="x13-223001r270"></a>
+<h3 class="sectionHead"><span class="titlemark">6.3   </span> <a 
+href="#x13-2240003" id="x13-2240003">Alternatives</a></h3>
+<!--l. 86--><p class="noindent" >Il serait intéressant de se pencher sur la sécurité des alternatives à OpenSSL. Voici une liste non exhaustive de
+projet open source<span class="frenchb-nbsp">&nbsp;</span>:
+      <ul class="itemize1">
+      <li class="itemize">cryptlib (ne gère pas DTLS)<span class="frenchb-thinspace">&nbsp;</span>;
+      </li>
+      <li class="itemize">CyaSSL<span class="frenchb-thinspace">&nbsp;</span>;
+      </li>
+      <li class="itemize">GnuTLS<span class="frenchb-thinspace">&nbsp;</span>;
+      </li>
+      <li class="itemize">MatrixSSL<span class="frenchb-thinspace">&nbsp;</span>;
+      </li>
+      <li class="itemize">Network Security Services (utilisé dans Firefox, successeur du code développé par Netscape, ne gère
+      pas DTLS)<span class="frenchb-thinspace">&nbsp;</span>;
+      </li>
+      <li class="itemize">PolarSSL (ne gère pas DTLS)<span class="frenchb-thinspace">&nbsp;</span>;
+      </li>
+      <li class="itemize">Java Secure Socket Extension (ne gère pas DTLS).<br 
+class="newline" /></li></ul>
+<!--l. 97--><p class="indent" >   Chaque alternative a ses points forts et ses points faibles, il vaut mieux alors choisir le bon outil selon le travail
+à effectuer.
+<!--l. 99--><p class="indent" >   Il semble que OpenSSL soit un peu au dessus du lot en terme de support d&#8217;algorithmes et de méthodes en tout
+genre mais cela s&#8217;explique par l&#8217;âge et la taille du code.
+<!--l. 101--><p class="indent" >   En revanche, les autres se démarquent en désactivant des méthodes dépréciées alors qu&#8217;OpenSSL souhaite sans
+doute garder une rétro-compatibilité.
+                                                                                                  
+
+                                                                                                  
+                                                                                                  
+
+                                                                                                  
+<a 
+ id="Q1-13-272"></a>
+<a 
+ id="Q1-13-273"></a>
+<h3 class="likesectionHead"><a 
+href="#x13-2250003" id="x13-2250003">Conclusion</a></h3>
+<!--l. 4--><p class="noindent" >Cette étude fut l&#8217;occasion d&#8217;effectuer une première approche d&#8217;audit en analysant de façon générale des failles liées
+à un des programmes majeurs dans le domaine de la cryptographie, OpenSSL. Nous avons pu déterminer
+une stratégie globale d&#8217;audit suivant les exigences et suggestions du client, puis nous avons effectué
+un approfondissement dans plusieurs domaines, répartis de façon modulaire entre les membres du
+projet.<br 
+class="newline" />
+<!--l. 7--><p class="indent" >   Nous avons pu notamment constater que les failles identifiées sont principalement sur des anciennes versions
+d&#8217;OpenSSL et qu&#8217;elles sont, par conséquent, pour la plupart aujourd&#8217;hui corrigées. Toutefois, un utilisateur du
+logiciel possédant une version non à jour est vulnérable -suivant sa version- à des attaques référencées dans ce
+rapport. <br 
+class="newline" />
+<!--l. 10--><p class="indent" >   L&#8217;audit de deux semaines nous a permis d&#8217;établir un état général sur les faiblesses de ce logiciel. Nous aurions
+aimé avoir davantage de temps pour entrer au plus près du code. Comme nous l&#8217;avons rappelé plusieurs fois, le
+projet OpenSSL n&#8217;a pas un code facilement lisible, et le manque de documentation nous a considérablement freiné
+dans nos analyses. De plus, le code en lui-même est de taille considérable, avec plus de 400 000 lignes de
+code.<br 
+class="newline" />
+<!--l. 13--><p class="indent" >   De ce fait, nous considérons que le projet OpenSSL mériterait un rafraîchissement complet, en clarifiant à la
+fois la structure et l&#8217;implémentation, mais aussi en ajoutant une documentation digne de ce nom, afin d&#8217;en faciliter
+la compréhension et d&#8217;éviter au maximum toute mauvaise utilisation.
+                                                                                                  
+
+                                                                                                  
+                                                                                                  
+
+                                                                                                  
+   <!--l. 1--><div class="crosslinks"><p class="noindent"><span 
+class="ec-lmr-10">[</span><a 
+href="rapport_Auditch5.html" ><span 
+class="ec-lmr-10">prev</span></a><span 
+class="ec-lmr-10">] [</span><a 
+href="rapport_Auditch5.html#tailrapport_Auditch5.html" ><span 
+class="ec-lmr-10">prev-tail</span></a><span 
+class="ec-lmr-10">] [</span><a 
+href="rapport_Auditch6.html" ><span 
+class="ec-lmr-10">front</span></a><span 
+class="ec-lmr-10">] [</span><a 
+href="rapport_Audit.html# " ><span 
+class="ec-lmr-10">up</span></a><span 
+class="ec-lmr-10">] </span></p></div>
+<!--l. 1--><p class="indent" >   <a 
+ id="tailrapport_Auditch6.html"></a>        
+</body></html> 

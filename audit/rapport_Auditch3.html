@@ -1,0 +1,1365 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html xml:lang="fr" > 
+<head><title>3 Chiffrement et Protocoles</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html,2,sections+ --> 
+<meta name="src" content="rapport_Audit.tex"> 
+<meta name="date" content="2014-02-25 17:35:00"> 
+<link rel="stylesheet" type="text/css" href="rapport_Audit.css"> 
+</head><body 
+>
+   <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+href="rapport_Auditch6.html" >next</a>] [<a 
+href="rapport_Auditch2.html" >prev</a>] [<a 
+href="rapport_Auditch2.html#tailrapport_Auditch2.html" >prev-tail</a>] [<a 
+href="#tailrapport_Auditch3.html">tail</a>] [<a 
+href="rapport_Audit.html#rapport_Auditch5.html" >up</a>] </p></div>
+   <h2 class="chapterHead"><span class="titlemark">Chapitre&#x00A0;3</span><br /><a 
+href="#x10-1250003" id="x10-1250003">Chiffrement et Protocoles</a></h2>
+<a 
+ id="x10-125001r110"></a>
+<h3 class="sectionHead"><span class="titlemark">3.1   </span> <a 
+href="#x10-1260001" id="x10-1260001">Définitions et contexte</a></h3>
+<!--l. 5--><p class="noindent" >Nous allons tout d&#8217;abord apporter quelques précisions au contexte dans lequel nous travaillons. Plusieurs failles ont
+été trouvées sur RSA-OAEP ainsi que sur le mode CBC. Nous allons donc décrire ces deux principes et étudier
+leurs vulnérabilités.<br 
+class="newline" />
+<!--l. 7--><p class="indent" >   Nous allons voir qu&#8217;une combinaison entre un mode de chiffrement et un protocole de chiffrement peut générer
+des failles, souvent graves (i.e vols de mots de passe), que le padding est également une donnée sensible et qu&#8217;il faut
+donc le choisir intelligemment, et qu&#8217;une mauvaise documentation ou un mauvais paramétrage peuvent entraîner
+des failles au niveau protocolaire.
+<a 
+ id="x10-126001r143"></a>
+<h3 class="sectionHead"><span class="titlemark">3.2   </span> <a 
+href="#x10-1270002" id="x10-1270002">Audits</a></h3>
+<a 
+ id="x10-127001r133"></a>
+<h4 class="subsectionHead"><span class="titlemark">3.2.1   </span> <a 
+href="#x10-1280001" id="x10-1280001">Audit 3.1<span class="frenchb-nbsp">&nbsp;</span>: Les "Manger&#8217;s attack" sur RSA-OAEP</a></h4>
+<a 
+ id="x10-128001r141"></a>
+<h5 class="subsubsectionHead"><span class="titlemark">3.2.1.1   </span> <a 
+href="#x10-1290001" id="x10-1290001">Normes visées</a></h5>
+<!--l. 13--><p class="noindent" ><span class="paragraphHead"><a 
+href="#x10-1300001" id="x10-1300001"><span 
+class="ec-lmbx-10x-x-109">OAEP</span><span class="frenchb-nbsp">&nbsp;</span><span 
+class="ec-lmbx-10x-x-109">: </span><span 
+class="ec-lmbxi-10x-x-109">Optimal Asymmetric Encryption Padding</span><span 
+class="ec-lmbx-10x-x-109">. </span><br 
+class="newline" /></a></span>
+   Dans les chiffrements par blocs, cela nécessite généralement que tous les blocs soient d&#8217;une taille précise. Or ce
+n&#8217;est pas toujours le cas. Pour cela, on rajoute des bits de bourrage (padding).<br 
+class="newline" />OAEP est un schéma de remplissage, généralement utilisé avec RSA (en prétraitement). Il a été introduit en 1994
+par Mihir Bellare et Phil Rogaway1. L&#8217;OAEP est une forme de réseau de Feistel qui nécessite une source d&#8217;aléa
+ainsi que deux fonctions de hachage.<br 
+class="newline" />RSA-OEAP peut être prouvé sûr dans un modèle théorique idéalisé, celui de l&#8217;oracle aléatoire. Il est recommandé
+par les PKCS.<br 
+class="newline" />OAEP a deux buts<span class="frenchb-nbsp">&nbsp;</span>:
+      <ul class="itemize1">
+      <li class="itemize">insérer un élément d&#8217;aléatoire qui permet de passer d&#8217;un schéma déterministe à un schéma non
+      déterministe (le même message clair chiffré deux fois avec la même clef et le même algorithme n&#8217;aura
+      pas le même message chiffré.)
+      </li>
+      <li class="itemize">prévenir un déchiffrement partiel en s&#8217;assurant que l&#8217;attaquant ne peut retrouver une portion du text
+      clair sans être capable d&#8217;inverser la fonction trapdoor (par exemple la factorisation de deux grands
+      nombres premiers<span class="frenchb-nbsp">&nbsp;</span>: il est facile de multiplier, mais quand on n&#8217;a que le produit il est très difficile de
+      retrouver les facteurs).<br 
+class="newline" /></li></ul>
+<!--l. 22--><p class="noindent" >Il n&#8217;est pas prouvé sûr pour une attaque IND-CCA (attaque à texte chiffré seulement). Victor Shoup a démontré qu&#8217;il
+n&#8217;existe pas de preuve générale. Il a montré que dans un cas IND-CCA, quelqu&#8217;un qui sait comme
+inverser partiellement une primitive d&#8217;insertion mais ne sait pas comment l&#8217;inverser complètement,
+pourrait bien être en mesure de casser le système. Par exemple, on peut imaginer quelqu&#8217;un qui peut
+                                                                                                  
+
+                                                                                                  
+attaquer RSAES-OAEP si on sait comment retrouver tous les octets exceptés les 20 premiers d&#8217;un entier
+généré aléatoirement chiffré avec RSAEP (RSA Encryption Protocole). Un tel attaquant n&#8217;a pas besoin
+d&#8217;être capable d&#8217;inverser entièrement RSAEP, parce qu&#8217;il n&#8217;utilise pas les 20 premiers octets dans son
+attaque.
+<!--l. 25--><p class="noindent" ><span class="paragraphHead"><a 
+href="#x10-1310001" id="x10-1310001"><span 
+class="ec-lmbx-10x-x-109">R</span><span 
+class="ec-lmbx-10x-x-109">éseau de Feistel. </span><br 
+class="newline" /></a></span>
+   Il est utilisé dans les systèmes de chiffrement par bloc. Un schéma de Feistel repose sur des principes simples
+dont des permutations, des substitutions, des échanges de blocs de données et une fonction prenant en entrée une
+clé intermédiaire à chaque étage.<br 
+class="newline" /><hr class="figure"><div class="figure" 
+>
+                                                                                                  
+
+                                                                                                  
+<a 
+ id="x10-131001r1"></a>
+                                                                                                  
+
+                                                                                                  
+
+<!--l. 29--><p class="noindent" ><img 
+src="images/Reseau_de_feistel.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id"><span 
+class="ec-lmcsc-10x-x-109">Figure</span>&#x00A0;3.1: </span><span  
+class="content">Réseau de Feistel</span></div><!--tex4ht:label?: x10-131001r1 -->
+                                                                                                  
+
+                                                                                                  
+<!--l. 32--><p class="indent" >   </div><hr class="endfigure">
+<!--l. 34--><p class="indent" >   Le chiffrement DES par exemple repose sur ce réseau, et effectue 16 tours.<br 
+class="newline" />Généralement les deux parties sont équilibrées même si par exemple des algorithmes comme MacGuffin de Bruce
+Schneier utilisent un réseau non équilibré.
+<!--l. 37--><p class="noindent" ><span class="paragraphHead"><a 
+href="#x10-1320001" id="x10-1320001"><span 
+class="ec-lmbx-10x-x-109">RSA-OAEP. </span><br 
+class="newline" /></a></span>
+   Dans la PKCS#1 est décrit le standard de RSA-OAEP. RSAES-OAEP est le terme plus facilement utilisé dans
+le document<span class="frenchb-nbsp">&nbsp;</span>: RSA Encryption Scheme OAEP.<br 
+class="newline" />Il regroupe les primitives RSAEP et RSADP<span class="frenchb-nbsp">&nbsp;</span>: respectivement RSA Encryption Protocole et RSA Decryption
+Protocole.
+<!--l. 41--><p class="noindent" ><span class="paragraphHead"><a 
+href="#x10-1330001" id="x10-1330001"><span 
+class="ec-lmbx-10x-x-109">RSAES-OAEP-ENCRYPT. </span><br 
+class="newline" /></a></span>
+   Options<span class="frenchb-nbsp">&nbsp;</span>:
+      <dl class="description"><dt class="description">
+<span 
+class="ec-lmbx-10x-x-109">Hash</span><span class="frenchb-nbsp">&nbsp;</span><span 
+class="ec-lmbx-10x-x-109">:</span> </dt><dd 
+class="description">fonction de hachage (<span 
+class="ec-lmtt-10x-x-109">hLen </span>contient la longueur en octets de la sortie de fonction de hachage)<span class="frenchb-thinspace">&nbsp;</span>;
+      </dd><dt class="description">
+<span 
+class="ec-lmbx-10x-x-109">MGF</span><span class="frenchb-nbsp">&nbsp;</span><span 
+class="ec-lmbx-10x-x-109">:</span> </dt><dd 
+class="description">fonction de génération de masque.<br 
+class="newline" /></dd></dl>
+<!--l. 47--><p class="noindent" >Entrée<span class="frenchb-nbsp">&nbsp;</span>:
+      <dl class="description"><dt class="description">
+<span 
+class="ec-lmbx-10x-x-109">(n, e)</span><span class="frenchb-nbsp">&nbsp;</span><span 
+class="ec-lmbx-10x-x-109">:</span>  </dt><dd 
+class="description">destinataire de la clef publique RSA (<span 
+class="ec-lmtt-10x-x-109">k </span>contient la longueur en octets du modulo RSA <span 
+class="ec-lmtt-10x-x-109">n</span>)<span class="frenchb-thinspace">&nbsp;</span>;
+      </dd><dt class="description">
+<span 
+class="ec-lmbx-10x-x-109">M</span><span class="frenchb-nbsp">&nbsp;</span><span 
+class="ec-lmbx-10x-x-109">:</span>  </dt><dd 
+class="description">message à chiffrer, une chaîne d&#8217;octets de longueur <span 
+class="ec-lmtt-10x-x-109">mLen</span>, quand <span 
+class="ec-lmtt-10x-x-109">mLen &#x003C;= k - 2hLen - 2</span><span class="frenchb-thinspace">&nbsp;</span>;
+      </dd><dt class="description">
+<span 
+class="ec-lmbx-10x-x-109">L</span><span class="frenchb-nbsp">&nbsp;</span><span 
+class="ec-lmbx-10x-x-109">:</span>  </dt><dd 
+class="description">champ optionnel à associer au message, la valeur par défaut pour <span 
+class="ec-lmtt-10x-x-109">L</span>, si <span 
+class="ec-lmtt-10x-x-109">L </span>n&#8217;a aucune condition, est la
+      chaîne vide.<br 
+class="newline" /></dd></dl>
+<!--l. 53--><p class="noindent" >Sortie<span class="frenchb-nbsp">&nbsp;</span>:
+      <dl class="description"><dt class="description">
+<span 
+class="ec-lmbx-10x-x-109">C</span><span class="frenchb-nbsp">&nbsp;</span><span 
+class="ec-lmbx-10x-x-109">:</span>  </dt><dd 
+class="description">texte chiffré, une chaîne d&#8217;octets de longueur <span 
+class="ec-lmtt-10x-x-109">k</span>.<br 
+class="newline" /></dd></dl>
+<!--l. 57--><p class="noindent" >Erreurs<span class="frenchb-nbsp">&nbsp;</span>:
+      <ul class="itemize1">
+      <li class="itemize">"<span 
+class="ec-lmri-10x-x-109">message too long</span>"<span class="frenchb-thinspace">&nbsp;</span>;
+      </li>
+      <li class="itemize">"<span 
+class="ec-lmri-10x-x-109">label too long</span>".<br 
+class="newline" /></li></ul>
+<!--l. 62--><p class="noindent" >Précondition<span class="frenchb-nbsp">&nbsp;</span>:
+      <ul class="itemize1">
+      <li class="itemize">la clef publique RSA <span 
+class="ec-lmtt-10x-x-109">(n, e) </span>est valide.<br 
+class="newline" /></li></ul>
+                                                                                                  
+
+                                                                                                  
+
+<!--l. 66--><p class="noindent" >Étapes<span class="frenchb-nbsp">&nbsp;</span>:
+      <ol  class="enumerate1" >
+      <li 
+  class="enumerate" id="x10-133002x1">vérifier de la longueur<span class="frenchb-nbsp">&nbsp;</span>:
+         <ol  class="enumerate2" >
+         <li 
+  class="enumerate" id="x10-133004x1">si la longueur de <span 
+class="ec-lmtt-10x-x-109">L </span>est plus grande que la longueur limite en entrée de la fonction de hachage
+         (<span 
+class="rm-lmr-10x-x-109">2</span><sup><span 
+class="rm-lmr-8">61</span></sup> <span 
+class="lmsy-10x-x-109">- </span><span 
+class="rm-lmr-10x-x-109">1 </span>octets pour SHA-1), renvoyer "<span 
+class="ec-lmri-10x-x-109">label too long</span>" et arrêter<span class="frenchb-thinspace">&nbsp;</span>;
+         </li>
+         <li 
+  class="enumerate" id="x10-133006x2">si <span 
+class="ec-lmtt-10x-x-109">mLen &#x003E; k - 2hLen - 2</span>, le message "<span 
+class="ec-lmri-10x-x-109">message too long</span>" est renvoyé et la fonction est stoppée.<br 
+class="newline" /></li></ol>
+      </li>
+      <li 
+  class="enumerate" id="x10-133008x2">coder EME-OAEP<span class="frenchb-nbsp">&nbsp;</span>:
+         <ol  class="enumerate2" >
+         <li 
+  class="enumerate" id="x10-133010x1">si l&#8217;étiquette <span 
+class="ec-lmtt-10x-x-109">L </span>n&#8217;est pas spécifiée, laisser <span 
+class="ec-lmtt-10x-x-109">L </span>à une chaîne vide. Laisser <span 
+class="ec-lmtt-10x-x-109">lHash = Hash(L)</span>, une
+         chaîne d&#8217;octets de taille <span 
+class="ec-lmtt-10x-x-109">hLen</span><span class="frenchb-thinspace">&nbsp;</span>;
+         </li>
+         <li 
+  class="enumerate" id="x10-133012x2">générer une chaîne d&#8217;octets PS consistant en <span 
+class="ec-lmtt-10x-x-109">k - mLen - 2hLen - 2 </span>d&#8217;octets zéro. La taille de
+         <span 
+class="ec-lmtt-10x-x-109">PS </span>peut être zéro<span class="frenchb-thinspace">&nbsp;</span>;
+         </li>
+         <li 
+  class="enumerate" id="x10-133014x3">concaténer <span 
+class="ec-lmtt-10x-x-109">lHash</span>, <span 
+class="ec-lmtt-10x-x-109">PS</span>, un unique octet avec la valeur hexadécimale <span 
+class="ec-lmri-10x-x-109">0x01</span>, et le message <span 
+class="ec-lmtt-10x-x-109">M </span>pour
+         former un bloc de données DB de longueur <span 
+class="ec-lmtt-10x-x-109">k - hLen - 1 </span>octets, tel que<span class="frenchb-nbsp">&nbsp;</span>: <span 
+class="ec-lmtt-10x-x-109">DB </span>= <span 
+class="ec-lmtt-10x-x-109">lHash </span>||<span 
+class="ec-lmtt-10x-x-109">PS </span>||<span 
+class="ec-lmri-10x-x-109">0x01</span>
+         ||<span 
+class="ec-lmtt-10x-x-109">M</span><span class="frenchb-thinspace">&nbsp;</span>;
+         </li>
+         <li 
+  class="enumerate" id="x10-133016x4">générer un une chaîne d&#8217;octets aléatoires de longueur <span 
+class="ec-lmtt-10x-x-109">hLen</span><span class="frenchb-thinspace">&nbsp;</span>;
+         </li>
+         <li 
+  class="enumerate" id="x10-133018x5">laisser <span 
+class="ec-lmtt-10x-x-109">dbMask = MGF(seed, k - hLen - 1)</span><span class="frenchb-thinspace">&nbsp;</span>;
+         </li>
+         <li 
+  class="enumerate" id="x10-133020x6">laisser <span 
+class="ec-lmtt-10x-x-109">maskedDB = DB xor dbMask</span><span class="frenchb-thinspace">&nbsp;</span>;
+         </li>
+         <li 
+  class="enumerate" id="x10-133022x7">laisser <span 
+class="ec-lmtt-10x-x-109">seedMask = MGF(maskedDB, hLen)</span><span class="frenchb-thinspace">&nbsp;</span>;
+         </li>
+         <li 
+  class="enumerate" id="x10-133024x8">laisser <span 
+class="ec-lmtt-10x-x-109">maskedSeed = seed xor seedMask</span><span class="frenchb-thinspace">&nbsp;</span>;
+         </li>
+         <li 
+  class="enumerate" id="x10-133026x9">concaténer un unique octet avec la valeur hexadécimale <span 
+class="ec-lmri-10x-x-109">0x00</span>, <span 
+class="ec-lmtt-10x-x-109">maskedSeed</span>, et <span 
+class="ec-lmtt-10x-x-109">maskedDB </span>pour
+         former un message chiffré <span 
+class="ec-lmtt-10x-x-109">EM </span>de longueur <span 
+class="ec-lmtt-10x-x-109">k </span>octets tel que <span 
+class="ec-lmtt-10x-x-109">EM = 0x00 </span>||<span 
+class="ec-lmtt-10x-x-109">maskedSeed </span>||<span 
+class="ec-lmtt-10x-x-109">maskedDB</span>.<br 
+class="newline" /></li></ol>
+      </li>
+      <li 
+  class="enumerate" id="x10-133028x3">chiffrement RSA<span class="frenchb-nbsp">&nbsp;</span>:
+         <ol  class="enumerate2" >
+         <li 
+  class="enumerate" id="x10-133030x1">convertir le message codé <span 
+class="ec-lmtt-10x-x-109">EM </span>en un entier représentatif du message <span 
+class="ec-lmtt-10x-x-109">m</span><span class="frenchb-nbsp">&nbsp;</span>: <span 
+class="ec-lmtt-10x-x-109">m = OS2IP (EM)</span><span class="frenchb-thinspace">&nbsp;</span>;
+         </li>
+         <li 
+  class="enumerate" id="x10-133032x2">appliquer la primitive de chiffrement <span 
+class="ec-lmtt-10x-x-109">RSAEP </span>avec la clef RSA publique (n, e) pour produire un
+         entier c représentatif du message chiffré<span class="frenchb-nbsp">&nbsp;</span>: <span 
+class="ec-lmtt-10x-x-109">c = RSAEP ((n, e), m)</span><span class="frenchb-thinspace">&nbsp;</span>;
+                                                                                                  
+
+                                                                                                  
+         </li>
+         <li 
+  class="enumerate" id="x10-133034x3">convertir le texte chiffré représentatif <span 
+class="ec-lmtt-10x-x-109">c </span>en un texte chiffré <span 
+class="ec-lmtt-10x-x-109">C </span>de taille <span 
+class="ec-lmtt-10x-x-109">k </span>octets<span class="frenchb-nbsp">&nbsp;</span>: <span 
+class="ec-lmtt-10x-x-109">C = I2OSP (c,</span>
+         <span 
+class="ec-lmtt-10x-x-109">k)</span>.<br 
+class="newline" /></li></ol>
+      </li>
+      <li 
+  class="enumerate" id="x10-133036x4">envoyer en sortie le texte chiffré <span 
+class="ec-lmtt-10x-x-109">C</span>.<br 
+class="newline" /></li></ol>
+<!--l. 93--><p class="noindent" ><span class="paragraphHead"><a 
+href="#x10-1340001" id="x10-1340001"><span 
+class="ec-lmbx-10x-x-109">Note.</span><br 
+class="newline" /></a></span>
+   Si <span 
+class="ec-lmtt-10x-x-109">L </span>est une chaîne vide, la valeur du hash correspondante <span 
+class="ec-lmtt-10x-x-109">lHash </span>a la représentation hexadécimale suivante
+pour différents choix de hash<span class="frenchb-nbsp">&nbsp;</span>:
+   <div class="table">
+                                                                                                  
+
+                                                                                                  
+<!--l. 97--><p class="indent" >   <a 
+ id="x10-134001r1"></a><hr class="float"><div class="float" 
+>
+                                                                                                  
+
+                                                                                                  
+ <table id="TBL-5" class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-5-1g"><col 
+id="TBL-5-1"><col 
+id="TBL-5-2"><col 
+id="TBL-5-3"><col 
+id="TBL-5-4"><col 
+id="TBL-5-5"><col 
+id="TBL-5-6"><col 
+id="TBL-5-7"></colgroup><tr  
+ style="vertical-align:baseline;" id="TBL-5-1-"><td  style="white-space:wrap; text-align:left;" id="TBL-5-1-1"  
+class="td11"> <!--l. 108--><p class="noindent" >SHA-1<span class="frenchb-nbsp">&nbsp;</span>: </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-1-2"  
+class="td11"> (0x)da39a3ee  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-1-3"  
+class="td11"> 5e6b4b0d  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-1-4"  
+class="td11"> 3255bfef   </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-1-5"  
+class="td11"> 95601890  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-1-6"  
+class="td11"> afd80709  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-1-7"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-2-"><td  style="white-space:wrap; text-align:left;" id="TBL-5-2-1"  
+class="td11"> <!--l. 108--><p class="noindent" >SHA-256<span class="frenchb-nbsp">&nbsp;</span>: </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-2-2"  
+class="td11"> (0x)e3b0c442  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-2-3"  
+class="td11"> 98fc1c14   </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-2-4"  
+class="td11"> 9afbf4c8   </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-2-5"  
+class="td11"> 996fb924  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-2-6"  
+class="td11"> 27ae41e4  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-2-7"  
+class="td11"> 649b934c  </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-3-"><td  style="white-space:wrap; text-align:left;" id="TBL-5-3-1"  
+class="td11"> <!--l. 108--><p class="noindent" >    </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-3-2"  
+class="td11"> a495991b       </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-3-3"  
+class="td11"> 7852b855  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-3-4"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-3-5"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-3-6"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-3-7"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-4-"><td  style="white-space:wrap; text-align:left;" id="TBL-5-4-1"  
+class="td11"> <!--l. 108--><p class="noindent" >SHA-384<span class="frenchb-nbsp">&nbsp;</span>: </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-4-2"  
+class="td11"> (0x)38b060a7  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-4-3"  
+class="td11"> 51ac9638  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-4-4"  
+class="td11"> 4cd9327e  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-4-5"  
+class="td11"> b1b1e36a  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-4-6"  
+class="td11"> 21fdb711  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-4-7"  
+class="td11"> 14be0743  </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-5-"><td  style="white-space:wrap; text-align:left;" id="TBL-5-5-1"  
+class="td11"> <!--l. 108--><p class="noindent" >    </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-5-2"  
+class="td11"> 4c0cc7bf        </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-5-3"  
+class="td11"> 63f6e1da   </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-5-4"  
+class="td11"> 274edebf  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-5-5"  
+class="td11"> e76f65fb   </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-5-6"  
+class="td11"> d51ad2f1  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-5-7"  
+class="td11"> 4898b95b  </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-6-"><td  style="white-space:wrap; text-align:left;" id="TBL-5-6-1"  
+class="td11"> <!--l. 108--><p class="noindent" >SHA-512<span class="frenchb-nbsp">&nbsp;</span>: </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-6-2"  
+class="td11"> (0x)cf83e135   </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-6-3"  
+class="td11"> 7eefb8bd  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-6-4"  
+class="td11"> f1542850  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-6-5"  
+class="td11"> d66d8007  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-6-6"  
+class="td11"> d620e405  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-6-7"  
+class="td11"> 0b5715dc  </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-7-"><td  style="white-space:wrap; text-align:left;" id="TBL-5-7-1"  
+class="td11"> <!--l. 108--><p class="noindent" >    </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-7-2"  
+class="td11"> 83f4a921        </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-7-3"  
+class="td11"> d36ce9ce  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-7-4"  
+class="td11"> 47d0d13c  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-7-5"  
+class="td11"> 5d85f2b0  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-7-6"  
+class="td11"> ff8318d2   </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-7-7"  
+class="td11"> 877eec2f   </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-8-"><td  style="white-space:wrap; text-align:left;" id="TBL-5-8-1"  
+class="td11"> <!--l. 108--><p class="noindent" >    </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-8-2"  
+class="td11"> 63b931bd       </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-8-3"  
+class="td11"> 47417a81  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-8-4"  
+class="td11"> a538327a  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-8-5"  
+class="td11"> f927da3e   </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-8-6"  
+class="td11">          </td><td  style="white-space:nowrap; text-align:left;" id="TBL-5-8-7"  
+class="td11">          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-5-9-"><td  style="white-space:wrap; text-align:left;" id="TBL-5-9-1"  
+class="td11"> <!--l. 108--><p class="noindent" >    </td></tr></table>
+ <div class="caption" 
+><span class="id"><span 
+class="ec-lmcsc-10x-x-109">Table</span>&#x00A0;3.1: </span><span  
+class="content">Représentations hexadécimales</span></div><!--tex4ht:label?: x10-134001r1 -->
+                                                                                                  
+
+                                                                                                  
+   </div><hr class="endfloat" />
+   </div>
+<!--l. 114--><p class="indent" >   <hr class="figure"><div class="figure" 
+>
+                                                                                                  
+
+                                                                                                  
+<a 
+ id="x10-134002r2"></a><a 
+ id="x10-142001r14"></a>
+                                                                                                  
+
+                                                                                                  
+<div class="center" 
+>
+<!--l. 115--><p class="noindent" >
+<!--l. 162--><p class="noindent" >                                                        <!--l. 155--><p class="noindent" >         <!--l. 159--><p class="noindent" >lHashPSMDB =<span 
+class="ec-lmtt-10x-x-109">xor</span>MGFseed<span 
+class="ec-lmtt-10x-x-109">xor</span>00MGF00EM=maskedSeedmaskedDB
+</div>
+<br /> <div class="caption" 
+><span class="id"><span 
+class="ec-lmcsc-10x-x-109">Figure</span>&#x00A0;3.2: </span><span  
+class="content">Opération de chiffrement EME-OAEP</span></div><!--tex4ht:label?: x10-134002r2 -->
+                                                                                                  
+
+                                                                                                  
+<!--l. 166--><p class="indent" >   </div><hr class="endfigure">
+<!--l. 168--><p class="indent" >   <span 
+class="ec-lmtt-10x-x-109">lHash </span>est le hash de l&#8217;étiquette optionnelle <span 
+class="ec-lmtt-10x-x-109">L</span>. L&#8217;opération de déchiffrement suivant inverse les étapes pour
+retrouver <span 
+class="ec-lmtt-10x-x-109">M </span>et vérifier <span 
+class="ec-lmtt-10x-x-109">lHash </span>et <span 
+class="ec-lmtt-10x-x-109">PS</span>.
+<!--l. 171--><p class="noindent" ><span class="paragraphHead"><a 
+href="#x10-1350001" id="x10-1350001"><span 
+class="ec-lmbx-10x-x-109">RSAES-OAEP-DECRYPT (K, C, L). </span><br 
+class="newline" /></a></span>
+   Options<span class="frenchb-nbsp">&nbsp;</span>:
+      <dl class="description"><dt class="description">
+<span 
+class="ec-lmbx-10x-x-109">Hash</span><span class="frenchb-nbsp">&nbsp;</span><span 
+class="ec-lmbx-10x-x-109">:</span> </dt><dd 
+class="description">fonction de hachage (<span 
+class="ec-lmtt-10x-x-109">hLen </span>contient la longueur en octets de la sortie de la fonction de hachage)<span class="frenchb-thinspace">&nbsp;</span>;
+      </dd><dt class="description">
+<span 
+class="ec-lmbx-10x-x-109">MGF</span><span class="frenchb-nbsp">&nbsp;</span><span 
+class="ec-lmbx-10x-x-109">:</span> </dt><dd 
+class="description">fonction de génération du masque.<br 
+class="newline" /></dd></dl>
+<!--l. 178--><p class="noindent" >Entrée<span class="frenchb-nbsp">&nbsp;</span>:
+      <dl class="description"><dt class="description">
+<span 
+class="ec-lmbx-10x-x-109">K</span><span class="frenchb-nbsp">&nbsp;</span><span 
+class="ec-lmbx-10x-x-109">:</span> </dt><dd 
+class="description">destinataire de la clef privée RSA (<span 
+class="ec-lmtt-10x-x-109">k </span>contient la longueur en octets du modulo RSA <span 
+class="ec-lmtt-10x-x-109">n</span>)<span class="frenchb-thinspace">&nbsp;</span>;
+      </dd><dt class="description">
+<span 
+class="ec-lmbx-10x-x-109">C</span><span class="frenchb-nbsp">&nbsp;</span><span 
+class="ec-lmbx-10x-x-109">:</span> </dt><dd 
+class="description">texte chiffré à déchiffrer, une chaîne de caractères de taille <span 
+class="ec-lmtt-10x-x-109">k</span>, où <span 
+class="ec-lmtt-10x-x-109">k = 2hLen + 2</span><span class="frenchb-thinspace">&nbsp;</span>;
+      </dd><dt class="description">
+<span 
+class="ec-lmbx-10x-x-109">L</span><span class="frenchb-nbsp">&nbsp;</span><span 
+class="ec-lmbx-10x-x-109">:</span> </dt><dd 
+class="description">champ optionnel dont l&#8217;association avec le message doit être garantie<span class="frenchb-thinspace">&nbsp;</span>; la valeur par défaut pour <span 
+class="ec-lmtt-10x-x-109">L </span>est, si
+      pas de spécification, une chaîne vide.<br 
+class="newline" /></dd></dl>
+<!--l. 184--><p class="noindent" >Sortie<span class="frenchb-nbsp">&nbsp;</span>:
+      <dl class="description"><dt class="description">
+<span 
+class="ec-lmbx-10x-x-109">M</span><span class="frenchb-nbsp">&nbsp;</span><span 
+class="ec-lmbx-10x-x-109">:</span> </dt><dd 
+class="description">message, une chaîne d&#8217;octets de longueur <span 
+class="ec-lmtt-10x-x-109">mLen</span>, où <span 
+class="ec-lmtt-10x-x-109">mLen &#x003C;= k - 2hLen - 2</span>.<br 
+class="newline" /></dd></dl>
+<!--l. 188--><p class="noindent" >Erreur<span class="frenchb-nbsp">&nbsp;</span>:
+      <ul class="itemize1">
+      <li class="itemize">"decryption error"<span class="frenchb-thinspace">&nbsp;</span>;</li></ul>
+<!--l. 192--><p class="noindent" >Étapes<span class="frenchb-nbsp">&nbsp;</span>:
+      <ol  class="enumerate1" >
+      <li 
+  class="enumerate" id="x10-135002x1">Vérification des longueurs<span class="frenchb-nbsp">&nbsp;</span>:
+         <ol  class="enumerate2" >
+         <li 
+  class="enumerate" id="x10-135004x1">Si la longueur de <span 
+class="ec-lmtt-10x-x-109">L </span>est supérieure à la taille limite en entrée de la fonction de hachage (<span 
+class="rm-lmr-10x-x-109">2</span><sup><span 
+class="rm-lmr-8">61</span><span 
+class="lmsy8-">-</span><span 
+class="rm-lmr-8">1</span></sup>
+         octets pour SHA-1), renvoie "decryption error" et s&#8217;arrête<span class="frenchb-thinspace">&nbsp;</span>;
+         </li>
+         <li 
+  class="enumerate" id="x10-135006x2">Si la longueur du texte chiffré <span 
+class="ec-lmtt-10x-x-109">C </span>n&#8217;est pas de <span 
+class="ec-lmtt-10x-x-109">k </span>octets, renvoie "decryption error" et s&#8217;arrête<span class="frenchb-thinspace">&nbsp;</span>;
+         </li>
+         <li 
+  class="enumerate" id="x10-135008x3">Si <span 
+class="ec-lmtt-10x-x-109">k &#x003C; 2hLen + 2</span>, renvoie "decryption error" et s&#8217;arrête.<br 
+class="newline" /></li></ol>
+      </li>
+      <li 
+  class="enumerate" id="x10-135010x2">déchiffrement RSA<span class="frenchb-nbsp">&nbsp;</span>:
+                                                                                                  
+
+                                                                                                  
+         <ol  class="enumerate2" >
+         <li 
+  class="enumerate" id="x10-135012x1">Convertir le texte chiffré <span 
+class="ec-lmtt-10x-x-109">C </span>en un entier <span 
+class="ec-lmtt-10x-x-109">c </span>représentatif du message chiffré<span class="frenchb-nbsp">&nbsp;</span>: <span 
+class="ec-lmtt-10x-x-109">c = OS2IP (C)</span><span class="frenchb-thinspace">&nbsp;</span>;
+         </li>
+         <li 
+  class="enumerate" id="x10-135014x2">Appliquer la primitive de déchiffrement <span 
+class="ec-lmtt-10x-x-109">RSADP </span>à la clef privée RSA <span 
+class="ec-lmtt-10x-x-109">K </span>et au message chiffré
+         représentatif <span 
+class="ec-lmtt-10x-x-109">c </span>pour produire un entier <span 
+class="ec-lmtt-10x-x-109">m </span>représentatif du message clair<span class="frenchb-nbsp">&nbsp;</span>: <span 
+class="ec-lmtt-10x-x-109">m = RSADP (K, c)</span><span class="frenchb-thinspace">&nbsp;</span>;<br 
+class="newline" />si  RSADP  renvoie  "ciphertext  representative  out  of  range"  (signifie  que  <span 
+class="ec-lmtt-10x-x-109">c &#x003E;= n</span>),  renvoie
+         "decryption error" et s&#8217;arrête<span class="frenchb-thinspace">&nbsp;</span>;
+         </li>
+         <li 
+  class="enumerate" id="x10-135016x3">convertir le message représentatif <span 
+class="ec-lmtt-10x-x-109">m </span>en un message déchiffré <span 
+class="ec-lmtt-10x-x-109">EM </span>de longueur <span 
+class="ec-lmtt-10x-x-109">k </span>octets<span class="frenchb-nbsp">&nbsp;</span>: <span 
+class="ec-lmtt-10x-x-109">EM = I2OSP</span>
+         <span 
+class="ec-lmtt-10x-x-109">(m, k)</span>.<br 
+class="newline" /></li></ol>
+      </li>
+      <li 
+  class="enumerate" id="x10-135018x3">déchiffrement EME-OAEP<span class="frenchb-nbsp">&nbsp;</span>:
+         <ol  class="enumerate2" >
+         <li 
+  class="enumerate" id="x10-135020x1">si l&#8217;étiquette <span 
+class="ec-lmtt-10x-x-109">L </span>n&#8217;est pas spécifiée, laisser <span 
+class="ec-lmtt-10x-x-109">L </span>à une chaîne vide, laisser <span 
+class="ec-lmtt-10x-x-109">lHash = Hash(L)</span>, une
+         chaîne d&#8217;octets de longueur <span 
+class="ec-lmtt-10x-x-109">hLen</span>
+         </li>
+         <li 
+  class="enumerate" id="x10-135022x2">séparer  le  message  encodé  <span 
+class="ec-lmtt-10x-x-109">EM </span>dans  un  seul  octet  <span 
+class="ec-lmtt-10x-x-109">Y</span>,  une  chaîne  d&#8217;octets  <span 
+class="ec-lmtt-10x-x-109">maskedSeed </span>de
+         longueur <span 
+class="ec-lmtt-10x-x-109">hLen</span>, et une chaîne d&#8217;octets <span 
+class="ec-lmtt-10x-x-109">maskedDB </span>de longueur <span 
+class="ec-lmtt-10x-x-109">k - hLen - 1 </span>telle que <span 
+class="ec-lmtt-10x-x-109">EM = Y</span>
+         <span 
+class="ec-lmtt-10x-x-109">||maskedSeed ||maskedDB</span><span class="frenchb-thinspace">&nbsp;</span>;
+         </li>
+         <li 
+  class="enumerate" id="x10-135024x3">laisser <span 
+class="ec-lmtt-10x-x-109">seedMask = MGF(maskedDB, hLen)</span><span class="frenchb-thinspace">&nbsp;</span>;
+         </li>
+         <li 
+  class="enumerate" id="x10-135026x4">laisser <span 
+class="ec-lmtt-10x-x-109">seed = maskedSeed xor seedMask</span><span class="frenchb-thinspace">&nbsp;</span>;
+         </li>
+         <li 
+  class="enumerate" id="x10-135028x5">laisser <span 
+class="ec-lmtt-10x-x-109">dbMask = MGF(seed, k - hLen - 1)</span><span class="frenchb-thinspace">&nbsp;</span>;
+         </li>
+         <li 
+  class="enumerate" id="x10-135030x6">laisser <span 
+class="ec-lmtt-10x-x-109">DB = maskedDB xor dbMask</span><span class="frenchb-thinspace">&nbsp;</span>;
+         </li>
+         <li 
+  class="enumerate" id="x10-135032x7">séparer <span 
+class="ec-lmtt-10x-x-109">DB </span>en une chaîne d&#8217;octet <span 
+class="ec-lmtt-10x-x-109">lHash </span>de longueur <span 
+class="ec-lmtt-10x-x-109">hLen</span>, une chaîne de padding (possiblement
+         vide) <span 
+class="ec-lmtt-10x-x-109">PS </span>consistant en des octets hexadécimaux de valeur <span 
+class="ec-lmri-10x-x-109">0x00</span>, et un message <span 
+class="ec-lmtt-10x-x-109">M </span>tel que <span 
+class="ec-lmtt-10x-x-109">DB =</span>
+         <span 
+class="ec-lmtt-10x-x-109">lHash ||PS ||0x01 ||M</span><span class="frenchb-thinspace">&nbsp;</span>; <br 
+class="newline" />s&#8217;il n&#8217;y a pas d&#8217;octet avec la valeur hexadécimale <span 
+class="ec-lmri-10x-x-109">0x01 </span>pour séparer <span 
+class="ec-lmtt-10x-x-109">PS </span>de <span 
+class="ec-lmtt-10x-x-109">M</span>, si <span 
+class="ec-lmtt-10x-x-109">lHash </span>n&#8217;est pas
+         égal à <span 
+class="ec-lmtt-10x-x-109">lHash</span>, ou si <span 
+class="ec-lmtt-10x-x-109">Y </span>n&#8217;est pas une sortie non nulle, renvoyer "decryption error" et s&#8217;arrêter.<br 
+class="newline" /></li></ol>
+      </li>
+      <li 
+  class="enumerate" id="x10-135034x4">renvoyer le message M.<br 
+class="newline" /></li></ol>
+<!--l. 220--><p class="noindent" ><span class="paragraphHead"><a 
+href="#x10-1360001" id="x10-1360001"><span 
+class="ec-lmbx-10x-x-109">Note. </span><br 
+class="newline" /></a></span>
+                                                                                                  
+
+                                                                                                  
+   Il faut faire attention qu&#8217;un adversaire ne puisse distinguer les différentes erreurs dans les conditions de l&#8217;étape
+3, que ce soit par un message d&#8217;erreur, ou un temps de réponse différent, ou, plus généralement, apprendre une
+information partielle à propos du message en clair <span 
+class="ec-lmtt-10x-x-109">EM</span>. Sinon un adversaire peut être en mesure d&#8217;obtenir des
+informations utiles sur le déchiffrement du texte chiffré <span 
+class="ec-lmtt-10x-x-109">C</span>, conduisant à une attaque à chiffré choisi telle que celle
+observée par Manger.
+<!--l. 223--><p class="noindent" ><span class="paragraphHead"><a 
+href="#x10-1370001" id="x10-1370001"><span 
+class="ec-lmbx-10x-x-109">RSAES-PKCS1-v1_ 5. </span><br 
+class="newline" /></a></span>
+   RSAES-PKCS1-v1_5 combine les primitives RSAEP et RSADP avec la méthode de codage EME-PKCS1-v1_
+5. Il est mathématiquement équivalent au schéma de chiffrement dans la PKCS # 1 v1.5. RSAES-PKCS1-v1_ 5
+peut fonctionner sur des messages de longueur supérieure à <span 
+class="ec-lmtt-10x-x-109">k - 11 </span>octets (<span 
+class="ec-lmtt-10x-x-109">k </span>est la longueur en octets du modulo
+RSA), bien qu&#8217;il faille faire attention aux attaques portant sur les faibles exposants RSA menée par Coppersmith,
+Franklin, Patarin, and Reiter quand les longs messages sont chiffrés.<br 
+class="newline" />En règle générale, l&#8217;utilisation de ce schéma pour chiffrer un message arbitraire, en opposition à une clef générée
+aléatoirement, n&#8217;est pas recommandée.<br 
+class="newline" />Il est possible de générer des textes chiffrés RSAES-PKCS1-v1_5 valides sans connaître les messages clairs
+correspondants, avec une probabilité raisonnable de réussite.<br 
+class="newline" />Cette possibilité peut être exploitée dans une attaque à chiffré choisi. Par conséquent, si RSAES-PKCS1-v1_5 doit
+être utilisé, certaines contre mesures faciles à implémenter devraient être mises en place afin de contrecarrer
+l&#8217;attaque trouvée.<br 
+class="newline" />Des exemples typiques comprennent l&#8217;ajout de la structure des données à encoder, le contrôle rigoureux de la
+conformité des PKCS# 1v1.5 (et d&#8217;autres redondances) dans les messages déchiffrés, et la consolidation
+des messages d&#8217;erreur dans un protocole client-serveur basé sur PKCS # 1 v1.5. Ils peuvent tous
+être des contre-mesures efficaces et n&#8217;entraînent pas de changement à un protocole n&#x02DA; 1 sur la base
+de v1.5-PKCS. Il a été récemment montré que la sécurité du protocole SSL / TLS handshake, qui
+utilise RSAES-PKCS1-v1_5 et certaines contre-mesures, peut être liée à une variante du problème
+RSA.<br 
+class="newline" />
+<!--l. 231--><p class="noindent" ><span class="paragraphHead"><a 
+href="#x10-1380001" id="x10-1380001"><span 
+class="ec-lmbx-10x-x-109">Note. </span><br 
+class="newline" /></a></span>
+   Les passages suivants décrivent des recommandations concernant l&#8217;utilisation de RSAES-PKCS1-v1_5. Les
+recommandations de la version 1.5 de ce document sont incluses ainsi que de nouvelles recommandations motivées
+par les avancées de cryptanalyses durant les années suivantes.
+      <ul class="itemize1">
+      <li class="itemize">il est recommandé que les octets pseudo-aléatoires soient générés indépendamment pour chaque
+      processus de chiffrement, en particulier si la même donnée est en entrée pour plus d&#8217;un processus de
+      chiffrement. Les résultats de Haastad sont une des motivations pour cette recommandation<span class="frenchb-thinspace">&nbsp;</span>;
+      </li>
+      <li class="itemize">la chaîne de padding <span 
+class="ec-lmtt-10x-x-109">PS </span>est d&#8217;une longueur d&#8217;au moins 8 octets, ce qui est une condition de sécurité
+      pour les opérations sur les clefs publiques, et qui rend difficile pour les attaquants de récupérer les
+      données en essayant tous les blocs chiffrés possibles.
+      </li>
+                                                                                                  
+
+                                                                                                  
+      <li class="itemize">les octets pseudo aléatoires peuvent aussi aider à contrecarrer une attaque grâce à Coppersmith et
+      al. quand la taille du message à chiffrer est gardé petit. L&#8217;attaque marche sur les petits exposants
+      RSA quand des messages similaires sont chiffrés avec la même clef publique. Plus spécifiquement,
+      une façon peut être, quand deux entrées RSAEP correspondent sur une large portion de bits (8/9) et
+      qu&#8217;un petit exposant RSA est utilisé (e = 3) pour chiffrer les deux, il peut être possible de retrouver
+      les entrées avec l&#8217;attaque. Une autre façon d&#8217;attaquer est couronnée de succès pour déchiffrer un
+      seul texte chiffré, quand une large proportion (2/3) des entrées de RSAEP est déjà connue. Pour
+      des applications typiques, le message à chiffrer est court (par exemple une clef symétrique de 128
+      bits) donc peu d&#8217;informations seront connues ou en commun entre deux messages pour permettre
+      l&#8217;attaque. Cependant, si un long message est chiffré, ou si une partie du message est connu, alors
+      l&#8217;attaque peut fonctionner. Dans tous les cas, le schéma RSAES-OAEP surmonte l&#8217;attaque.<br 
+class="newline" /></li></ul>
+<a 
+ id="x10-138001r146"></a>
+<h5 class="subsubsectionHead"><span class="titlemark">3.2.1.2   </span> <a 
+href="#x10-1390002" id="x10-1390002">Faille</a></h5>
+     RSA-OAEP peut être soumis à une attaque nommée "Mangers Attack" selon son implantation <span class="cite">[<a 
+href="rapport_Auditli5.html#Xmangers2010falko">64</a>]</span>. OpenSSL
+semble être vulnérable à une attaque de ce type, à base de "prédictions" par injections de fautes. La vulnérabilité
+semble être très récente puisqu&#8217;elle fonctionne sous OpenSSL 1.0.0.<br 
+class="newline" />
+   Le padding OAEP devait palier le problème d&#8217;insécurité que causait le padding PKCS#1 v1.5 (attaque à chiffré
+choisi) <span class="cite">[<a 
+href="rapport_Auditli5.html#XbleichenbacherPCKS">6</a>]</span>. OpenSSL a tout de même pris en compte cette vulnérabilité et a placé des contres-mesures efficaces. La
+Technische Universität Darmstadt (Allemagne) explique en détails comment sont implémentées ces
+contre-mesures et montre que dans certains cas l&#8217;attaque reste possible. Enfin, elle apporte ses propres
+contre-mesures.<br 
+class="newline" />
+   On peut noter que plusieurs librairies sont vulnérables à une attaque de Manger qui consiste à contrôler la taille
+des paramètres à hacher, mais que l&#8217;implantation de RSA-OAEP d&#8217;OpenSSL ne le permet pas. La raison est que le
+décodage OAEP est linéaire quelle que soit la taille des paramètres et les erreurs survenues. Il semble également y
+avoir un problème avec l&#8217;OAEP_padding sur le chiffrement RSA. Bill Nickless recommande l&#8217;utilisation de
+PKCS_padding. <span class="cite">[<a 
+href="rapport_Auditli5.html#XsourceforgeRSAbroken">48</a>]</span> <br 
+class="newline" />
+<a 
+ id="x10-139001r159"></a>
+<h5 class="subsubsectionHead"><span class="titlemark">3.2.1.3   </span> <a 
+href="#x10-1400003" id="x10-1400003">Implémentation</a></h5>
+<!--l. 251--><p class="noindent" ><span class="paragraphHead"><a 
+href="#x10-1410003" id="x10-1410003"><span 
+class="ec-lmbx-10x-x-109">Configuration vis</span><span 
+class="ec-lmbx-10x-x-109">ée.</span><br 
+class="newline" /></a></span>
+   L&#8217;étude a été réalisée sur la librairie OpenSSL-1.0.0.
+<!--l. 255--><p class="noindent" ><span class="paragraphHead"><a 
+href="#x10-1420003" id="x10-1420003"><span 
+class="ec-lmbx-10x-x-109">Fonction.</span><br 
+class="newline" /></a></span>
+   La fonction auditée se nomme RSA_padding_check_PKCS1_OAEP() (cf. <span 
+class="ec-lmri-10x-x-109">Listing </span><a 
+href="#x10-142001r1">3.1<!--tex4ht:ref: rsaoaep --></a>) et est accessible à partir
+du chemin <span 
+class="ec-lmtt-10x-x-109">openssl/crypto/rsa/rsa_oaep.c</span>.
+   <!--l. 260-->
+                                                                                                  
+
+                                                                                                  
+<a 
+ id="x10-142001r1"></a>
+<a 
+ id="x10-142002"></a>
+   <div class="lstlisting" id="listing-10"><span class="label"><a 
+ id="x10-142003r1"></a></span><span 
+class="ec-lmtt-9">lzero</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">=</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">num</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">-</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">flen</span><span 
+class="ec-lmtt-9">;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x10-142004r2"></a><span 
+class="ec-lmr-6">2</span></span><span 
+class="ec-lmtk-10x-x-90">if</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">(</span><span 
+class="ec-lmtt-9">lzero</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">&#x003C;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">0)</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x10-142005r3"></a></span><span 
+class="ec-lmtt-9">{</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x10-142006r4"></a><span 
+class="ec-lmr-6">4</span></span><span 
+class="ec-lmtti-10x-x-90">/*</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">signalling</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">this</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">error</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">immediately</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">after</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">detection</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">might</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">allow</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x10-142007r5"></a></span><span 
+class="ec-lmtti-10x-x-90">*</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">for</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">side</span><span 
+class="ec-lmtti-10x-x-90">-</span><span 
+class="ec-lmtti-10x-x-90">channel</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">attacks</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">(</span><span 
+class="ec-lmtti-10x-x-90">e</span><span 
+class="ec-lmtti-10x-x-90">.</span><span 
+class="ec-lmtti-10x-x-90">g</span><span 
+class="ec-lmtti-10x-x-90">.</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">timing</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">if</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">&#8217;</span><span 
+class="ec-lmtti-10x-x-90">plen</span><span 
+class="ec-lmtti-10x-x-90">&#8217;</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">is</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">huge</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x10-142008r6"></a><span 
+class="ec-lmr-6">6</span></span><span 
+class="ec-lmtti-10x-x-90">*</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">--</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">cf</span><span 
+class="ec-lmtti-10x-x-90">.</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">James</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">H</span><span 
+class="ec-lmtti-10x-x-90">.</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">Manger</span><span 
+class="ec-lmtti-10x-x-90">,</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">"</span><span 
+class="ec-lmtti-10x-x-90">A</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">Chosen</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">Ciphertext</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">Attack</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">on</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">RSA</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x10-142009r7"></a></span><span 
+class="ec-lmtti-10x-x-90">Optimal</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x10-142010r8"></a><span 
+class="ec-lmr-6">8</span></span><span 
+class="ec-lmtti-10x-x-90">*</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">Asymmetric</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">Encryption</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">Padding</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">(</span><span 
+class="ec-lmtti-10x-x-90">OAEP</span><span 
+class="ec-lmtti-10x-x-90">)</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">[...]",</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">CRYPTO</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">2001)</span><span 
+class="ec-lmtti-10x-x-90">,</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x10-142011r9"></a></span><span 
+class="ec-lmtti-10x-x-90">*</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">so</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">we</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">use</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">a</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">&#8217;</span><span 
+class="ec-lmtti-10x-x-90">bad</span><span 
+class="ec-lmtti-10x-x-90">&#8217;</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">flag</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">*/</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x10-142012r10"></a><span 
+class="ec-lmr-6">10</span></span><span 
+class="ec-lmtt-9">bad</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">=</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">1;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x10-142013r11"></a></span><span 
+class="ec-lmtt-9">lzero</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">=</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">0;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x10-142014r12"></a><span 
+class="ec-lmr-6">12</span></span><span 
+class="ec-lmtt-9">flen</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">=</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtt-9">num</span><span 
+class="ec-lmtt-9">;</span><span 
+class="ec-lmtt-9">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">/*</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">don</span><span 
+class="ec-lmtti-10x-x-90">&#8217;</span><span 
+class="ec-lmtti-10x-x-90">t</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">overflow</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">the</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">memcpy</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">to</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">padded_from</span><span 
+class="ec-lmtti-10x-x-90">&#x00A0;</span><span 
+class="ec-lmtti-10x-x-90">*/</span><span 
+class="ec-lmtt-9">&#x00A0;</span><br /><span class="label"><a 
+ id="x10-142015r13"></a></span><span 
+class="ec-lmtt-9">}</span>
+   
+   <br />
+       <div class="caption" 
+><span class="id">Listing&#x00A0;3.1:
+       </span><span  
+class="content">rsa_oaep.c</span></div><!--tex4ht:label?: x10-142001r3 -->
+   </div>
+<!--l. 277--><p class="indent" >   Le développeur n&#8217;a pas considéré qu&#8217;il y avait un grand danger dans le code de contre-mesures.<br 
+class="newline" />Pourtant l&#8217;étude confirme qu&#8217;il y a un décalage de temps possible, certes léger mais qui peut entraîner une attaque
+en "branch prediction" (qui peut se traduire en prédiction par dérivation).<br 
+class="newline" />
+<a 
+ id="x10-142016r160"></a>
+<h5 class="subsubsectionHead"><span class="titlemark">3.2.1.4   </span> <a 
+href="#x10-1430004" id="x10-1430004">Conclusion</a></h5>
+     Il n&#8217;y a pas vraiment de quoi s&#8217;alarmer, cette attaque est en pratique infaisable sur un serveur car il y a
+suffisamment de variations de délais (différences de CPU, opérations multi-tâches, connexions réseaux, etc...) pour
+éviter une attaque par timing. Cependant, sur des systèmes embarqués l&#8217;attaque peut être réalisable, et il serait
+plus prudent de palier ce problème.
+<a 
+ id="x10-143001r145"></a>
+<h4 class="subsectionHead"><span class="titlemark">3.2.2   </span> <a 
+href="#x10-1440002" id="x10-1440002">Audit 3.2<span class="frenchb-nbsp">&nbsp;</span>: Chiffrement SSLv3 ou TLS 1.0 en mode CBC</a></h4>
+<a 
+ id="x10-144001r164"></a>
+<h5 class="subsubsectionHead"><span class="titlemark">3.2.2.1   </span> <a 
+href="#x10-1450001" id="x10-1450001">Normes visées</a></h5>
+<!--l. 287--><p class="noindent" ><span class="paragraphHead"><a 
+href="#x10-1460001" id="x10-1460001"><span 
+class="ec-lmbx-10x-x-109">SSL version 3 </span><br 
+class="newline" /></a></span>
+   Cette partie référence la RFC 6101 <span class="cite">[<a 
+href="rapport_Auditli5.html#Xrfc6101">20</a>]</span> du protocole SSL version 3, concernant le chiffrement par bloc.
+<br 
+class="newline" />Dans ce chiffrement, chaque bloc de texte clair est chiffré dans un bloc de donnée chiffrée. Comme il est très peu
+probable que le texte clair (qu&#8217;importe la donnée à envoyer) ne se découpe exactement en taille de blocs nécessaire
+(qui est de 64 bits normalement), on doit alors rajouter du bourrage à la fin de ces petit blocs avec des valeurs
+régulières, normalement des &#8217;0&#8217;. <br 
+class="newline" />
+<!--l. 291--><p class="indent" >   Lorsqu&#8217;un chiffrement CBC est utilisé, un vecteur d&#8217;initialisation (IV) est maintenu pour chaque clef. Cette
+valeur est initialisée pour la première fois par la poignée de main du protocole SSL. Par la suite, le dernier bloc du
+texte chiffré de chaque tour est préservé comme IV pour le tour suivant.<br 
+class="newline" />
+                                                                                                  
+
+                                                                                                  
+   <div class="verbatim" id="verbatim-2">
+block-ciphered&#x00A0;struct&#x00A0;{
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;opaque&#x00A0;content[SSLCompressed.length];
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;opaque&#x00A0;MAC[CipherSpec.hash_size];
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;uint8&#x00A0;padding[GenericBlockCipher.padding_length];
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;uint8&#x00A0;padding_length;
+&#x00A0;<br />}&#x00A0;GenericBlockCipher;
+</div>
+<!--l. 300--><p class="nopar" >
+   <div class="tabular"> <table id="TBL-6" class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-6-1g"><col 
+id="TBL-6-1"><col 
+id="TBL-6-2"><col 
+id="TBL-6-3"></colgroup><tr  
+ style="vertical-align:baseline;" id="TBL-6-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-6-1-1"  
+class="td11"> - <span 
+class="ec-lmtt-10x-x-109">content       </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-1-2"  
+class="td11"> <span class="frenchb-nbsp">&nbsp;</span>:  </td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-6-1-3"  
+class="td11"> <!--l. 303--><p class="noindent" >le contenu du bloc de message.                                       </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-6-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-6-2-1"  
+class="td11"> - <span 
+class="ec-lmtt-10x-x-109">MAC            </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-2-2"  
+class="td11"> <span class="frenchb-nbsp">&nbsp;</span>:  </td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-6-2-3"  
+class="td11"> <!--l. 304--><p class="noindent" >la valeur du haché MAC.                                              </td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-6-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-6-3-1"  
+class="td11"> - <span 
+class="ec-lmtt-10x-x-109">padding </span></td> <td  style="white-space:nowrap; text-align:left;" id="TBL-6-3-2"  
+class="td11"> <span class="frenchb-nbsp">&nbsp;</span>: </td> <td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-6-3-3"  
+class="td11"> <!--l. 305--><p class="noindent" >le bourage qui est utilisé pour forcer la taille du bloc.</td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-6-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-6-4-1"  
+class="td11"> - <span 
+class="ec-lmtt-10x-x-109">padding_length </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-4-2"  
+class="td11"> <span class="frenchb-nbsp">&nbsp;</span>:  </td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-6-4-3"  
+class="td11"> <!--l. 306--><p class="noindent" >la taille du bourage utilisé qui doit être plus petit que la     </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-6-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-6-5-1"  
+class="td11">                 </td><td  style="white-space:nowrap; text-align:left;" id="TBL-6-5-2"  
+class="td11">   </td><td  style="white-space:nowrap; text-align:left; vertical-align:middle;" id="TBL-6-5-3"  
+class="td11"> <!--l. 307--><p class="noindent" >taille du bloc chiffré et il peut être à &#8217;0&#8217;.                           </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-6-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-6-6-1"  
+class="td11">                 </td> </tr></table></div><br 
+class="newline" />
+<!--l. 311--><p class="indent" >   La taille des données chiffrées (<span 
+class="ec-lmtt-10x-x-109">SSLCiphertext.length</span>) est égale à la somme de <span 
+class="ec-lmtt-10x-x-109">SSLCompressed.length</span>,
+<span 
+class="ec-lmtt-10x-x-109">CipherSpec.hash_size </span>et <span 
+class="ec-lmtt-10x-x-109">padding_length </span>+ 1.
+<!--l. 313--><p class="noindent" ><span class="paragraphHead"><a 
+href="#x10-1470001" id="x10-1470001"><span 
+class="ec-lmbx-10x-x-109">CBC</span><span class="frenchb-nbsp">&nbsp;</span><span 
+class="ec-lmbx-10x-x-109">: </span><span 
+class="ec-lmbxi-10x-x-109">Cipher Block Chaining </span><br 
+class="newline" /></a></span>
+   C&#8217;est un mode de chiffrement qui a été très utilisé<span class="frenchb-nbsp">&nbsp;</span>: enchaînement des blocs.<br 
+class="newline" />Sur chaque bloc, un OU exclusif avec le chiffrement du bloc précédent est appliqué. Un vecteur d&#8217;initialisation est
+lui aussi utilisé. Contrairement au mode ECB, les blocs identiques ne seront pas chiffrés de la même façon. On ne
+pourra donc pas repérer de chaîne de caractères récurrentes aussi facilement. Ce mode de chiffrement possède
+plusieurs inconvénients<span class="frenchb-nbsp">&nbsp;</span>:
+      <ul class="itemize1">
+      <li class="itemize">un  chiffrement  de  plusieurs  blocs  en  parallèles  est  impossible  (puisque  chaque  bloc  dépend  du
+      chiffrement du précédent). Déchiffrer avec un IV incorrect entraînera une corruption dans le premier
+      bloc en clair, mais les blocs suivants seront corrects. C&#8217;est parce qu&#8217;un texte clair peut être récupéré
+      grâce à deux blocs adjacents du texte chiffré. Le déchiffrement, contrairement au chiffrement, peut
+      donc être parallélisé. À noter que si un seul bit change dans le texte chiffré, le bloc clair correspondant
+      est complètement corrompu.
+      </li>
+      <li class="itemize">Si une erreur se produit sur un bloc, elle sera répercutée sur tous les suivants. La propagation d&#8217;erreur
+      n&#8217;est pas limitée.</li></ul>
+<!--l. 320--><p class="noindent" ><hr class="figure"><div class="figure" 
+><a 
+ id="x10-147001r3"></a><img 
+src="images/CBC_chiff.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id"><span 
+class="ec-lmcsc-10x-x-109">Figure</span>&#x00A0;3.3: </span><span  
+class="content">Chiffrement CBC</span></div><!--tex4ht:label?: x10-147001r3 -->
+<!--l. 325--><p class="indent" >   </div><hr class="endfigure">
+<!--l. 327--><p class="indent" >   <hr class="figure"><div class="figure" 
+>
+                                                                                                  
+
+                                                                                                  
+<a 
+ id="x10-147002r4"></a><a 
+ id="x11-164001r15"></a><a 
+ id="x11-167001r13"></a><a 
+ id="x11-175001r38"></a>
+                                                                                                  
+
+                                                                                                  
+
+<!--l. 329--><p class="noindent" ><img 
+src="images/CBC_dechiff.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id"><span 
+class="ec-lmcsc-10x-x-109">Figure</span>&#x00A0;3.4: </span><span  
+class="content">Déchiffrement CBC</span></div><!--tex4ht:label?: x10-147002r4 -->
+                                                                                                  
+
+                                                                                                  
+<!--l. 332--><p class="indent" >   </div><hr class="endfigure">
+<!--l. 334--><p class="indent" >   Il a d&#8217;abord été défini par le NIST dans le FIPS 81 (<a 
+href="http://www.itl.nist.gov/fipspubs/fip81.htm" class="url" ><span 
+class="ec-lmtt-10x-x-109">http://www.itl.nist.gov/fipspubs/fip81.htm</span></a>). Le
+standard a été publié en 1981.
+<a 
+ id="x10-147003r166"></a>
+<h5 class="subsubsectionHead"><span class="titlemark">3.2.2.2   </span> <a 
+href="#x10-1480002" id="x10-1480002">Description de la faille</a></h5>
+<!--l. 338--><p class="noindent" >En Septembre 2011, une attaque en <span 
+class="ec-lmri-10x-x-109">man in the middle </span>très efficace a vu le jour contre les protocoles SSLv3 et TLS
+1.0. <span class="cite">[<a 
+href="rapport_Auditli5.html#Xekr2011beast">18</a>]</span> <span class="cite">[<a 
+href="rapport_Auditli5.html#Ximperial2011beast">29</a>]</span> <span class="cite">[<a 
+href="rapport_Auditli5.html#Xgoodin2011beast">24</a>]</span> <span class="cite">[<a 
+href="rapport_Auditli5.html#Xgallagher2011beast">21</a>]</span>. L&#8217;attaque est à clair choisi. Le but étant d&#8217;insérer des morceaux de texte clair
+grâce au navigateur dans la requête chiffrée avec ces protocoles, ceci afin de récupérer les cookies de
+session.<br 
+class="newline" />
+<!--l. 340--><p class="indent" >   La technique est basique, un individu enregistre plusieurs cookies de session auprès de divers sites officiels
+(banques, messageries, etc...). Puis, il clique malencontreusement sur du code Java malveillant (publicité, image,
+etc...). et l&#8217;attaque se déroule automatiquement. L&#8217;ensemble des cookies est envoyé au serveur malveillant qui n&#8217;a
+plus qu&#8217;à déchiffrer les clés de session.<br 
+class="newline" />
+<!--l. 342--><p class="indent" >   La cause viendrait du mode de chiffrement choisi<span class="frenchb-nbsp">&nbsp;</span>: CBC. SSL/TLS est un protocole qui chiffre un canal de
+communication. De ce fait il ne chiffre pas un fichier unique, mais une série d&#8217;enregistrements. Il y a deux façons
+d&#8217;utiliser le mode CBC dans ce cas précis<span class="frenchb-nbsp">&nbsp;</span>:
+      <ul class="itemize1">
+      <li class="itemize">prendre chacun de ces enregistrements indépendamment des autres. Générer un nouveau vecteur
+      d&#8217;initialisation à chaque fois<span class="frenchb-thinspace">&nbsp;</span>;
+      </li>
+      <li class="itemize">traiter ces enregistrements comme un seul objet en les concaténant. Le vecteur d&#8217;initialisation est
+      donc choisi aléatoirement pour le premier enregistrement et pour les autres, il aura pour valeur le
+      dernier bloc de l&#8217;enregistrement précédent.<br 
+class="newline" />
+      </li></ul>
+<!--l. 349--><p class="indent" >   SSLv3 et TLS 1.0 utilisent ce deuxième choix, cela soulève un lourd problème de sécurité. En 2004, Moeller <span class="cite">[<a 
+href="rapport_Auditli5.html#Xmoeller2004cbc">43</a>]</span>
+trouve une méthode pour exploiter ce mauvais choix afin de récupérer des morceaux de textes clairs. Il y a certes
+une faille immense, mais peu exploitable. Les grandes entreprises savent (normalement) qu&#8217;il ne faut pas utiliser le
+mode CBC pour du chiffrement SSL/TLS. Et, dans tous les cas, plusieurs navigateurs ne permettent pas ce type
+d&#8217;attaque (c&#8217;est le cas de Chrome par exemple).
+<a 
+ id="x10-148001r171"></a>
+<h5 class="subsubsectionHead"><span class="titlemark">3.2.2.3   </span> <a 
+href="#x10-1490003" id="x10-1490003">Tests</a></h5>
+<!--l. 353--><p class="noindent" >Nous n&#8217;avons pas repris les tests du logiciel BEAST qui s&#8217;avère être introuvable sur le Web (celui-ci étant un projet
+universitaire, développé par un étudiant de l&#8217;Université de Versailles). Mais une vidéo de l&#8217;exploit est accessible sur
+YouTube au lien ci-dessous<span class="frenchb-nbsp">&nbsp;</span>: <br 
+class="newline" />
+<!--l. 355--><p class="indent" >   <span 
+class="ec-lmbx-10x-x-109">Lien YouTube</span><span class="frenchb-nbsp">&nbsp;</span><span 
+class="ec-lmbx-10x-x-109">:  </span><a 
+href="http://www.youtube.com/watch?v=ujz4SXzWK9o" >http://www.youtube.com/watch?v=ujz4SXzWK9o</a>
+<a 
+ id="x10-149001r172"></a>
+<h5 class="subsubsectionHead"><span class="titlemark">3.2.2.4   </span> <a 
+href="#x10-1500004" id="x10-1500004">Recommandations</a></h5>
+<!--l. 359--><p class="noindent" >La faille existe tant que l&#8217;association de ces protocoles avec le mode de chiffrement CBC existe. Même si l&#8217;attaque
+est infaisable sur les navigateurs les plus répandus (Chrome, Firefox, IE, Safari, ...), OpenSSL devrait pouvoir
+                                                                                                  
+
+                                                                                                  
+interdire cette association, et ne pas laisser le travail aux navigateurs. Mais rien n&#8217;empêche l&#8217;utilisation de ce
+chiffrement par un navigateur plus léger, nous pourrons tester cette vulnérabilité lors de notre partie 3 si nous
+trouvons un navigateur acceptant ce type de chiffrement.
+<a 
+ id="x10-150001r165"></a>
+<h4 class="subsectionHead"><span class="titlemark">3.2.3   </span> <a 
+href="#x10-1510003" id="x10-1510003">Audit 3.3<span class="frenchb-nbsp">&nbsp;</span>: Non-validation des certificats SSL</a></h4>
+<a 
+ id="x10-151001r173"></a>
+<h5 class="subsubsectionHead"><span class="titlemark">3.2.3.1   </span> <a 
+href="#x10-1520001" id="x10-1520001">Normes visées</a></h5>
+<!--l. 364--><p class="noindent" ><span class="paragraphHead"><a 
+href="#x10-1530001" id="x10-1530001"><span 
+class="ec-lmbx-10x-x-109">RFC 5246 </span><br 
+class="newline" /></a></span>
+   La RFC 5246 <span class="cite">[<a 
+href="rapport_Auditli5.html#Xrfc5246">16</a>]</span> stipule que le serveur doit toujours envoyer un message certificat dès lors que la méthode
+d&#8217;échange des clefs a été acceptée. Le certificat DOIT être approprié à la suite des chiffrements utilisés pour les
+échanges de clefs. La structure du message est<span class="frenchb-nbsp">&nbsp;</span>:
+                                                                                                  
+
+                                                                                                  
+   <div class="verbatim" id="verbatim-3">
+opaque&#x00A0;ASN.1Cert&#x003C;1..2^24-1&#x003E;;
+&#x00A0;<br />struct&#x00A0;{
+&#x00A0;<br />&#x00A0;&#x00A0;&#x00A0;&#x00A0;ASN.1Cert&#x00A0;certificate_list&#x003C;0..2^24-1&#x003E;;
+&#x00A0;<br />}&#x00A0;Certificate;
+</div>
+<!--l. 374--><p class="nopar" >
+<!--l. 376--><p class="indent" >   La liste de certificats (<span 
+class="ec-lmtt-10x-x-109">certificate_list</span>) est une séquence de certificats. Le certificat de l&#8217;envoyeur DOIT
+venir en premier. Les suivants sont ceux qui forment la chaîne de certification. Les certificats auto-signés qui
+spécifient un certificat racine peuvent être omis de la chaîne, sous condition que le certificat à l&#8217;extrémité de la
+chaîne soit dans tous les cas validé.<br 
+class="newline" />
+<!--l. 378--><p class="indent" >   Le même message type et la même structure seront utilisés pour la réponse au client du message de requête de
+certificat.
+<a 
+ id="x10-153001r175"></a>
+<h5 class="subsubsectionHead"><span class="titlemark">3.2.3.2   </span> <a 
+href="#x10-1540002" id="x10-1540002">Description de la faille</a></h5>
+     Six chercheurs des universités de Stanford et d&#8217;Austin au Texas, analysent une attaque en Man in the Middle
+autour des certificats SSL sans utilisation d&#8217;un navigateur. Le titre est sans appel "Le code le plus dangereux du
+monde" <span class="cite">[<a 
+href="rapport_Auditli5.html#Xvalidate2012martin">22</a>]</span>.<br 
+class="newline" />
+   SSL doit permettre d&#8217;être sécurisé en toutes circonstances, que le cache DNS soit empoisonné, que les
+attaquants contrôlent les points d&#8217;accès et les routeurs, etc. Il assure théoriquement trois grands principes de la
+cryptologie<span class="frenchb-nbsp">&nbsp;</span>: la confidentialité, l&#8217;intégrité et l&#8217;authentification. Nous connaissons certaines failles au niveau du
+navigateur et de l&#8217;implantation SSL (voir ci-dessus). Mais il existe également d&#8217;autres cas d&#8217;utilisation du protocole
+SSL. Par exemple<span class="frenchb-nbsp">&nbsp;</span>:
+      <ul class="itemize1">
+      <li class="itemize">administration à distance basé sur le cloud, stockage sécurisé sur le cloud en local<span class="frenchb-thinspace">&nbsp;</span>;
+      </li>
+      <li class="itemize">transmissions de données sensibles (ex<span class="frenchb-nbsp">&nbsp;</span>: e-commerce)<span class="frenchb-thinspace">&nbsp;</span>;
+      </li>
+      <li class="itemize">services en ligne comme les messageries électroniques<span class="frenchb-thinspace">&nbsp;</span>;
+      </li>
+      <li class="itemize">authentification via applications mobiles comme Android et iOS.<br 
+class="newline" /></li></ul>
+<!--l. 394--><p class="noindent" >L&#8217;étude montre que la validation des certificats SSL est basée sur plusieurs applications et librairies
+dont<span class="frenchb-nbsp">&nbsp;</span>:
+      <ul class="itemize1">
+      <li class="itemize">OpenSSL
+      </li>
+      <li class="itemize">JSSE
+      </li>
+      <li class="itemize">CryptoAPI
+                                                                                                  
+
+                                                                                                  
+      </li>
+      <li class="itemize">NSS
+      </li>
+      <li class="itemize">GnuTLS
+      </li>
+      <li class="itemize">etc...<br 
+class="newline" /></li></ul>
+<!--l. 404--><p class="indent" >   En fait, un attaquant en <span 
+class="ec-lmri-10x-x-109">Man In The Middle </span>peut intercepter le secret entre un client et un serveur utilisant une
+connexion SSL. Il peut ainsi récupérer des numéros de carte bancaire, avoir accès à une messagerie, récupérer des
+mots de passe, etc. La cause principale vient du fait que les développeurs retouchent les librairies cryptographiques
+à leur façon. En voulant réparer un bug ou en souhaitant rendre SSL compatible avec leurs API, ils injectent de
+nouvelles vulnérabilités. De plus, l&#8217;application est souvent propriétaire et payante ce qui rend le déboggage
+difficile.<br 
+class="newline" />
+<!--l. 407--><p class="indent" >   Que ce soit accidentel ou intentionnel, l&#8217;une des conséquences les plus graves est la non-validation
+de certificat sur des contextes où la sécurité est primordiale (e.g. payement en ligne). La faute ne
+revient pas directement au code d&#8217;OpenSSL, mais à une mauvaise utilisation des différentes fonctions et
+options.<br 
+class="newline" />
+<!--l. 410--><p class="indent" >   Voici quelques exemples concrets concernant différentes API<span class="frenchb-nbsp">&nbsp;</span>:
+      <ul class="itemize1">
+      <li class="itemize">les services comme Amazon&#8217;s Flexible Payments Service PHP et PayPal Payments Standard PHP
+      passent le paramètre <span 
+class="ec-lmtt-10x-x-109">CURLOPT_SSL_VERIFYHOST </span>à <span 
+class="ec-lmri-10x-x-109">true </span>alors que la valeur doit être passée à 2. La
+      conséquence est la désactivation de la validation du certificat<span class="frenchb-thinspace">&nbsp;</span>;
+      </li>
+      <li class="itemize">lynx, un navigateur textuel très connu et souvent utilisé dans le développement d&#8217;applications, vérifie
+      les certificats auto-signés seulement si la fonction de validation de certificat GnuTLS retourne une
+      valeur négative. Malheureusement, dans certains cas la fonction peut retourner 0 pour certaines
+      erreurs (dont les certificats signés par une autorité sans confiance)<span class="frenchb-thinspace">&nbsp;</span>;
+      </li>
+      <li class="itemize">la librairie SSLSocketFactory de JSSE, très réputée, ne fait pas de vérification si la cypher suite du
+      client vaut NULL ou est une chaîne vide<span class="frenchb-thinspace">&nbsp;</span>;
+      </li>
+      <li class="itemize">vulnérabilités sur Apache HttpClient, WebSockets, Android, ...<span class="frenchb-thinspace">&nbsp;</span>;
+      </li>
+      <li class="itemize">autres causes célèbres<span class="frenchb-nbsp">&nbsp;</span>: non reconnaissance des expressions régulières, non vérification du résultat de
+      la validation, désactivation de l&#8217;authentification.<br 
+class="newline" /></li></ul>
+<a 
+ id="x10-154001r177"></a>
+<h5 class="subsubsectionHead"><span class="titlemark">3.2.3.3   </span> <a 
+href="#x10-1550003" id="x10-1550003">Difficultés du code OpenSSL</a></h5>
+<!--l. 423--><p class="noindent" >OpenSSL ne déroge pas à la règle.<br 
+class="newline" />Voici quelques vulnérabilités du code<span class="frenchb-nbsp">&nbsp;</span>:
+      <ul class="itemize1">
+      <li class="itemize">les contraintes de nom x509 ne sont pas correctement validés<span class="frenchb-thinspace">&nbsp;</span>;
+                                                                                                  
+
+                                                                                                  
+      </li>
+      <li class="itemize">les applications DOIVENT fournir elles même leur code de vérification de nom d&#8217;hôte. Or, des
+      protocoles comme HTTPS, LDAP ont chacun leurs propres notions de validations. Ainsi, Apache
+      Libcloud utilise les librairies Python, elles-même utilisant des commandes OpenSSL. Et sa méthode
+      de vérification du nom d&#8217;hôte comporte des vulnérabilités pouvant causer des attaques en <span 
+class="ec-lmri-10x-x-109">Man in</span>
+      <span 
+class="ec-lmri-10x-x-109">the Middle </span>(e.g "google.com" et "oogle.com" vérifie la même expression régulière)<span class="frenchb-thinspace">&nbsp;</span>;
+      </li>
+      <li class="itemize">un programme utilisant OpenSSL peut exécuter la fonction <span 
+class="ec-lmtt-10x-x-109">SSL_connect </span>pour le handshake SSL.
+      Bien que certaines erreurs de validation soient signalées par <span 
+class="ec-lmtt-10x-x-109">SSL_connect</span>, d&#8217;autres ne peuvent être
+      vérifiées qu&#8217;en appelant la fonction <span 
+class="ec-lmtt-10x-x-109">SSL_get_verify_result</span>, alors que <span 
+class="ec-lmtt-10x-x-109">SSL_connect </span>se contente de
+      retourner "OK".<br 
+class="newline" /></li></ul>
+<a 
+ id="x10-155001r178"></a>
+<h5 class="subsubsectionHead"><span class="titlemark">3.2.3.4   </span> <a 
+href="#x10-1560004" id="x10-1560004">Exemple<span class="frenchb-nbsp">&nbsp;</span>: Trillian</a></h5>
+<!--l. 433--><p class="noindent" >Trillian est une messagerie cliente instantanée reliée à OpenSSL pour la sécurisation de l&#8217;établissement de
+connexion. Par défaut OpenSSL ne soulève pas d&#8217;exception en cas de certificat auto-signé ou de non-confiance
+auprès de la chaîne de vérification. À la place, il envoie un drapeau. De plus, il ne vérifie jamais le nom d&#8217;hôte. Si
+l&#8217;application appelle la fonction <span 
+class="ec-lmtt-10x-x-109">SSL_CTX_set </span>pour initialiser le drapeau <span 
+class="ec-lmtt-10x-x-109">SSL_VERIFY_PEER</span>, alors <span 
+class="ec-lmtt-10x-x-109">SSL_connect </span>se
+ferme et affiche un message d&#8217;erreur lorsque le certificat n&#8217;est pas valide. Mais Trillian n&#8217;initialise jamais ce drapeau.
+Par conséquent, <span 
+class="ec-lmtt-10x-x-109">SSL_connect </span>va retourner 1 et le statut de la validation du certificat peut être connu en appelant
+la fonction <span 
+class="ec-lmtt-10x-x-109">SSL_get_verify_result</span>. Encore une fois, Trillian n&#8217;appelle pas cette fonction. Les conséquences sont
+très lourdes<span class="frenchb-nbsp">&nbsp;</span>: vols de mots de passe, compromissions de services, révélations des paramètres de sécurité,
+etc...<br 
+class="newline" />
+<!--l. 436--><p class="indent" >   L&#8217;étude montre que l&#8217;attaque est possible sur la version 5.1.0.19 et antérieure de Trillian.
+<a 
+ id="x10-156001r179"></a>
+<h5 class="subsubsectionHead"><span class="titlemark">3.2.3.5   </span> <a 
+href="#x10-1570005" id="x10-1570005">Conclusion</a></h5>
+<!--l. 440--><p class="noindent" >Les chercheurs nous donnent alors plusieurs leçons à retenir, dont voici quelques points<span class="frenchb-nbsp">&nbsp;</span>:
+      <ul class="itemize1">
+      <li class="itemize">premièrement, les vulnérabilités doivent être trouvées et réparées lors des phases de tests. Certaines
+      se trouvent très facilement si les procédures de tests sont bien réalisées<span class="frenchb-thinspace">&nbsp;</span>;
+      </li>
+      <li class="itemize">deuxièmement, la plupart des librairies SSL ne sont pas <span 
+class="ec-lmbx-10x-x-109">s</span><span 
+class="ec-lmbx-10x-x-109">ûres par d</span><span 
+class="ec-lmbx-10x-x-109">éfaut</span>, laissant le choix de la
+      sécurité aux applications de plus haut niveau avec choix des options, choix de la vérification de l&#8217;hôte,
+      choix d&#8217;interprétation des résultats<span class="frenchb-thinspace">&nbsp;</span>;
+      </li>
+      <li class="itemize">troisièmement,  même  les  librairies  SSL  sûres  par  défaut  peuvent  être  mal  utilisées  par  des
+      développeurs changeant les paramètres par défaut par des paramètres non sécurisés. La cause peut
+      venir d&#8217;une <span 
+class="ec-lmbx-10x-x-109">mauvaise documentation </span>ou d&#8217;une mauvaise formalisation de la part de l&#8217;API. Les
+      API devraient entre autres proposer des abstractions de haut niveau pour les développeurs comme
+      des tunnels d&#8217;authentification, plutôt que de les laisser traiter des détails de bas niveau comme la
+      vérification du nom d&#8217;hôte.<br 
+class="newline" /></li></ul>
+<!--l. 447--><p class="indent" >   Nous conseillons surtout une meilleure documentation d&#8217;OpenSSL, et des rapports d&#8217;erreurs d&#8217;interfaces plus
+                                                                                                  
+
+                                                                                                  
+simples et plus consistants afin d&#8217;éviter les erreurs d&#8217;interprétation. L&#8217;idée des chercheurs de proposer des
+abstractions de haut niveau pour les applications semblent être une très bonne idée.
+                                                                                                  
+
+                                                                                                  
+                                                                                                  
+
+                                                                                                  
+                                                                                                  
+
+                                                                                                  
+   <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+href="rapport_Auditch6.html" >next</a>] [<a 
+href="rapport_Auditch2.html" >prev</a>] [<a 
+href="rapport_Auditch2.html#tailrapport_Auditch2.html" >prev-tail</a>] [<a 
+href="rapport_Auditch3.html" >front</a>] [<a 
+href="rapport_Audit.html#rapport_Auditch5.html" >up</a>] </p></div>
+<!--l. 1--><p class="indent" >   <a 
+ id="tailrapport_Auditch3.html"></a>           
+</body></html> 
