@@ -12,7 +12,7 @@
 			$nomAudit = "Aucun Nom";
 		}
 		// Juste pour les tests, devrait être défini selon une authentification basique (fichier user+MDP)
-		$isadmin = true; 
+		$isadmin = false; 
 		
 		/* On se connecte à la base *
 /		

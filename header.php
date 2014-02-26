@@ -11,7 +11,7 @@
 		<ul class="nav">
 		  <li <?php if (basename($_SERVER['PHP_SELF']) === "keys_stat.php") { echo "class=\"active\""; }?>><a href="keys_stat.php">Analyse des certificats</a></li>
 		  <li <?php if (basename($_SERVER['PHP_SELF']) === "audit_results.php") { echo "class=\"active\""; }?>><a href="audit_results.php">Audit d'OpenSSL</a></li>
-		  <li <?php if (basename($_SERVER['PHP_SELF']) === "scan_client.php") { echo "class=\"active\""; }?>><a href="scan_client.php">Test du navigateur</a></li>
+		  <li <?php if (basename($_SERVER['PHP_SELF']) === "scan_client.php") { echo "class=\"active\""; }?>><a href="https://192.168.34.1/site/analyze">Test du navigateur</a></li>
 		</ul>
 	  </div><!--/.nav-collapse -->
 	</div>

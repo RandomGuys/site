@@ -14,7 +14,7 @@
 		} catch(PDOException $e) {
 
 		}
-  ?>
+		  ?>
   <body>
     <script src="js/jquery-2.0.3.min.js"></script>
     <script src="js/jquery-validate/dist/jquery.validate.min.js"></script>
@@ -41,46 +41,47 @@
     <?php
 		include ("header.php");
     ?>
-	<div id="wrap">
-    <div class="container">
-
-      <h1>Fonctions auditées</h1>
-    
-	<table class="table table-striped">
-		<thead>
-			<tr>
-			  <th>Nom de la fonction</th>
-			  <th>Norme correspondante</th>
-			  <th>Conformité</th>
-			</tr>
-		  </thead>
-		  <tbody>
-			<?php
-				foreach ($fonction as $fnc) {
-					echo "<tr>";
-						echo "<td><a href='fonction_auditee_type.php?audit=".$fnc["nom"]."'>".$fnc["nom"]."</a></td>";
-						echo "<td><a href='".$fnc["lien"]."'>".$fnc["nomLien"]."</a></td>";
-						if ($fnc["idFonction"] == NULL) {
-							echo "<td>Non conforme</td>";
-						} else {
-							echo "<td>Conforme</td>";
-						}
-					echo "</tr>";
-				}
-			?>
-		  </tbody>  
-		</table>
-	<form class="form-inline" id="creerAudit" name="creerAudit" action="fonction_auditee_type.php" method="get">
-		<div class="control-group">
-			<input class="input-medium" type="text" name="audit">
-		</div>
-		<button class="btn" type="submit">Créer Audit</button>
-	</form>
-    </div> <!-- /container -->
-	<div id="push"></div>
+    <div id="wrap">
+    <div class="row">
+    	<div class="span4 bs-docs-sidebar">
+    <ul id="menuaudit" class="nav nav-list bs-docs-sidenav affix">
+          <li><a href="audit_results.php"><i class="icon-chevron-right"></i> Introduction</a></li>
+          <li><a href="audit_results.php?partie=1"><i class="icon-chevron-right"></i> Entropie</a></li>
+          <li><a href="audit_results.php?partie=2"><i class="icon-chevron-right"></i> Génération des clefs</a></li>
+          <li><a href="audit_results.php?partie=3"><i class="icon-chevron-right"></i> Chiffrement et protocoles</a></li>
+          <li><a href="audit_results.php?partie=4"><i class="icon-chevron-right"></i> Signature et authentification</a></li>
+          <li><a href="audit_results.php?partie=5"><i class="icon-chevron-right"></i> Protocole SSL/TLS</a></li>
+          <li><a href="audit_results.php?partie=6"><i class="icon-chevron-right"></i> Observations, alternatives et conclusion</a></li>
+        </ul>
     </div>
+	
+
+    <div class="span8 container">
+    
+		<?php 
+			if (isset ($_GET['partie'])) {
+			include ("audit/rapport_Auditch". $_GET['partie'] .".html");
+		} else {
+			include ("audit/rapport_Auditli4.html");
+		}
+
+		?>
+		
+    </div> <!-- /container -->
+	
+    </div>
+</div>
+<div id="push"></div>
 	<?php
 		include ("footer.php");
 	?>
+
+	<script>
+		$(document).ready(function () {
+			$('#menuaudit').affix();
+      SyntaxHighlighter.all();
+		});
+		
+	</script>
   </body>
 </html>

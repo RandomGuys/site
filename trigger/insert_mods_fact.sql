@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS stats_issuer (
   vuln INT
 );
 
-INSERT INTO stats_issuer SELECT DISTINCT c.emetteur_CN, 
+INSERT INTO stats_issuer SELECT DISTINCT c.emetteur_CN, 0, 
 	(SELECT COUNT(id_mod) FROM mod_and_fact m1 join certificats c1 ON m1.id_mod = c1.id 
 	WHERE c1.emetteur_CN=c.emetteur_CN) AS VULN
 from mod_and_fact m JOIN certificats c ON m.id_mod = c.id;
