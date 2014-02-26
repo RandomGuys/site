@@ -1,14 +1,17 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
-  "http://www.w3.org/TR/html4/loose.dtd">  
-<html xml:lang="fr" > 
+<?xml version="1.0" encoding="utf-8" ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">  
+<!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
+<html xml:lang="fr" xmlns="http://www.w3.org/1999/xhtml"  
+> 
 <head><title>6 Observations et alternatives</title> 
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
-<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
-<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
-<!-- html,2,sections+ --> 
-<meta name="src" content="rapport_Audit.tex"> 
-<meta name="date" content="2014-02-25 17:35:00"> 
-<link rel="stylesheet" type="text/css" href="rapport_Audit.css"> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
+<!-- xhtml,2,sections+,charset=utf-8,html --> 
+<meta name="src" content="rapport_Audit.tex" /> 
+<meta name="date" content="2014-02-26 13:58:00" /> 
+<link rel="stylesheet" type="text/css" href="rapport_Audit.css" /> 
 </head><body 
 >
    <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
@@ -29,17 +32,17 @@ href="#x13-2210001" id="x13-2210001">Documentation</a></h4>
 <!--l. 7--><p class="noindent" >Nos observations sur la documentation d&#8217;OpenSSL va se développer sur trois axes<span class="frenchb-nbsp">&nbsp;</span>: dans le code, le manuel et les
 commentaires git.<br 
 class="newline" />
-<!--l. 10--><p class="indent" >   La documentation d&#8217;OpenSSL est quasi inexistante dans le code lui-même. Ce problème vient principalement du
+</p><!--l. 10--><p class="indent" >   La documentation d&#8217;OpenSSL est quasi inexistante dans le code lui-même. Ce problème vient principalement du
 fait que le code était originellement développé par Eric A. Young et Tim Hudson seulement, et ce pendant environ
 6 ans. Puis ces deux développeurs ont rejoint RSA Security en 1998, léguant le code à la communauté
 pour devenir OpenSSL. Ce code était très peu commenté au vu des premiers commits d&#8217;OpenSSL.
 <br 
 class="newline" />
-<!--l. 14--><p class="indent" >   Actuellement, OpenSSL est principalement en développement réactif, c&#8217;est-à-dire qu&#8217;il y a surtout des
+</p><!--l. 14--><p class="indent" >   Actuellement, OpenSSL est principalement en développement réactif, c&#8217;est-à-dire qu&#8217;il y a surtout des
 corrections ou des implémentations de nouveaux standards. En revanche, les corrections de failles sont souvent
 accompagnées de commentaires dans le code et cela est très appréciable.<br 
 class="newline" />
-<!--l. 17--><p class="indent" >   Au-delà de la documentation dans le code, le manuel d&#8217;utilisation n&#8217;est pas très bien fourni non plus, regroupant
+</p><!--l. 17--><p class="indent" >   Au-delà de la documentation dans le code, le manuel d&#8217;utilisation n&#8217;est pas très bien fourni non plus, regroupant
 très souvent plusieurs fonctions dans une même entrée <span 
 class="ec-lmri-10x-x-109">man </span>et oubliant certaines fonctions. Un exemple très
 intéressant est la vérification du pair connecté. En effet, lorsqu&#8217;on fait un <span class="obeylines-h"><span class="verb"><span 
@@ -51,17 +54,18 @@ class="ec-lmtt-10x-x-109">SSL_accept</span></span></span> n&#8217;en fait
 pas mention et tout novice de la libssl peut se limiter à cette fonction, croyant que la connexion est
 sûre.<br 
 class="newline" />
-<!--l. 20--><p class="indent" >   Une autre source de documentation est les commentaires des commits git. Ces derniers sont en général assez
+</p><!--l. 20--><p class="indent" >   Une autre source de documentation est les commentaires des commits git. Ces derniers sont en général assez
 clairs et bien développés lorsque cela est nécessaire.
 <a 
  id="x13-221001r264"></a>
+</p>
 <h4 class="subsectionHead"><span class="titlemark">6.1.2   </span> <a 
 href="#x13-2220002" id="x13-2220002">Lisibilité du code</a></h4>
 <!--l. 25--><p class="noindent" >Au niveau de la lisibilité du code, notre analyse va se porter sur<span class="frenchb-nbsp">&nbsp;</span>: l&#8217;architecture du projet, les conventions de
 nommage, le <span 
 class="ec-lmri-10x-x-109">coding style </span>et l&#8217;utilisation des constantes et des macros C.<br 
 class="newline" />
-<!--l. 28--><p class="indent" >   Pour ce qui est de l&#8217;architecture, bien que le code soit assez conséquent (plus de 450 000 lignes de code dont
+</p><!--l. 28--><p class="indent" >   Pour ce qui est de l&#8217;architecture, bien que le code soit assez conséquent (plus de 450 000 lignes de code dont
 66% de C &#8211; <a 
 href="http://www.ohloh.net/p/openssl" class="url" ><span 
 class="ec-lmtt-10x-x-109">http://www.ohloh.net/p/openssl</span></a>), il est relativement bien organisé, notamment les dossiers <span class="obeylines-h"><span class="verb"><span 
@@ -70,14 +74,14 @@ et <span class="obeylines-h"><span class="verb"><span
 class="ec-lmtt-10x-x-109">ssl/</span></span></span>. On accède vite au fichier recherché grâce à des noms de dossiers assez explicites et une convention de
 nommage des fichiers.<br 
 class="newline" />
-<!--l. 31--><p class="indent" >   En effet, les noms de fichiers sont souvent précédés d&#8217;un indicateur de quelques caractères qui permettent
+</p><!--l. 31--><p class="indent" >   En effet, les noms de fichiers sont souvent précédés d&#8217;un indicateur de quelques caractères qui permettent
 d&#8217;identifier rapidement de quel morceau un fichier fait partie. Par exemple, les fichiers commençant par <span class="obeylines-h"><span class="verb"><span 
 class="ec-lmtt-10x-x-109">s3_</span></span></span> sont des
-fichiers <span class="obeylines-h"><span class="verb"><span 
-class="ec-lmtt-10x-x-109">.c</span></span></span> relatifs à SSL version 3. On retrouve un peu la même logique dans le nommage des fonctions.
                                                                                                   
 
                                                                                                   
+fichiers <span class="obeylines-h"><span class="verb"><span 
+class="ec-lmtt-10x-x-109">.c</span></span></span> relatifs à SSL version 3. On retrouve un peu la même logique dans le nommage des fonctions.
 Ainsi pour la partie chiffrement, on aura un préfixe <span class="obeylines-h"><span class="verb"><span 
 class="ec-lmtt-10x-x-109">EVP_</span></span></span>, pour SSL version 3 <span class="obeylines-h"><span class="verb"><span 
 class="ec-lmtt-10x-x-109">SSL3_</span></span></span> etc. Il arrive de
@@ -90,18 +94,18 @@ aurait fallu créer un nouveau fichier <span class="obeylines-h"><span class="ver
 class="ec-lmtt-10x-x-109">t1_cbc.c</span></span></span> ou changer le nom du fichier pour regrouper plusieurs
 protocoles.<br 
 class="newline" />
-<!--l. 34--><p class="indent" >   Pour ce qui est du <span 
+</p><!--l. 34--><p class="indent" >   Pour ce qui est du <span 
 class="ec-lmri-10x-x-109">coding style</span>, il se rapproche beaucoup du <span 
 class="ec-lmri-10x-x-109">Whitesmiths </span>mais peut être s&#8217;agit-il d&#8217;une variante.
 Ce style est peut être moins clair que celui de GNU, du Kernel Linux ou même du K&amp;R mais ce choix reste à
 l&#8217;appréciation des mainteneurs du projet.<br 
 class="newline" />
-<!--l. 37--><p class="indent" >   Les constantes sont assez largement utilisées et déclarées massivement dans les <span 
+</p><!--l. 37--><p class="indent" >   Les constantes sont assez largement utilisées et déclarées massivement dans les <span 
 class="ec-lmri-10x-x-109">headers </span>C en code hexadécimal.
 Cela dit, on retrouve beaucoup de tests comparant octet par octet, avec des valeurs hexadécimales écrites en dur
 dans le code. Un bon exemple de ce mauvais code est dans le fichier <span class="obeylines-h"><span class="verb"><span 
 class="ec-lmtt-10x-x-109">s23_srvr.c</span></span></span> qui gère la rétro-compatibilité des
-versions de SSL/TLS. On y retrouve la ligne <!--l. 38-->
+versions de SSL/TLS. On y retrouve la ligne </p><!--l. 38-->
 <a 
  id="x13-222001r1"></a>
 <a 
@@ -133,6 +137,7 @@ class="content">Exemple
 class="ec-lmtt-10x-x-109">0x7f</span></span></span> et même des espaces auraient été largement
 appréciés. Dans ce même fichier, des comparaisons d&#8217;octets sont faites également sans constante avec un nom
 explicite comme ce test<span class="frenchb-nbsp">&nbsp;</span>:
+</p>
    <!--l. 44-->
 <a 
  id="x13-222004r2"></a>
@@ -192,7 +197,10 @@ class="content">Exemple
        test
        d&#8217;OpenSSL</span></div><!--tex4ht:label?: x13-222004r6 -->
    </div>
-<!--l. 51--><p class="indent" >   Ici un petit commentaire nous met sur la voie mais le code suivant aurait été plus clair<span class="frenchb-nbsp">&nbsp;</span>: <!--l. 52-->
+<!--l. 51--><p class="indent" >   Ici un petit commentaire nous met sur la voie mais le code suivant aurait été plus clair<span class="frenchb-nbsp">&nbsp;</span>: </p><!--l. 52-->
+                                                                                                  
+
+                                                                                                  
 <a 
  id="x13-222010r3"></a>
 <a 
@@ -238,9 +246,6 @@ class="ec-lmtt-9">&#x00A0;</span><span
 class="ec-lmtt-9">SSL2_VERSION_MINOR</span><span 
 class="ec-lmtt-9">)</span><span 
 class="ec-lmtt-9">)</span>
-                                                                                                  
-
-                                                                                                  
    
    <br />
        <div class="caption" 
@@ -256,8 +261,9 @@ class="content">Exemple
 <!--l. 59--><p class="indent" >   Ces constantes existent dans le <span 
 class="ec-lmri-10x-x-109">header </span><span class="obeylines-h"><span class="verb"><span 
 class="ec-lmtt-10x-x-109">ssl2.h</span></span></span> mais n&#8217;ont pourtant pas été utilisées.
-<!--l. 61--><p class="indent" >   Du côté des macros C, on regrettera les nombreux morceaux de code mis en commentaire avec des
+</p><!--l. 61--><p class="indent" >   Du côté des macros C, on regrettera les nombreux morceaux de code mis en commentaire avec des
 macros<span class="frenchb-nbsp">&nbsp;</span>:
+</p>
    <!--l. 63-->
 <a 
  id="x13-222016r4"></a>
@@ -345,6 +351,7 @@ que ce code est commenté. Certains morceaux de code sont enlevés à cause de fail
 une raison que nous ignorons.
 <a 
  id="x13-222024r263"></a>
+</p>
 <h3 class="sectionHead"><span class="titlemark">6.2   </span> <a 
 href="#x13-2230002" id="x13-2230002">Construction du projet</a></h3>
 <!--l. 76--><p class="noindent" >La construction d&#8217;OpenSSL se fait avec <span 
@@ -357,22 +364,24 @@ suivantes<span class="frenchb-nbsp">&nbsp;</span>:
                                                                                                   
 
                                                                                                   
+</p>
    <div class="verbatim" id="verbatim-5">
 $&#x00A0;./config&#x00A0;shared&#x00A0;zlib-dynamic
 &#x00A0;<br />$&#x00A0;make
 </div>
 <!--l. 80--><p class="nopar" >
-<!--l. 82--><p class="indent" >   On regrettera ce type de construction qui vieillit. De nos jours, beaucoup de projets migrent vers
+</p><!--l. 82--><p class="indent" >   On regrettera ce type de construction qui vieillit. De nos jours, beaucoup de projets migrent vers
 cmake (comme MySQL par exemple) qui est plus simple à configurer et génèrent des sorties claires et
 colorées qui améliore le suivi de la compilation. De plus, il permet de compiler les binaires dans un
 dossier séparé, ce qui permet de ne pas perturber l&#8217;arborescence de travail qui ne contient que les
 sources.
 <a 
  id="x13-223001r270"></a>
+</p>
 <h3 class="sectionHead"><span class="titlemark">6.3   </span> <a 
 href="#x13-2240003" id="x13-2240003">Alternatives</a></h3>
 <!--l. 86--><p class="noindent" >Il serait intéressant de se pencher sur la sécurité des alternatives à OpenSSL. Voici une liste non exhaustive de
-projet open source<span class="frenchb-nbsp">&nbsp;</span>:
+projet open source<span class="frenchb-nbsp">&nbsp;</span>: </p>
       <ul class="itemize1">
       <li class="itemize">cryptlib (ne gère pas DTLS)<span class="frenchb-thinspace">&nbsp;</span>;
       </li>
@@ -391,9 +400,9 @@ projet open source<span class="frenchb-nbsp">&nbsp;</span>:
 class="newline" /></li></ul>
 <!--l. 97--><p class="indent" >   Chaque alternative a ses points forts et ses points faibles, il vaut mieux alors choisir le bon outil selon le travail
 à effectuer.
-<!--l. 99--><p class="indent" >   Il semble que OpenSSL soit un peu au dessus du lot en terme de support d&#8217;algorithmes et de méthodes en tout
+</p><!--l. 99--><p class="indent" >   Il semble que OpenSSL soit un peu au dessus du lot en terme de support d&#8217;algorithmes et de méthodes en tout
 genre mais cela s&#8217;explique par l&#8217;âge et la taille du code.
-<!--l. 101--><p class="indent" >   En revanche, les autres se démarquent en désactivant des méthodes dépréciées alors qu&#8217;OpenSSL souhaite sans
+</p><!--l. 101--><p class="indent" >   En revanche, les autres se démarquent en désactivant des méthodes dépréciées alors qu&#8217;OpenSSL souhaite sans
 doute garder une rétro-compatibilité.
                                                                                                   
 
@@ -405,6 +414,7 @@ doute garder une rétro-compatibilité.
  id="Q1-13-272"></a>
 <a 
  id="Q1-13-273"></a>
+</p>
 <h3 class="likesectionHead"><a 
 href="#x13-2250003" id="x13-2250003">Conclusion</a></h3>
 <!--l. 4--><p class="noindent" >Cette étude fut l&#8217;occasion d&#8217;effectuer une première approche d&#8217;audit en analysant de façon générale des failles liées
@@ -413,18 +423,18 @@ une stratégie globale d&#8217;audit suivant les exigences et suggestions du clie
 un approfondissement dans plusieurs domaines, répartis de façon modulaire entre les membres du
 projet.<br 
 class="newline" />
-<!--l. 7--><p class="indent" >   Nous avons pu notamment constater que les failles identifiées sont principalement sur des anciennes versions
+</p><!--l. 7--><p class="indent" >   Nous avons pu notamment constater que les failles identifiées sont principalement sur des anciennes versions
 d&#8217;OpenSSL et qu&#8217;elles sont, par conséquent, pour la plupart aujourd&#8217;hui corrigées. Toutefois, un utilisateur du
 logiciel possédant une version non à jour est vulnérable -suivant sa version- à des attaques référencées dans ce
 rapport. <br 
 class="newline" />
-<!--l. 10--><p class="indent" >   L&#8217;audit de deux semaines nous a permis d&#8217;établir un état général sur les faiblesses de ce logiciel. Nous aurions
+</p><!--l. 10--><p class="indent" >   L&#8217;audit de deux semaines nous a permis d&#8217;établir un état général sur les faiblesses de ce logiciel. Nous aurions
 aimé avoir davantage de temps pour entrer au plus près du code. Comme nous l&#8217;avons rappelé plusieurs fois, le
 projet OpenSSL n&#8217;a pas un code facilement lisible, et le manque de documentation nous a considérablement freiné
 dans nos analyses. De plus, le code en lui-même est de taille considérable, avec plus de 400 000 lignes de
 code.<br 
 class="newline" />
-<!--l. 13--><p class="indent" >   De ce fait, nous considérons que le projet OpenSSL mériterait un rafraîchissement complet, en clarifiant à la
+</p><!--l. 13--><p class="indent" >   De ce fait, nous considérons que le projet OpenSSL mériterait un rafraîchissement complet, en clarifiant à la
 fois la structure et l&#8217;implémentation, mais aussi en ajoutant une documentation digne de ce nom, afin d&#8217;en faciliter
 la compréhension et d&#8217;éviter au maximum toute mauvaise utilisation.
                                                                                                   
@@ -433,6 +443,7 @@ la compréhension et d&#8217;éviter au maximum toute mauvaise utilisation.
                                                                                                   
 
                                                                                                   
+</p>
    <!--l. 1--><div class="crosslinks"><p class="noindent"><span 
 class="ec-lmr-10">[</span><a 
 href="rapport_Auditch5.html" ><span 
@@ -448,5 +459,5 @@ href="rapport_Audit.html# " ><span
 class="ec-lmr-10">up</span></a><span 
 class="ec-lmr-10">] </span></p></div>
 <!--l. 1--><p class="indent" >   <a 
- id="tailrapport_Auditch6.html"></a>        
+ id="tailrapport_Auditch6.html"></a>       </p> 
 </body></html> 

@@ -1,14 +1,17 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
-  "http://www.w3.org/TR/html4/loose.dtd">  
-<html xml:lang="fr" > 
+<?xml version="1.0" encoding="utf-8" ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">  
+<!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
+<html xml:lang="fr" xmlns="http://www.w3.org/1999/xhtml"  
+> 
 <head><title>5 Protocoles SSL/TLS</title> 
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
-<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
-<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
-<!-- html,2,sections+ --> 
-<meta name="src" content="rapport_Audit.tex"> 
-<meta name="date" content="2014-02-25 17:35:00"> 
-<link rel="stylesheet" type="text/css" href="rapport_Audit.css"> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
+<!-- xhtml,2,sections+,charset=utf-8,html --> 
+<meta name="src" content="rapport_Audit.tex" /> 
+<meta name="date" content="2014-02-26 13:58:00" /> 
+<link rel="stylesheet" type="text/css" href="rapport_Audit.css" /> 
 </head><body 
 >
    <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
@@ -25,7 +28,7 @@ href="#x12-1780001" id="x12-1780001">Définitions et contexte</a></h3>
 <!--l. 5--><p class="noindent" >SSL et TLS (successeur de SSL) sont des protocoles de sécurisation des échanges sur internet. Les versions 2 et 3 de
 SSL ont été développées par Netscape puis le brevet a été racheté par l&#8217;IETF en 2001 qui a publié une évolution
 de ce protocole en TLS. Ce protocole fonctionne selon un mode client-serveur et fournit les objectifs de sécurité
-suivants<span class="frenchb-nbsp">&nbsp;</span>:
+suivants<span class="frenchb-nbsp">&nbsp;</span>: </p>
       <ul class="itemize1">
       <li class="itemize">authentification serveur/client<span class="frenchb-thinspace">&nbsp;</span>;
       </li>
@@ -36,12 +39,13 @@ class="newline" /></li></ul>
 <!--l. 12--><p class="indent" >   Du point de vue réseau, ce protocole se situe dans la couche session du modèle OSI et entre transport et
 application dans le modèle TCP.<br 
 class="newline" />
-<!--l. 16--><p class="indent" >   Pour simplifier la compréhension des parties suivantes, le schéma <a 
+</p><!--l. 16--><p class="indent" >   Pour simplifier la compréhension des parties suivantes, le schéma <a 
 href="#x12-178001r1">5.1<!--tex4ht:ref: schema-ssltls --></a> représente de manière large
 l&#8217;établissement d&#8217;une connexion SSL/TLS. Les données entre accolades sont chiffrées avec la clef indiquée en indice.
 La <span 
 class="lmmi-10x-x-109">masterkey </span>est la clef principale qui sera dérivée pour chiffrer chaque message.
-<!--l. 18--><p class="indent" >   <hr class="figure"><div class="figure" 
+</p>
+   <hr class="figure" /><div class="figure" 
 >
                                                                                                   
 
@@ -54,7 +58,7 @@ class="lmmi-10x-x-109">masterkey </span>est la clef principale qui sera dérivée 
 <div class="center" 
 >
 <!--l. 19--><p class="noindent" >
-<!--l. 47--><p class="noindent" >                                                      <!--l. 31--><p class="noindent" >                <!--l. 31--><p class="noindent" > <!--l. 36--><p class="noindent" ><!--l. 36--><p class="noindent" ><span 
+</p><!--l. 47--><p class="noindent" >                                                      </p><!--l. 31--><p class="noindent" >                </p><!--l. 31--><p class="noindent" > </p> <!--l. 36--><p class="noindent" ></p><!--l. 36--><p class="noindent" ><span 
 class="ec-lmr-10">hello client</span><span 
 class="ec-lmr-10">hello serveur</span><span 
 class="ec-lmr-10">certificat serveur</span><span 
@@ -94,13 +98,13 @@ class="lmsy7-">&#x2032;&#x2032;&#x2032;</span> </sub><span
 class="ec-lmr-10">Changement de l&#8217;algorithme de chiffrement du client</span><span 
 class="ec-lmr-10">Changement de l&#8217;algorithme de chiffrement du serveur</span><span 
 class="ec-lmr-10">C:Client SSL/TLS</span><span 
-class="ec-lmr-10">S:Serveur SSL/TLS</span> <!--l. 29--><p class="noindent" ><span 
+class="ec-lmr-10">S:Serveur SSL/TLS</span> </p> <!--l. 29--><p class="noindent" ><span 
 class="ec-lmr-10">[sinon]</span><span 
 class="ec-lmr-10">alt</span><span 
 class="ec-lmr-10">[si certificat]</span><span 
 class="ec-lmr-10">alt</span><span 
 class="ec-lmr-10">[si auth client]</span>
-</div>
+</p></div>
 <br /> <div class="caption" 
 ><span class="id"><span 
 class="ec-lmcsc-10x-x-109">Figure</span>&#x00A0;5.1: </span><span  
@@ -108,12 +112,13 @@ class="content">Schéma global d&#8217;une connexion SSL/TLS</span></div><!--tex4
                                                                                                   
 
                                                                                                   
-<!--l. 51--><p class="indent" >   </div><hr class="endfigure">
+   </div><hr class="endfigure" />
 <!--l. 54--><p class="noindent" ><span class="paragraphHead"><a 
 href="#x12-1790001" id="x12-1790001"><span 
 class="ec-lmbx-10x-x-109">hello client</span></a></span>
    Version du protocole SSL avec laquelle le client souhaite communiquer, challenge, algorithmes de chiffrement
 supportés par le client, méthodes de compressions supportées par le client.
+</p>
 <!--l. 57--><p class="noindent" ><span class="paragraphHead"><a 
 href="#x12-1800001" id="x12-1800001"><span 
 class="ec-lmbx-10x-x-109">hello serveur</span></a></span>
@@ -122,6 +127,7 @@ client), challenge, id de session, algorithmes de chiffrement supportés par le s
 supportées par le serveur.
 <a 
  id="x12-180001r204"></a>
+</p>
 <h3 class="sectionHead"><span class="titlemark">5.2   </span> <a 
 href="#x12-1810002" id="x12-1810002">Audits</a></h3>
 <a 
@@ -137,12 +143,13 @@ Communications. Cette version est sortie en 1994. Toutefois, on trouve des morce
 6176 <span class="cite">[<a 
 href="rapport_Auditli5.html#Xrfc6176">66</a>]</span> et le draft de Hickman <span class="cite">[<a 
 href="rapport_Auditli5.html#Xhickman1995">28</a>]</span>.
+</p>
    <div class="table">
                                                                                                   
 
                                                                                                   
 <!--l. 68--><p class="indent" >   <a 
- id="x12-183001r1"></a><hr class="float"><div class="float" 
+ id="x12-183001r1"></a></p><hr class="float" /><div class="float" 
 >
                                                                                                   
 
@@ -150,12 +157,12 @@ href="rapport_Auditli5.html#Xhickman1995">28</a>]</span>.
  <table id="TBL-10" class="tabular" 
 cellspacing="0" cellpadding="0" rules="groups" 
 ><colgroup id="TBL-10-1g"><col 
-id="TBL-10-1"></colgroup><colgroup id="TBL-10-2g"><col 
-id="TBL-10-2"></colgroup><colgroup id="TBL-10-3g"><col 
-id="TBL-10-3"></colgroup><colgroup id="TBL-10-4g"><col 
-id="TBL-10-4"></colgroup><colgroup id="TBL-10-5g"><col 
-id="TBL-10-5"></colgroup><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+id="TBL-10-1" /></colgroup><colgroup id="TBL-10-2g"><col 
+id="TBL-10-2" /></colgroup><colgroup id="TBL-10-3g"><col 
+id="TBL-10-3" /></colgroup><colgroup id="TBL-10-4g"><col 
+id="TBL-10-4" /></colgroup><colgroup id="TBL-10-5g"><col 
+id="TBL-10-5" /></colgroup><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-10-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-10-1-1"  
 class="td11"> <span 
 class="ec-lmbx-10x-x-109">Identifiant                                    </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-10-1-2"  
@@ -164,79 +171,79 @@ class="ec-lmbx-10x-x-109">KeyExch </span></td><td  style="white-space:nowrap; te
 class="td11"> <span 
 class="ec-lmbx-10x-x-109">Authn </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-10-1-4"  
 class="td11"> <!--l. 88--><p class="noindent" ><span 
-class="ec-lmbx-10x-x-109">Enc</span>       </td><td  style="white-space:nowrap; text-align:left;" id="TBL-10-1-5"  
+class="ec-lmbx-10x-x-109">Enc</span>       </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-10-1-5"  
 class="td11"> <span 
 class="ec-lmbx-10x-x-109">MAC </span></td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-10-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-10-2-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_CK_RC2_128_CBC_WITH_MD5          </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-10-2-2"  
 class="td11"> RSA         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-10-2-3"  
 class="td11"> RSA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-10-2-4"  
 class="td11"> <!--l. 88--><p class="noindent" >RC2.128
-  CBC       </td><td  style="white-space:nowrap; text-align:left;" id="TBL-10-2-5"  
+  CBC       </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-10-2-5"  
 class="td11"> MD5   </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-10-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-10-3-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_CK_RC2_128_CBC_EXPORT40_WITH_MD5 </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-10-3-2"  
 class="td11"> RSA.512    </td><td  style="white-space:nowrap; text-align:left;" id="TBL-10-3-3"  
 class="td11"> RSA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-10-3-4"  
 class="td11"> <!--l. 88--><p class="noindent" >RC4.40
-  CBC       </td><td  style="white-space:nowrap; text-align:left;" id="TBL-10-3-5"  
+  CBC       </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-10-3-5"  
 class="td11"> MD5   </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-10-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-10-4-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_CK_IDEA_128_CBC_WITH_MD5         </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-10-4-2"  
 class="td11"> RSA         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-10-4-3"  
 class="td11"> RSA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-10-4-4"  
 class="td11"> <!--l. 88--><p class="noindent" >IDEA.128
-  CBC       </td><td  style="white-space:nowrap; text-align:left;" id="TBL-10-4-5"  
+  CBC       </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-10-4-5"  
 class="td11"> MD5   </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-10-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-10-5-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_CK_DES_64_CBC_WITH_MD5           </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-10-5-2"  
 class="td11"> RSA         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-10-5-3"  
 class="td11"> RSA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-10-5-4"  
 class="td11"> <!--l. 88--><p class="noindent" >DES.56
-  CBC       </td><td  style="white-space:nowrap; text-align:left;" id="TBL-10-5-5"  
+  CBC       </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-10-5-5"  
 class="td11"> MD5   </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-10-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-10-6-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_CK_DES_192_EDE3_CBC_WITH_MD5     </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-10-6-2"  
 class="td11"> RSA         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-10-6-3"  
 class="td11"> RSA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-10-6-4"  
 class="td11"> <!--l. 88--><p class="noindent" >3DES.168
-  CBC       </td><td  style="white-space:nowrap; text-align:left;" id="TBL-10-6-5"  
+  CBC       </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-10-6-5"  
 class="td11"> MD5   </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-10-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-10-7-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_CK_RC4_128_WITH_MD5              </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-10-7-2"  
 class="td11"> RSA         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-10-7-3"  
 class="td11"> RSA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-10-7-4"  
-class="td11"> <!--l. 88--><p class="noindent" >RC4.128   </td><td  style="white-space:nowrap; text-align:left;" id="TBL-10-7-5"  
+class="td11"> <!--l. 88--><p class="noindent" >RC4.128   </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-10-7-5"  
 class="td11"> MD5   </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-10-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-10-8-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_CK_RC4_128_EXPORT40_WITH_MD5     </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-10-8-2"  
 class="td11"> RSA.512    </td><td  style="white-space:nowrap; text-align:left;" id="TBL-10-8-3"  
 class="td11"> RSA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-10-8-4"  
-class="td11"> <!--l. 88--><p class="noindent" >RC4.40    </td><td  style="white-space:nowrap; text-align:left;" id="TBL-10-8-5"  
+class="td11"> <!--l. 88--><p class="noindent" >RC4.40    </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-10-8-5"  
 class="td11"> MD5   </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-10-9-"><td  style="white-space:nowrap; text-align:left;" id="TBL-10-9-1"  
 class="td11">                                      </td></tr></table>
  <div class="caption" 
@@ -256,6 +263,7 @@ class="ec-lmtt-10x-x-109">CK</span></span></span> signifie <span class="obeyline
 class="ec-lmtt-10x-x-109">CIPHER-KIND</span></span></span>.
 <a 
  id="x12-184001r210"></a>
+</p>
 <h5 class="subsubsectionHead"><span class="titlemark">5.2.1.2   </span> <a 
 href="#x12-1850002" id="x12-1850002">Implémentation</a></h5>
      Dans le code d&#8217;OpenSSL, cette version du protocole SSL se trouve dans les fichiers commençant par <span class="obeylines-h"><span class="verb"><span 
@@ -270,7 +278,7 @@ href="#x12-185001r2">5.2<!--tex4ht:ref: algosOpenssl --></a>.
 
                                                                                                   
    <a 
- id="x12-185001r2"></a><hr class="float"><div class="float" 
+ id="x12-185001r2"></a><hr class="float" /><div class="float" 
 >
                                                                                                   
 
@@ -278,65 +286,65 @@ href="#x12-185001r2">5.2<!--tex4ht:ref: algosOpenssl --></a>.
  <table id="TBL-14" class="tabular" 
 cellspacing="0" cellpadding="0" rules="groups" 
 ><colgroup id="TBL-14-1g"><col 
-id="TBL-14-1"></colgroup><colgroup id="TBL-14-2g"><col 
-id="TBL-14-2"></colgroup><tr 
-class="hline"><td><hr></td><td><hr></td></tr><tr  
+id="TBL-14-1" /></colgroup><colgroup id="TBL-14-2g"><col 
+id="TBL-14-2" /></colgroup><tr 
+class="hline"><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-14-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-14-1-1"  
 class="td11"> <span 
 class="ec-lmbx-10x-x-109">Identifiant                                    </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-14-1-2"  
 class="td11"> <!--l. 120--><p class="noindent" ><span 
-class="ec-lmbx-10x-x-109">Constante OpenSSL</span>                              </td>
+class="ec-lmbx-10x-x-109">Constante OpenSSL</span>                              </p></td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-14-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-14-2-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_CK_RC2_128_CBC_WITH_MD5          </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-14-2-2"  
 class="td11"> <!--l. 120--><p class="noindent" ><span 
-class="ec-lmtt-10x-x-109">SSL2_CK_RC2_128_CBC_WITH_MD5</span>             </td>
+class="ec-lmtt-10x-x-109">SSL2_CK_RC2_128_CBC_WITH_MD5</span>             </p></td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-14-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-14-3-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_CK_RC2_128_CBC_EXPORT40_WITH_MD5 </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-14-3-2"  
 class="td11"> <!--l. 120--><p class="noindent" ><span 
-class="ec-lmtt-10x-x-109">SSL2_CK_RC2_128_CBC_EXPORT40_WITH_MD5</span>    </td>
+class="ec-lmtt-10x-x-109">SSL2_CK_RC2_128_CBC_EXPORT40_WITH_MD5</span>    </p></td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-14-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-14-4-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_CK_IDEA_128_CBC_WITH_MD5         </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-14-4-2"  
 class="td11"> <!--l. 120--><p class="noindent" ><span 
-class="ec-lmtt-10x-x-109">SSL2_CK_IDEA_128_CBC_WITH_MD5</span>            </td>
+class="ec-lmtt-10x-x-109">SSL2_CK_IDEA_128_CBC_WITH_MD5</span>            </p></td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-14-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-14-5-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_CK_DES_64_CBC_WITH_MD5           </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-14-5-2"  
 class="td11"> <!--l. 120--><p class="noindent" ><span 
-class="ec-lmtt-10x-x-109">SSL2_CK_DES_64_CBC_WITH_MD5</span>              </td>
+class="ec-lmtt-10x-x-109">SSL2_CK_DES_64_CBC_WITH_MD5</span>              </p></td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-14-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-14-6-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_CK_DES_192_EDE3_CBC_WITH_MD5     </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-14-6-2"  
 class="td11"> <!--l. 120--><p class="noindent" ><span 
-class="ec-lmtt-10x-x-109">SSL2_CK_DES_192_EDE3_CBC_WITH_MD5</span>        </td>
+class="ec-lmtt-10x-x-109">SSL2_CK_DES_192_EDE3_CBC_WITH_MD5</span>        </p></td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-14-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-14-7-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_CK_RC4_128_WITH_MD5              </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-14-7-2"  
 class="td11"> <!--l. 120--><p class="noindent" ><span 
-class="ec-lmtt-10x-x-109">SSL2_CK_RC4_128_WITH_MD5</span>                 </td>
+class="ec-lmtt-10x-x-109">SSL2_CK_RC4_128_WITH_MD5</span>                 </p></td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-14-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-14-8-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_CK_RC4_128_EXPORT40_WITH_MD5     </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-14-8-2"  
 class="td11"> <!--l. 120--><p class="noindent" ><span 
-class="ec-lmtt-10x-x-109">SSL2_CK_RC4_128_EXPORT40_WITH_MD5</span>        </td>
+class="ec-lmtt-10x-x-109">SSL2_CK_RC4_128_EXPORT40_WITH_MD5</span>        </p></td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-14-9-"><td  style="white-space:nowrap; text-align:left;" id="TBL-14-9-1"  
 class="td11">                                      </td></tr></table>
  <div class="caption" 
@@ -398,6 +406,7 @@ class="ec-lmtt-10x-x-109">&#x00A0;hack</span></span></span> est spécifique à
 Windows.
 <a 
  id="x12-185002r209"></a>
+</p>
 <h4 class="subsectionHead"><span class="titlemark">5.2.2   </span> <a 
 href="#x12-1860002" id="x12-1860002">Audit 5.2<span class="frenchb-nbsp">&nbsp;</span>: SSL version 3</a></h4>
 <a 
@@ -409,12 +418,13 @@ href="rapport_Auditli5.html#Xrfc6101">20</a>]</span>. On y trouve notamment en s
 liste des algorithmes de chiffrement pouvant être utilisés avec cette version, référencés sur la tableau
 <a 
 href="#x12-187001r3">5.3<!--tex4ht:ref: algosV3 --></a>.
+</p>
    <div class="table">
                                                                                                   
 
                                                                                                   
 <!--l. 144--><p class="indent" >   <a 
- id="x12-187001r3"></a><hr class="float"><div class="float" 
+ id="x12-187001r3"></a></p><hr class="float" /><div class="float" 
 >
                                                                                                   
 
@@ -422,12 +432,12 @@ href="#x12-187001r3">5.3<!--tex4ht:ref: algosV3 --></a>.
  <table id="TBL-18" class="tabular" 
 cellspacing="0" cellpadding="0" rules="groups" 
 ><colgroup id="TBL-18-1g"><col 
-id="TBL-18-1"></colgroup><colgroup id="TBL-18-2g"><col 
-id="TBL-18-2"></colgroup><colgroup id="TBL-18-3g"><col 
-id="TBL-18-3"></colgroup><colgroup id="TBL-18-4g"><col 
-id="TBL-18-4"></colgroup><colgroup id="TBL-18-5g"><col 
-id="TBL-18-5"></colgroup><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+id="TBL-18-1" /></colgroup><colgroup id="TBL-18-2g"><col 
+id="TBL-18-2" /></colgroup><colgroup id="TBL-18-3g"><col 
+id="TBL-18-3" /></colgroup><colgroup id="TBL-18-4g"><col 
+id="TBL-18-4" /></colgroup><colgroup id="TBL-18-5g"><col 
+id="TBL-18-5" /></colgroup><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-18-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-1-1"  
 class="td11"> <span 
 class="ec-lmbx-10x-x-109">Identifiant                                       </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-1-2"  
@@ -436,308 +446,308 @@ class="ec-lmbx-10x-x-109">KeyExch </span></td><td  style="white-space:nowrap; te
 class="td11"> <span 
 class="ec-lmbx-10x-x-109">Authn </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-18-1-4"  
 class="td11"> <!--l. 212--><p class="noindent" ><span 
-class="ec-lmbx-10x-x-109">Enc</span>    </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-1-5"  
+class="ec-lmbx-10x-x-109">Enc</span>    </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-1-5"  
 class="td11"> <span 
 class="ec-lmbx-10x-x-109">MAC </span></td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-18-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-2-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_NULL_WITH_NULL_NULL                </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-2-2"  
 class="td11"> NULL       </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-2-3"  
 class="td11"> NULL   </td><td  style="white-space:wrap; text-align:left;" id="TBL-18-2-4"  
-class="td11"> <!--l. 212--><p class="noindent" >NULL  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-2-5"  
+class="td11"> <!--l. 212--><p class="noindent" >NULL  </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-2-5"  
 class="td11"> NULL  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-18-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-3-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_RSA_WITH_NULL_MD5                  </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-3-2"  
 class="td11"> RSA         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-3-3"  
 class="td11"> RSA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-18-3-4"  
-class="td11"> <!--l. 212--><p class="noindent" >NULL  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-3-5"  
+class="td11"> <!--l. 212--><p class="noindent" >NULL  </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-3-5"  
 class="td11"> MD5   </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-18-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-4-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_RSA_WITH_NULL_SHA                  </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-4-2"  
 class="td11"> RSA         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-4-3"  
 class="td11"> RSA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-18-4-4"  
-class="td11"> <!--l. 212--><p class="noindent" >NULL  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-4-5"  
+class="td11"> <!--l. 212--><p class="noindent" >NULL  </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-4-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-18-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-5-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_RSA_EXPORT_WITH_RC4_40_MD5         </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-5-2"  
 class="td11"> RSAex      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-5-3"  
 class="td11"> RSAex  </td><td  style="white-space:wrap; text-align:left;" id="TBL-18-5-4"  
-class="td11"> <!--l. 212--><p class="noindent" >RC4.40 </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-5-5"  
+class="td11"> <!--l. 212--><p class="noindent" >RC4.40 </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-5-5"  
 class="td11"> MD5   </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-18-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-6-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_RSA_WITH_RC4_128_MD5               </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-6-2"  
 class="td11"> RSA         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-6-3"  
 class="td11"> RSA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-18-6-4"  
-class="td11"> <!--l. 212--><p class="noindent" >RC4.128 </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-6-5"  
+class="td11"> <!--l. 212--><p class="noindent" >RC4.128 </p> </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-6-5"  
 class="td11"> MD5   </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-18-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-7-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_RSA_WITH_RC4_128_SHA               </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-7-2"  
 class="td11"> RSA         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-7-3"  
 class="td11"> RSA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-18-7-4"  
-class="td11"> <!--l. 212--><p class="noindent" >IDEA.128 </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-7-5"  
+class="td11"> <!--l. 212--><p class="noindent" >IDEA.128 </p> </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-7-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-18-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-8-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_RSA_EXPORT_WITH_RC2_CBC_40_MD5     </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-8-2"  
 class="td11"> RSAex      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-8-3"  
 class="td11"> RSAex  </td><td  style="white-space:wrap; text-align:left;" id="TBL-18-8-4"  
 class="td11"> <!--l. 212--><p class="noindent" >RC2.40
-  CBC    </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-8-5"  
+  CBC    </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-8-5"  
 class="td11"> MD5   </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-18-9-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-9-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_RSA_WITH_IDEA_CBC_SHA              </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-9-2"  
 class="td11"> RSA         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-9-3"  
 class="td11"> RSA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-18-9-4"  
 class="td11"> <!--l. 212--><p class="noindent" >IDEA.128
-  CBC    </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-9-5"  
+  CBC    </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-9-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-18-10-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-10-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_RSA_EXPORT_WITH_DES40_CBC_SHA      </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-10-2"  
 class="td11"> RSAex      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-10-3"  
 class="td11"> RSAex  </td><td  style="white-space:wrap; text-align:left;" id="TBL-18-10-4"  
-class="td11"> <!--l. 212--><p class="noindent" >DES.40 </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-10-5"  
+class="td11"> <!--l. 212--><p class="noindent" >DES.40 </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-10-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-18-11-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-11-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_RSA_WITH_DES_CBC_SHA               </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-11-2"  
 class="td11"> RSA         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-11-3"  
 class="td11"> RSA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-18-11-4"  
 class="td11"> <!--l. 212--><p class="noindent" >DES.56
-  CBC    </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-11-5"  
+  CBC    </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-11-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-18-12-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-12-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_RSA_WITH_3DES_EDE_CBC_SHA          </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-12-2"  
 class="td11"> RSA         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-12-3"  
 class="td11"> RSA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-18-12-4"  
 class="td11"> <!--l. 212--><p class="noindent" >3DES.168
-  CBC    </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-12-5"  
+  CBC    </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-12-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-18-13-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-13-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_DH_DSS_EXPORT_WITH_DES40_CBC_SHA   </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-13-2"  
 class="td11"> DH           </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-13-3"  
 class="td11"> DSS      </td><td  style="white-space:wrap; text-align:left;" id="TBL-18-13-4"  
 class="td11"> <!--l. 212--><p class="noindent" >DES.40
-  CBC    </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-13-5"  
+  CBC    </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-13-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-18-14-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-14-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_DH_DSS_WITH_DES_CBC_SHA            </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-14-2"  
 class="td11"> DH           </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-14-3"  
 class="td11"> DSS      </td><td  style="white-space:wrap; text-align:left;" id="TBL-18-14-4"  
 class="td11"> <!--l. 212--><p class="noindent" >DES.56
-  CBC    </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-14-5"  
+  CBC    </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-14-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-18-15-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-15-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_DH_DSS_WITH_3DES_EDE_CBC_SHA       </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-15-2"  
 class="td11"> DH           </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-15-3"  
 class="td11"> DSS      </td><td  style="white-space:wrap; text-align:left;" id="TBL-18-15-4"  
 class="td11"> <!--l. 212--><p class="noindent" >3DES.168
-  CBC    </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-15-5"  
+  CBC    </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-15-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-18-16-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-16-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_DH_RSA_EXPORT_WITH_DES40_CBC_SHA   </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-16-2"  
 class="td11"> DH           </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-16-3"  
 class="td11"> RSA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-18-16-4"  
 class="td11"> <!--l. 212--><p class="noindent" >DES.40
-  CBC    </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-16-5"  
+  CBC    </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-16-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-18-17-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-17-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_DH_RSA_WITH_DES_CBC_SHA            </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-17-2"  
 class="td11"> DH           </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-17-3"  
 class="td11"> RSA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-18-17-4"  
 class="td11"> <!--l. 212--><p class="noindent" >DES.56
-  CBC    </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-17-5"  
+  CBC    </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-17-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-18-18-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-18-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_DH_RSA_WITH_3DES_EDE_CBC_SHA       </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-18-2"  
 class="td11"> DH           </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-18-3"  
 class="td11"> RSA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-18-18-4"  
 class="td11"> <!--l. 212--><p class="noindent" >3DES.168
-  CBC    </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-18-5"  
+  CBC    </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-18-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-18-19-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-19-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_DHE_DSS_EXPORT_WITH_DES40_CBC_SHA  </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-19-2"  
 class="td11"> DHE.512   </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-19-3"  
 class="td11"> DSS      </td><td  style="white-space:wrap; text-align:left;" id="TBL-18-19-4"  
 class="td11"> <!--l. 212--><p class="noindent" >DES.40
-  CBC    </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-19-5"  
+  CBC    </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-19-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-18-20-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-20-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_DHE_DSS_WITH_DES_CBC_SHA           </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-20-2"  
 class="td11"> DHE         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-20-3"  
 class="td11"> DSS      </td><td  style="white-space:wrap; text-align:left;" id="TBL-18-20-4"  
 class="td11"> <!--l. 212--><p class="noindent" >DES.56
-  CBC    </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-20-5"  
+  CBC    </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-20-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-18-21-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-21-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_DHE_DSS_WITH_3DES_EDE_CBC_SHA      </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-21-2"  
 class="td11"> DHE         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-21-3"  
 class="td11"> DSS      </td><td  style="white-space:wrap; text-align:left;" id="TBL-18-21-4"  
 class="td11"> <!--l. 212--><p class="noindent" >3DES.168
-  CBC    </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-21-5"  
+  CBC    </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-21-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-18-22-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-22-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_DHE_RSA_EXPORT_WITH_DES40_CBC_SHA  </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-22-2"  
 class="td11"> DHE.512   </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-22-3"  
 class="td11"> RSA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-18-22-4"  
-class="td11"> <!--l. 212--><p class="noindent" >DES.40CBC </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-22-5"  
+class="td11"> <!--l. 212--><p class="noindent" >DES.40CBC </p> </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-22-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-18-23-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-23-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_DHE_RSA_WITH_DES_CBC_SHA           </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-23-2"  
 class="td11"> DHE         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-23-3"  
 class="td11"> RSA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-18-23-4"  
 class="td11"> <!--l. 212--><p class="noindent" >DES.56
-  CBC    </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-23-5"  
+  CBC    </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-23-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-18-24-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-24-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_DHE_RSA_WITH_3DES_EDE_CBC_SHA      </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-24-2"  
 class="td11"> DHE         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-24-3"  
 class="td11"> RSA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-18-24-4"  
 class="td11"> <!--l. 212--><p class="noindent" >3DES.168
-  CBC    </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-24-5"  
+  CBC    </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-24-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-18-25-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-25-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_DH_anon_EXPORT_WITH_RC4_40_MD5     </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-25-2"  
 class="td11"> DH.512     </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-25-3"  
 class="td11"> None     </td><td  style="white-space:wrap; text-align:left;" id="TBL-18-25-4"  
-class="td11"> <!--l. 212--><p class="noindent" >RC4.40 </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-25-5"  
+class="td11"> <!--l. 212--><p class="noindent" >RC4.40 </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-25-5"  
 class="td11"> MD5   </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-18-26-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-26-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_DH_anon_WITH_RC4_128_MD5           </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-26-2"  
 class="td11"> DH           </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-26-3"  
 class="td11"> None     </td><td  style="white-space:wrap; text-align:left;" id="TBL-18-26-4"  
-class="td11"> <!--l. 212--><p class="noindent" >RC4.128 </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-26-5"  
+class="td11"> <!--l. 212--><p class="noindent" >RC4.128 </p> </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-26-5"  
 class="td11"> MD5   </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-18-27-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-27-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_DH_anon_EXPORT_WITH_DES40_CBC_SHA  </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-27-2"  
 class="td11"> DH.512     </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-27-3"  
 class="td11"> None     </td><td  style="white-space:wrap; text-align:left;" id="TBL-18-27-4"  
 class="td11"> <!--l. 212--><p class="noindent" >DES.40
-  CBC    </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-27-5"  
+  CBC    </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-27-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-18-28-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-28-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_DH_anon_WITH_DES_CBC_SHA           </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-28-2"  
 class="td11"> DH           </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-28-3"  
 class="td11"> None     </td><td  style="white-space:wrap; text-align:left;" id="TBL-18-28-4"  
 class="td11"> <!--l. 212--><p class="noindent" >DES.56
-  CBC    </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-28-5"  
+  CBC    </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-28-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-18-29-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-29-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_DH_anon_WITH_3DES_EDE_CBC_SHA      </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-29-2"  
 class="td11"> DH           </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-29-3"  
 class="td11"> None     </td><td  style="white-space:wrap; text-align:left;" id="TBL-18-29-4"  
 class="td11"> <!--l. 212--><p class="noindent" >3DES.168
-  CBC    </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-29-5"  
+  CBC    </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-29-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-18-30-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-30-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_FORTEZZA_KEA_WITH_NULL_SHA         </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-30-2"  
 class="td11"> FRTZA     </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-30-3"  
 class="td11"> KEA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-18-30-4"  
-class="td11"> <!--l. 212--><p class="noindent" >None    </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-30-5"  
+class="td11"> <!--l. 212--><p class="noindent" >None    </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-30-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-18-31-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-31-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_FORTEZZA_KEA_WITH_FORTEZZA_CBC_SHA </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-31-2"  
 class="td11"> FRTZA     </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-31-3"  
 class="td11"> KEA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-18-31-4"  
-class="td11"> <!--l. 212--><p class="noindent" >FRTZA </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-31-5"  
+class="td11"> <!--l. 212--><p class="noindent" >FRTZA </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-31-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-18-32-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-32-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_FORTEZZA_KEA_WITH_RC4_128_SHA      </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-32-2"  
 class="td11"> FRTZA     </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-32-3"  
 class="td11"> KEA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-18-32-4"  
-class="td11"> <!--l. 212--><p class="noindent" >RC4.128 </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-32-5"  
+class="td11"> <!--l. 212--><p class="noindent" >RC4.128 </p> </td><td  style="white-space:nowrap; text-align:left;" id="TBL-18-32-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-18-33-"><td  style="white-space:nowrap; text-align:left;" id="TBL-18-33-1"  
 class="td11">                                        </td></tr></table>
  <div class="caption" 
@@ -760,6 +770,7 @@ class="ec-lmtt-10x-x-109">ssl/</span></span></span>. Les constantes sont déclaré
 class="ec-lmtt-10x-x-109">ssl3.h</span></span></span>, on y retrouve les algorithmes de la RFC,
 référencés en table <a 
 href="#x12-188001r4">5.4<!--tex4ht:ref: algosOpensslV3 --></a>.
+</p>
    <div class="table">
                                                                                                   
 
@@ -767,7 +778,7 @@ href="#x12-188001r4">5.4<!--tex4ht:ref: algosOpensslV3 --></a>.
 <!--l. 222--><p class="indent" >   <a 
  id="x12-188001r4"></a><a 
  id="x12-192001r19"></a><a 
- id="x12-194001r16"></a><hr class="float"><div class="float" 
+ id="x12-194001r16"></a></p><hr class="float" /><div class="float" 
 >
                                                                                                   
 
@@ -775,235 +786,235 @@ href="#x12-188001r4">5.4<!--tex4ht:ref: algosOpensslV3 --></a>.
  <table id="TBL-23" class="tabular" 
 cellspacing="0" cellpadding="0" rules="groups" 
 ><colgroup id="TBL-23-1g"><col 
-id="TBL-23-1"></colgroup><colgroup id="TBL-23-2g"><col 
-id="TBL-23-2"></colgroup><colgroup id="TBL-23-3g"><col 
-id="TBL-23-3"></colgroup><colgroup id="TBL-23-4g"><col 
-id="TBL-23-4"></colgroup><colgroup id="TBL-23-5g"><col 
-id="TBL-23-5"></colgroup><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+id="TBL-23-1" /></colgroup><colgroup id="TBL-23-2g"><col 
+id="TBL-23-2" /></colgroup><colgroup id="TBL-23-3g"><col 
+id="TBL-23-3" /></colgroup><colgroup id="TBL-23-4g"><col 
+id="TBL-23-4" /></colgroup><colgroup id="TBL-23-5g"><col 
+id="TBL-23-5" /></colgroup><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-23-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-23-1-1"  
 class="td11"> <span 
 class="ec-lmbx-10x-x-109">Identifiant                                       </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-23-1-2"  
 class="td11"> <!--l. 290--><p class="noindent" ><span 
-class="ec-lmbx-10x-x-109">Constante OpenSSL</span>                           </td>
+class="ec-lmbx-10x-x-109">Constante OpenSSL</span>                           </p></td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-23-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-23-2-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_NULL_WITH_NULL_NULL                </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-23-2-2"  
-class="td11"> <!--l. 290--><p class="noindent" >                                       </td>
+class="td11"> <!--l. 290--><p class="noindent" >                                       </p></td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-23-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-23-3-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_RSA_WITH_NULL_MD5                  </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-23-3-2"  
 class="td11"> <!--l. 290--><p class="noindent" ><span 
-class="ec-lmtt-10x-x-109">SSL3_CK_RSA_NULL_MD5</span>                   </td>
+class="ec-lmtt-10x-x-109">SSL3_CK_RSA_NULL_MD5</span>                   </p></td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-23-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-23-4-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_RSA_WITH_NULL_SHA                  </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-23-4-2"  
 class="td11"> <!--l. 290--><p class="noindent" ><span 
-class="ec-lmtt-10x-x-109">SSL3_CK_RSA_NULL_SHA</span>                   </td>
+class="ec-lmtt-10x-x-109">SSL3_CK_RSA_NULL_SHA</span>                   </p></td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-23-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-23-5-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_RSA_EXPORT_WITH_RC4_40_MD5         </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-23-5-2"  
 class="td11"> <!--l. 290--><p class="noindent" ><span 
-class="ec-lmtt-10x-x-109">SSL3_CK_RSA_RC4_40_MD5</span>                 </td>
+class="ec-lmtt-10x-x-109">SSL3_CK_RSA_RC4_40_MD5</span>                 </p></td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-23-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-23-6-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_RSA_WITH_RC4_128_MD5               </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-23-6-2"  
 class="td11"> <!--l. 290--><p class="noindent" ><span 
-class="ec-lmtt-10x-x-109">SSL3_CK_RSA_RC4_128_MD5</span>                </td>
+class="ec-lmtt-10x-x-109">SSL3_CK_RSA_RC4_128_MD5</span>                </p></td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-23-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-23-7-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_RSA_WITH_RC4_128_SHA               </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-23-7-2"  
 class="td11"> <!--l. 290--><p class="noindent" ><span 
-class="ec-lmtt-10x-x-109">SSL3_CK_RSA_RC4_128_SHA</span>                </td>
+class="ec-lmtt-10x-x-109">SSL3_CK_RSA_RC4_128_SHA</span>                </p></td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-23-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-23-8-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_RSA_EXPORT_WITH_RC2_CBC_40_MD5     </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-23-8-2"  
 class="td11"> <!--l. 290--><p class="noindent" ><span 
-class="ec-lmtt-10x-x-109">SSL3_CK_RSA_RC2_40_MD5</span>                 </td>
+class="ec-lmtt-10x-x-109">SSL3_CK_RSA_RC2_40_MD5</span>                 </p></td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-23-9-"><td  style="white-space:nowrap; text-align:left;" id="TBL-23-9-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_RSA_WITH_IDEA_CBC_SHA              </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-23-9-2"  
 class="td11"> <!--l. 290--><p class="noindent" ><span 
-class="ec-lmtt-10x-x-109">SSL3_CK_RSA_IDEA_128_SHA</span>               </td>
+class="ec-lmtt-10x-x-109">SSL3_CK_RSA_IDEA_128_SHA</span>               </p></td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-23-10-"><td  style="white-space:nowrap; text-align:left;" id="TBL-23-10-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_RSA_EXPORT_WITH_DES40_CBC_SHA      </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-23-10-2"  
 class="td11"> <!--l. 290--><p class="noindent" ><span 
-class="ec-lmtt-10x-x-109">SSL3_CK_RSA_DES_40_CBC_SHA</span>             </td>
+class="ec-lmtt-10x-x-109">SSL3_CK_RSA_DES_40_CBC_SHA</span>             </p></td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-23-11-"><td  style="white-space:nowrap; text-align:left;" id="TBL-23-11-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_RSA_WITH_DES_CBC_SHA               </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-23-11-2"  
 class="td11"> <!--l. 290--><p class="noindent" ><span 
-class="ec-lmtt-10x-x-109">SSL3_CK_RSA_DES_64_CBC_SHA</span>             </td>
+class="ec-lmtt-10x-x-109">SSL3_CK_RSA_DES_64_CBC_SHA</span>             </p></td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-23-12-"><td  style="white-space:nowrap; text-align:left;" id="TBL-23-12-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_RSA_WITH_3DES_EDE_CBC_SHA          </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-23-12-2"  
 class="td11"> <!--l. 290--><p class="noindent" ><span 
-class="ec-lmtt-10x-x-109">SSL3_CK_RSA_DES_192_CBC3_SHA</span>           </td>
+class="ec-lmtt-10x-x-109">SSL3_CK_RSA_DES_192_CBC3_SHA</span>           </p></td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-23-13-"><td  style="white-space:nowrap; text-align:left;" id="TBL-23-13-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_DH_DSS_EXPORT_WITH_DES40_CBC_SHA   </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-23-13-2"  
 class="td11"> <!--l. 290--><p class="noindent" ><span 
-class="ec-lmtt-10x-x-109">SSL3_CK_DH_DSS_DES_40_CBC_SHA</span>          </td>
+class="ec-lmtt-10x-x-109">SSL3_CK_DH_DSS_DES_40_CBC_SHA</span>          </p></td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-23-14-"><td  style="white-space:nowrap; text-align:left;" id="TBL-23-14-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_DH_DSS_WITH_DES_CBC_SHA            </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-23-14-2"  
 class="td11"> <!--l. 290--><p class="noindent" ><span 
-class="ec-lmtt-10x-x-109">SSL3_CK_DH_DSS_DES_64_CBC_SHA</span>          </td>
+class="ec-lmtt-10x-x-109">SSL3_CK_DH_DSS_DES_64_CBC_SHA</span>          </p></td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-23-15-"><td  style="white-space:nowrap; text-align:left;" id="TBL-23-15-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_DH_DSS_WITH_3DES_EDE_CBC_SHA       </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-23-15-2"  
 class="td11"> <!--l. 290--><p class="noindent" ><span 
-class="ec-lmtt-10x-x-109">SSL3_CK_DH_DSS_DES_192_CBC3_SHA</span>        </td>
+class="ec-lmtt-10x-x-109">SSL3_CK_DH_DSS_DES_192_CBC3_SHA</span>        </p></td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-23-16-"><td  style="white-space:nowrap; text-align:left;" id="TBL-23-16-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_DH_RSA_EXPORT_WITH_DES40_CBC_SHA   </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-23-16-2"  
 class="td11"> <!--l. 290--><p class="noindent" ><span 
-class="ec-lmtt-10x-x-109">SSL3_CK_DH_RSA_DES_40_CBC_SHA</span>          </td>
+class="ec-lmtt-10x-x-109">SSL3_CK_DH_RSA_DES_40_CBC_SHA</span>          </p></td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-23-17-"><td  style="white-space:nowrap; text-align:left;" id="TBL-23-17-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_DH_RSA_WITH_DES_CBC_SHA            </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-23-17-2"  
 class="td11"> <!--l. 290--><p class="noindent" ><span 
-class="ec-lmtt-10x-x-109">SSL3_CK_DH_RSA_DES_64_CBC_SHA</span>          </td>
+class="ec-lmtt-10x-x-109">SSL3_CK_DH_RSA_DES_64_CBC_SHA</span>          </p></td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-23-18-"><td  style="white-space:nowrap; text-align:left;" id="TBL-23-18-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_DH_RSA_WITH_3DES_EDE_CBC_SHA       </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-23-18-2"  
 class="td11"> <!--l. 290--><p class="noindent" ><span 
-class="ec-lmtt-10x-x-109">SSL3_CK_DH_RSA_DES_192_CBC3_SHA</span>        </td>
+class="ec-lmtt-10x-x-109">SSL3_CK_DH_RSA_DES_192_CBC3_SHA</span>        </p></td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-23-19-"><td  style="white-space:nowrap; text-align:left;" id="TBL-23-19-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_DHE_DSS_EXPORT_WITH_DES40_CBC_SHA  </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-23-19-2"  
 class="td11"> <!--l. 290--><p class="noindent" ><span 
-class="ec-lmtt-10x-x-109">SSL3_CK_DHE_DSS_DES_40_CBC_SHA</span>         </td>
+class="ec-lmtt-10x-x-109">SSL3_CK_DHE_DSS_DES_40_CBC_SHA</span>         </p></td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-23-20-"><td  style="white-space:nowrap; text-align:left;" id="TBL-23-20-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_DHE_DSS_WITH_DES_CBC_SHA           </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-23-20-2"  
 class="td11"> <!--l. 290--><p class="noindent" ><span 
-class="ec-lmtt-10x-x-109">SSL3_CK_DHE_DSS_DES_64_CBC_SHA</span>         </td>
+class="ec-lmtt-10x-x-109">SSL3_CK_DHE_DSS_DES_64_CBC_SHA</span>         </p></td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-23-21-"><td  style="white-space:nowrap; text-align:left;" id="TBL-23-21-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_DHE_DSS_WITH_3DES_EDE_CBC_SHA      </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-23-21-2"  
 class="td11"> <!--l. 290--><p class="noindent" ><span 
-class="ec-lmtt-10x-x-109">SSL3_CK_DHE_DSS_DES_192_CBC3_SHA</span>       </td>
+class="ec-lmtt-10x-x-109">SSL3_CK_DHE_DSS_DES_192_CBC3_SHA</span>       </p></td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-23-22-"><td  style="white-space:nowrap; text-align:left;" id="TBL-23-22-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_DHE_RSA_EXPORT_WITH_DES40_CBC_SHA  </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-23-22-2"  
 class="td11"> <!--l. 290--><p class="noindent" ><span 
-class="ec-lmtt-10x-x-109">SSL3_CK_DHE_RSA_DES_40_CBC_SHA</span>         </td>
+class="ec-lmtt-10x-x-109">SSL3_CK_DHE_RSA_DES_40_CBC_SHA</span>         </p></td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-23-23-"><td  style="white-space:nowrap; text-align:left;" id="TBL-23-23-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_DHE_RSA_WITH_DES_CBC_SHA           </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-23-23-2"  
 class="td11"> <!--l. 290--><p class="noindent" ><span 
-class="ec-lmtt-10x-x-109">SSL3_CK_DHE_RSA_DES_64_CBC_SHA</span>         </td>
+class="ec-lmtt-10x-x-109">SSL3_CK_DHE_RSA_DES_64_CBC_SHA</span>         </p></td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-23-24-"><td  style="white-space:nowrap; text-align:left;" id="TBL-23-24-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_DHE_RSA_WITH_3DES_EDE_CBC_SHA      </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-23-24-2"  
 class="td11"> <!--l. 290--><p class="noindent" ><span 
-class="ec-lmtt-10x-x-109">SSL3_CK_DHE_RSA_DES_192_CBC3_SHA</span>       </td>
+class="ec-lmtt-10x-x-109">SSL3_CK_DHE_RSA_DES_192_CBC3_SHA</span>       </p></td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-23-25-"><td  style="white-space:nowrap; text-align:left;" id="TBL-23-25-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_DH_anon_EXPORT_WITH_RC4_40_MD5     </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-23-25-2"  
 class="td11"> <!--l. 290--><p class="noindent" ><span 
-class="ec-lmtt-10x-x-109">SSL3_CK_ADH_RC4_40_MD5</span>                 </td>
+class="ec-lmtt-10x-x-109">SSL3_CK_ADH_RC4_40_MD5</span>                 </p></td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-23-26-"><td  style="white-space:nowrap; text-align:left;" id="TBL-23-26-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_DH_anon_WITH_RC4_128_MD5           </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-23-26-2"  
 class="td11"> <!--l. 290--><p class="noindent" ><span 
-class="ec-lmtt-10x-x-109">SSL3_CK_ADH_RC4_128_MD5</span>                </td>
+class="ec-lmtt-10x-x-109">SSL3_CK_ADH_RC4_128_MD5</span>                </p></td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-23-27-"><td  style="white-space:nowrap; text-align:left;" id="TBL-23-27-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_DH_anon_EXPORT_WITH_DES40_CBC_SHA  </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-23-27-2"  
 class="td11"> <!--l. 290--><p class="noindent" ><span 
-class="ec-lmtt-10x-x-109">SSL3_CK_ADH_DES_40_CBC_SHA</span>             </td>
+class="ec-lmtt-10x-x-109">SSL3_CK_ADH_DES_40_CBC_SHA</span>             </p></td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-23-28-"><td  style="white-space:nowrap; text-align:left;" id="TBL-23-28-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_DH_anon_WITH_DES_CBC_SHA           </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-23-28-2"  
 class="td11"> <!--l. 290--><p class="noindent" ><span 
-class="ec-lmtt-10x-x-109">SSL3_CK_ADH_DES_64_CBC_SHA</span>             </td>
+class="ec-lmtt-10x-x-109">SSL3_CK_ADH_DES_64_CBC_SHA</span>             </p></td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-23-29-"><td  style="white-space:nowrap; text-align:left;" id="TBL-23-29-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_DH_anon_WITH_3DES_EDE_CBC_SHA      </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-23-29-2"  
 class="td11"> <!--l. 290--><p class="noindent" ><span 
-class="ec-lmtt-10x-x-109">SSL3_CK_ADH_DES_192_CBC_SHA</span>            </td>
+class="ec-lmtt-10x-x-109">SSL3_CK_ADH_DES_192_CBC_SHA</span>            </p></td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-23-30-"><td  style="white-space:nowrap; text-align:left;" id="TBL-23-30-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_FORTEZZA_KEA_WITH_NULL_SHA         </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-23-30-2"  
 class="td11"> <!--l. 290--><p class="noindent" ><span 
-class="ec-lmtt-10x-x-109">SSL3_CK_FZA_DMS_NULL_SHA</span>               </td>
+class="ec-lmtt-10x-x-109">SSL3_CK_FZA_DMS_NULL_SHA</span>               </p></td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-23-31-"><td  style="white-space:nowrap; text-align:left;" id="TBL-23-31-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_FORTEZZA_KEA_WITH_FORTEZZA_CBC_SHA </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-23-31-2"  
 class="td11"> <!--l. 290--><p class="noindent" ><span 
-class="ec-lmtt-10x-x-109">SSL3_CK_FZA_DMS_FZA_SHA</span>                </td>
+class="ec-lmtt-10x-x-109">SSL3_CK_FZA_DMS_FZA_SHA</span>                </p></td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-23-32-"><td  style="white-space:nowrap; text-align:left;" id="TBL-23-32-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">SSL_FORTEZZA_KEA_WITH_RC4_128_SHA      </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-23-32-2"  
 class="td11"> <!--l. 290--><p class="noindent" ><span 
-class="ec-lmtt-10x-x-109">SSL3_CK_FZA_DMS_RC4_SHA</span>                </td>
+class="ec-lmtt-10x-x-109">SSL3_CK_FZA_DMS_RC4_SHA</span>                </p></td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-23-33-"><td  style="white-space:nowrap; text-align:left;" id="TBL-23-33-1"  
 class="td11">                                        </td></tr></table>
  <div class="caption" 
@@ -1020,10 +1031,11 @@ href="#x12-1890002" id="x12-1890002"><span
 class="ec-lmbx-10x-x-109">Attention</span></a></span>
    Les 3 algorithmes FORTEZZA sont commentés dans OpenSSL depuis le commit<br 
 class="newline" />89bbe14c506b9bd2fd00e6bae22a99ef1ee7ad19 de 2006.
+</p>
 <!--l. 298--><p class="noindent" ><span class="paragraphHead"><a 
 href="#x12-1900002" id="x12-1900002"><span 
 class="ec-lmbx-10x-x-109">Remarque</span></a></span>
-   OpenSSL déclare d&#8217;autre constantes pour utiliser SSL 3 avec Kerberos 5<span class="frenchb-nbsp">&nbsp;</span>:
+   OpenSSL déclare d&#8217;autre constantes pour utiliser SSL 3 avec Kerberos 5<span class="frenchb-nbsp">&nbsp;</span>: </p>
       <ul class="itemize1">
       <li class="itemize"><span class="obeylines-h"><span class="verb"><span 
 class="ec-lmtt-10x-x-109">SSL3_CK_KRB5_DES_64_CBC_SHA</span></span></span>
@@ -1074,11 +1086,11 @@ href="#x12-1910003" id="x12-1910003">Failles</a></h5>
 href="#x12-1920005.2.2.3.1" id="x12-1920005.2.2.3.1">CVE-2013-4353</a></h4> Cette faille découverte par Anton Johansson <span class="cite">[<a 
 href="rapport_Auditli5.html#XCVE20134353">30</a>]</span> permet de faire planter OpenSSL
 avec un déréférencement de pointeur NULL et peut ainsi causer des dénis de service. Cette faille a été corrigée le 7
-janvier 2014 par Stephen Henson. Voici le patch de correction dans la fonction <span class="obeylines-h"><span class="verb"><span 
-class="ec-lmtt-10x-x-109">ssl3_take_mac</span></span></span> du fichier
                                                                                                   
 
                                                                                                   
+janvier 2014 par Stephen Henson. Voici le patch de correction dans la fonction <span class="obeylines-h"><span class="verb"><span 
+class="ec-lmtt-10x-x-109">ssl3_take_mac</span></span></span> du fichier
 <span class="obeylines-h"><span class="verb"><span 
 class="ec-lmtt-10x-x-109">ssl/s3_both.c</span></span></span><span class="frenchb-nbsp">&nbsp;</span>:
    <!--l. 322-->
@@ -1791,18 +1803,19 @@ y a quelques différences notables. Il y est notamment prévu un mécanisme de rétr
 vers SSL 3. La plus grosse différence est que TLS, contrairement à SSL, permet de commencer une
 connexion non chiffrée sur un port usuel tel que le 80 et bascule en mode chiffré avec la commande
 STARTTLS.
-<!--l. 378--><p class="indent" >   Du point de vue des algorithmes de chiffrement, on a globalement la même liste que SSL 3 et les algorithmes de
-Fortezza ont été retirés, comme on peut le constater sur le tableau <a 
-href="#x12-196001r5">5.5<!--tex4ht:ref: algosTLS1 --></a>.
                                                                                                   
 
                                                                                                   
+</p><!--l. 378--><p class="indent" >   Du point de vue des algorithmes de chiffrement, on a globalement la même liste que SSL 3 et les algorithmes de
+Fortezza ont été retirés, comme on peut le constater sur le tableau <a 
+href="#x12-196001r5">5.5<!--tex4ht:ref: algosTLS1 --></a>.
+</p>
    <div class="table">
                                                                                                   
 
                                                                                                   
 <!--l. 380--><p class="indent" >   <a 
- id="x12-196001r5"></a><hr class="float"><div class="float" 
+ id="x12-196001r5"></a></p><hr class="float" /><div class="float" 
 >
                                                                                                   
 
@@ -1810,12 +1823,12 @@ href="#x12-196001r5">5.5<!--tex4ht:ref: algosTLS1 --></a>.
  <table id="TBL-27" class="tabular" 
 cellspacing="0" cellpadding="0" rules="groups" 
 ><colgroup id="TBL-27-1g"><col 
-id="TBL-27-1"></colgroup><colgroup id="TBL-27-2g"><col 
-id="TBL-27-2"></colgroup><colgroup id="TBL-27-3g"><col 
-id="TBL-27-3"></colgroup><colgroup id="TBL-27-4g"><col 
-id="TBL-27-4"></colgroup><colgroup id="TBL-27-5g"><col 
-id="TBL-27-5"></colgroup><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+id="TBL-27-1" /></colgroup><colgroup id="TBL-27-2g"><col 
+id="TBL-27-2" /></colgroup><colgroup id="TBL-27-3g"><col 
+id="TBL-27-3" /></colgroup><colgroup id="TBL-27-4g"><col 
+id="TBL-27-4" /></colgroup><colgroup id="TBL-27-5g"><col 
+id="TBL-27-5" /></colgroup><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-27-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-27-1-1"  
 class="td11"> <span 
 class="ec-lmbx-10x-x-109">Identifiant                                      </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-1-2"  
@@ -1824,281 +1837,281 @@ class="ec-lmbx-10x-x-109">KeyExch </span></td><td  style="white-space:nowrap; te
 class="td11"> <span 
 class="ec-lmbx-10x-x-109">Authn </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-27-1-4"  
 class="td11"> <!--l. 442--><p class="noindent" ><span 
-class="ec-lmbx-10x-x-109">Enc</span>      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-1-5"  
+class="ec-lmbx-10x-x-109">Enc</span>      </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-1-5"  
 class="td11"> <span 
 class="ec-lmbx-10x-x-109">MAC </span></td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-27-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-27-2-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_NULL_WITH_NULL_NULL               </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-2-2"  
 class="td11"> NULL       </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-2-3"  
 class="td11"> NULL   </td><td  style="white-space:wrap; text-align:left;" id="TBL-27-2-4"  
-class="td11"> <!--l. 442--><p class="noindent" >NULL    </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-2-5"  
+class="td11"> <!--l. 442--><p class="noindent" >NULL    </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-2-5"  
 class="td11"> NULL  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-27-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-27-3-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_RSA_WITH_NULL_MD5                 </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-3-2"  
 class="td11"> RSA         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-3-3"  
 class="td11"> RSA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-27-3-4"  
-class="td11"> <!--l. 442--><p class="noindent" >NULL    </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-3-5"  
+class="td11"> <!--l. 442--><p class="noindent" >NULL    </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-3-5"  
 class="td11"> MD5   </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-27-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-27-4-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_RSA_WITH_NULL_SHA                 </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-4-2"  
 class="td11"> RSA         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-4-3"  
 class="td11"> RSA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-27-4-4"  
-class="td11"> <!--l. 442--><p class="noindent" >NULL    </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-4-5"  
+class="td11"> <!--l. 442--><p class="noindent" >NULL    </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-4-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-27-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-27-5-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_RSA_EXPORT_WITH_RC4_40_MD5        </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-5-2"  
 class="td11"> RSAex      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-5-3"  
 class="td11"> RSAex  </td><td  style="white-space:wrap; text-align:left;" id="TBL-27-5-4"  
-class="td11"> <!--l. 442--><p class="noindent" >RC4.40   </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-5-5"  
+class="td11"> <!--l. 442--><p class="noindent" >RC4.40   </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-5-5"  
 class="td11"> MD5   </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-27-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-27-6-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_RSA_WITH_RC4_128_MD5              </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-6-2"  
 class="td11"> RSA         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-6-3"  
 class="td11"> RSA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-27-6-4"  
-class="td11"> <!--l. 442--><p class="noindent" >RC4.128 </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-6-5"  
+class="td11"> <!--l. 442--><p class="noindent" >RC4.128 </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-6-5"  
 class="td11"> MD5   </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-27-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-27-7-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_RSA_WITH_RC4_128_SHA              </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-7-2"  
 class="td11"> RSA         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-7-3"  
 class="td11"> RSA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-27-7-4"  
-class="td11"> <!--l. 442--><p class="noindent" >IDEA.128 </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-7-5"  
+class="td11"> <!--l. 442--><p class="noindent" >IDEA.128 </p> </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-7-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-27-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-27-8-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_RSA_EXPORT_WITH_RC2_CBC_40_MD5    </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-8-2"  
 class="td11"> RSAex      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-8-3"  
 class="td11"> RSAex  </td><td  style="white-space:wrap; text-align:left;" id="TBL-27-8-4"  
 class="td11"> <!--l. 442--><p class="noindent" >RC2.40
-  CBC      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-8-5"  
+  CBC      </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-8-5"  
 class="td11"> MD5   </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-27-9-"><td  style="white-space:nowrap; text-align:left;" id="TBL-27-9-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_RSA_WITH_IDEA_CBC_SHA             </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-9-2"  
 class="td11"> RSA         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-9-3"  
 class="td11"> RSA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-27-9-4"  
 class="td11"> <!--l. 442--><p class="noindent" >IDEA.128
-  CBC      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-9-5"  
+  CBC      </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-9-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-27-10-"><td  style="white-space:nowrap; text-align:left;" id="TBL-27-10-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_RSA_EXPORT_WITH_DES40_CBC_SHA     </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-10-2"  
 class="td11"> RSAex      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-10-3"  
 class="td11"> RSAex  </td><td  style="white-space:wrap; text-align:left;" id="TBL-27-10-4"  
-class="td11"> <!--l. 442--><p class="noindent" >DES.40  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-10-5"  
+class="td11"> <!--l. 442--><p class="noindent" >DES.40  </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-10-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-27-11-"><td  style="white-space:nowrap; text-align:left;" id="TBL-27-11-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_RSA_WITH_DES_CBC_SHA              </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-11-2"  
 class="td11"> RSA         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-11-3"  
 class="td11"> RSA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-27-11-4"  
 class="td11"> <!--l. 442--><p class="noindent" >DES.56
-  CBC      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-11-5"  
+  CBC      </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-11-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-27-12-"><td  style="white-space:nowrap; text-align:left;" id="TBL-27-12-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_RSA_WITH_3DES_EDE_CBC_SHA         </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-12-2"  
 class="td11"> RSA         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-12-3"  
 class="td11"> RSA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-27-12-4"  
 class="td11"> <!--l. 442--><p class="noindent" >3DES.168
-  CBC      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-12-5"  
+  CBC      </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-12-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-27-13-"><td  style="white-space:nowrap; text-align:left;" id="TBL-27-13-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_DH_DSS_EXPORT_WITH_DES40_CBC_SHA  </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-13-2"  
 class="td11"> DH           </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-13-3"  
 class="td11"> DSS      </td><td  style="white-space:wrap; text-align:left;" id="TBL-27-13-4"  
 class="td11"> <!--l. 442--><p class="noindent" >DES.40
-  CBC      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-13-5"  
+  CBC      </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-13-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-27-14-"><td  style="white-space:nowrap; text-align:left;" id="TBL-27-14-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_DH_DSS_WITH_DES_CBC_SHA           </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-14-2"  
 class="td11"> DH           </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-14-3"  
 class="td11"> DSS      </td><td  style="white-space:wrap; text-align:left;" id="TBL-27-14-4"  
 class="td11"> <!--l. 442--><p class="noindent" >DES.56
-  CBC      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-14-5"  
+  CBC      </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-14-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-27-15-"><td  style="white-space:nowrap; text-align:left;" id="TBL-27-15-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_DH_DSS_WITH_3DES_EDE_CBC_SHA      </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-15-2"  
 class="td11"> DH           </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-15-3"  
 class="td11"> DSS      </td><td  style="white-space:wrap; text-align:left;" id="TBL-27-15-4"  
 class="td11"> <!--l. 442--><p class="noindent" >3DES.168
-  CBC      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-15-5"  
+  CBC      </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-15-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-27-16-"><td  style="white-space:nowrap; text-align:left;" id="TBL-27-16-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_DH_RSA_EXPORT_WITH_DES40_CBC_SHA  </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-16-2"  
 class="td11"> DH           </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-16-3"  
 class="td11"> RSA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-27-16-4"  
 class="td11"> <!--l. 442--><p class="noindent" >DES.40
-  CBC      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-16-5"  
+  CBC      </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-16-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-27-17-"><td  style="white-space:nowrap; text-align:left;" id="TBL-27-17-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_DH_RSA_WITH_DES_CBC_SHA           </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-17-2"  
 class="td11"> DH           </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-17-3"  
 class="td11"> RSA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-27-17-4"  
 class="td11"> <!--l. 442--><p class="noindent" >DES.56
-  CBC      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-17-5"  
+  CBC      </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-17-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-27-18-"><td  style="white-space:nowrap; text-align:left;" id="TBL-27-18-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_DH_RSA_WITH_3DES_EDE_CBC_SHA      </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-18-2"  
 class="td11"> DH           </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-18-3"  
 class="td11"> RSA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-27-18-4"  
 class="td11"> <!--l. 442--><p class="noindent" >3DES.168
-  CBC      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-18-5"  
+  CBC      </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-18-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-27-19-"><td  style="white-space:nowrap; text-align:left;" id="TBL-27-19-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_DHE_DSS_EXPORT_WITH_DES40_CBC_SHA </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-19-2"  
 class="td11"> DHE.512   </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-19-3"  
 class="td11"> DSS      </td><td  style="white-space:wrap; text-align:left;" id="TBL-27-19-4"  
 class="td11"> <!--l. 442--><p class="noindent" >DES.40
-  CBC      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-19-5"  
+  CBC      </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-19-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-27-20-"><td  style="white-space:nowrap; text-align:left;" id="TBL-27-20-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_DHE_DSS_WITH_DES_CBC_SHA          </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-20-2"  
 class="td11"> DHE         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-20-3"  
 class="td11"> DSS      </td><td  style="white-space:wrap; text-align:left;" id="TBL-27-20-4"  
 class="td11"> <!--l. 442--><p class="noindent" >DES.56
-  CBC      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-20-5"  
+  CBC      </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-20-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-27-21-"><td  style="white-space:nowrap; text-align:left;" id="TBL-27-21-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA     </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-21-2"  
 class="td11"> DHE         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-21-3"  
 class="td11"> DSS      </td><td  style="white-space:wrap; text-align:left;" id="TBL-27-21-4"  
 class="td11"> <!--l. 442--><p class="noindent" >3DES.168
-  CBC      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-21-5"  
+  CBC      </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-21-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-27-22-"><td  style="white-space:nowrap; text-align:left;" id="TBL-27-22-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_DHE_RSA_EXPORT_WITH_DES40_CBC_SHA </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-22-2"  
 class="td11"> DHE.512   </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-22-3"  
 class="td11"> RSA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-27-22-4"  
-class="td11"> <!--l. 442--><p class="noindent" >DES.40CBC </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-22-5"  
+class="td11"> <!--l. 442--><p class="noindent" >DES.40CBC </p> </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-22-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-27-23-"><td  style="white-space:nowrap; text-align:left;" id="TBL-27-23-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_DHE_RSA_WITH_DES_CBC_SHA          </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-23-2"  
 class="td11"> DHE         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-23-3"  
 class="td11"> RSA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-27-23-4"  
 class="td11"> <!--l. 442--><p class="noindent" >DES.56
-  CBC      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-23-5"  
+  CBC      </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-23-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-27-24-"><td  style="white-space:nowrap; text-align:left;" id="TBL-27-24-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_DHE_RSA_WITH_3DES_EDE_CBC_SHA     </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-24-2"  
 class="td11"> DHE         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-24-3"  
 class="td11"> RSA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-27-24-4"  
 class="td11"> <!--l. 442--><p class="noindent" >3DES.168
-  CBC      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-24-5"  
+  CBC      </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-24-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-27-25-"><td  style="white-space:nowrap; text-align:left;" id="TBL-27-25-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_DH_anon_EXPORT_WITH_RC4_40_MD5    </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-25-2"  
 class="td11"> DH.512     </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-25-3"  
 class="td11"> None     </td><td  style="white-space:wrap; text-align:left;" id="TBL-27-25-4"  
-class="td11"> <!--l. 442--><p class="noindent" >RC4.40   </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-25-5"  
+class="td11"> <!--l. 442--><p class="noindent" >RC4.40   </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-25-5"  
 class="td11"> MD5   </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-27-26-"><td  style="white-space:nowrap; text-align:left;" id="TBL-27-26-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_DH_anon_WITH_RC4_128_MD5          </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-26-2"  
 class="td11"> DH           </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-26-3"  
 class="td11"> None     </td><td  style="white-space:wrap; text-align:left;" id="TBL-27-26-4"  
-class="td11"> <!--l. 442--><p class="noindent" >RC4.128 </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-26-5"  
+class="td11"> <!--l. 442--><p class="noindent" >RC4.128 </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-26-5"  
 class="td11"> MD5   </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-27-27-"><td  style="white-space:nowrap; text-align:left;" id="TBL-27-27-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_DH_anon_EXPORT_WITH_DES40_CBC_SHA </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-27-2"  
 class="td11"> DH.512     </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-27-3"  
 class="td11"> None     </td><td  style="white-space:wrap; text-align:left;" id="TBL-27-27-4"  
 class="td11"> <!--l. 442--><p class="noindent" >DES.40
-  CBC      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-27-5"  
+  CBC      </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-27-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-27-28-"><td  style="white-space:nowrap; text-align:left;" id="TBL-27-28-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_DH_anon_WITH_DES_CBC_SHA          </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-28-2"  
 class="td11"> DH           </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-28-3"  
 class="td11"> None     </td><td  style="white-space:wrap; text-align:left;" id="TBL-27-28-4"  
 class="td11"> <!--l. 442--><p class="noindent" >DES.56
-  CBC      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-28-5"  
+  CBC      </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-28-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-27-29-"><td  style="white-space:nowrap; text-align:left;" id="TBL-27-29-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_DH_anon_WITH_3DES_EDE_CBC_SHA     </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-29-2"  
 class="td11"> DH           </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-29-3"  
 class="td11"> None     </td><td  style="white-space:wrap; text-align:left;" id="TBL-27-29-4"  
 class="td11"> <!--l. 442--><p class="noindent" >3DES.168
-  CBC      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-29-5"  
+  CBC      </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-27-29-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-27-30-"><td  style="white-space:nowrap; text-align:left;" id="TBL-27-30-1"  
 class="td11">                                       </td></tr></table>
  <div class="caption" 
@@ -2118,12 +2131,13 @@ class="ec-lmbx-10x-x-109">émentaires de la RFC 3268</span></a></span>
 href="rapport_Auditli5.html#Xrfc3268">9</a>]</span> apporte des nouvelles constantes avec
 AES et SHA-1, listés sur le tableau <span 
 class="ec-lmbx-10x-x-109">??</span>.
+</p>
    <div class="table">
                                                                                                   
 
                                                                                                   
 <!--l. 451--><p class="indent" >   <a 
- id="x12-197001r6"></a><hr class="float"><div class="float" 
+ id="x12-197001r6"></a></p><hr class="float" /><div class="float" 
 >
                                                                                                   
 
@@ -2131,12 +2145,12 @@ class="ec-lmbx-10x-x-109">??</span>.
  <table id="TBL-31" class="tabular" 
 cellspacing="0" cellpadding="0" rules="groups" 
 ><colgroup id="TBL-31-1g"><col 
-id="TBL-31-1"></colgroup><colgroup id="TBL-31-2g"><col 
-id="TBL-31-2"></colgroup><colgroup id="TBL-31-3g"><col 
-id="TBL-31-3"></colgroup><colgroup id="TBL-31-4g"><col 
-id="TBL-31-4"></colgroup><colgroup id="TBL-31-5g"><col 
-id="TBL-31-5"></colgroup><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+id="TBL-31-1" /></colgroup><colgroup id="TBL-31-2g"><col 
+id="TBL-31-2" /></colgroup><colgroup id="TBL-31-3g"><col 
+id="TBL-31-3" /></colgroup><colgroup id="TBL-31-4g"><col 
+id="TBL-31-4" /></colgroup><colgroup id="TBL-31-5g"><col 
+id="TBL-31-5" /></colgroup><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-31-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-31-1-1"  
 class="td11"> <span 
 class="ec-lmbx-10x-x-109">Identifiant                               </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-1-2"  
@@ -2145,119 +2159,119 @@ class="ec-lmbx-10x-x-109">KeyExch </span></td><td  style="white-space:nowrap; te
 class="td11"> <span 
 class="ec-lmbx-10x-x-109">Authn </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-31-1-4"  
 class="td11"> <!--l. 481--><p class="noindent" ><span 
-class="ec-lmbx-10x-x-109">Enc</span>             </td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-1-5"  
+class="ec-lmbx-10x-x-109">Enc</span>             </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-1-5"  
 class="td11"> <span 
 class="ec-lmbx-10x-x-109">MAC </span></td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-31-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-31-2-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_RSA_WITH_AES_128_CBC_SHA     </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-2-2"  
 class="td11"> RSA         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-2-3"  
 class="td11"> RSA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-31-2-4"  
-class="td11"> <!--l. 481--><p class="noindent" >AES 128 CBC  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-2-5"  
+class="td11"> <!--l. 481--><p class="noindent" >AES 128 CBC  </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-2-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-31-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-31-3-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_DH_DSS_WITH_AES_128_CBC_SHA  </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-3-2"  
 class="td11"> DH           </td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-3-3"  
 class="td11"> DSS      </td><td  style="white-space:wrap; text-align:left;" id="TBL-31-3-4"  
-class="td11"> <!--l. 481--><p class="noindent" >AES 128 CBC  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-3-5"  
+class="td11"> <!--l. 481--><p class="noindent" >AES 128 CBC  </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-3-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-31-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-31-4-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_DH_RSA_WITH_AES_128_CBC_SHA  </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-4-2"  
 class="td11"> DH           </td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-4-3"  
 class="td11"> RSA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-31-4-4"  
-class="td11"> <!--l. 481--><p class="noindent" >AES 128 CBC  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-4-5"  
+class="td11"> <!--l. 481--><p class="noindent" >AES 128 CBC  </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-4-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-31-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-31-5-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_DHE_DSS_WITH_AES_128_CBC_SHA </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-5-2"  
 class="td11"> DHE         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-5-3"  
 class="td11"> DSS      </td><td  style="white-space:wrap; text-align:left;" id="TBL-31-5-4"  
-class="td11"> <!--l. 481--><p class="noindent" >AES 128 CBC  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-5-5"  
+class="td11"> <!--l. 481--><p class="noindent" >AES 128 CBC  </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-5-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-31-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-31-6-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_DHE_RSA_WITH_AES_128_CBC_SHA </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-6-2"  
 class="td11"> DHE         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-6-3"  
 class="td11"> RSA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-31-6-4"  
-class="td11"> <!--l. 481--><p class="noindent" >AES 128 CBC  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-6-5"  
+class="td11"> <!--l. 481--><p class="noindent" >AES 128 CBC  </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-6-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-31-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-31-7-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_DH_anon_WITH_AES_128_CBC_SHA </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-7-2"  
 class="td11"> DH           </td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-7-3"  
 class="td11"> NULL   </td><td  style="white-space:wrap; text-align:left;" id="TBL-31-7-4"  
-class="td11"> <!--l. 481--><p class="noindent" >AES 128 CBC  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-7-5"  
+class="td11"> <!--l. 481--><p class="noindent" >AES 128 CBC  </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-7-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-31-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-31-8-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_RSA_WITH_AES_256_CBC_SHA     </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-8-2"  
 class="td11"> RSA         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-8-3"  
 class="td11"> RSA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-31-8-4"  
-class="td11"> <!--l. 481--><p class="noindent" >AES 256 CBC  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-8-5"  
+class="td11"> <!--l. 481--><p class="noindent" >AES 256 CBC  </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-8-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-31-9-"><td  style="white-space:nowrap; text-align:left;" id="TBL-31-9-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_DH_DSS_WITH_AES_256_CBC_SHA  </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-9-2"  
 class="td11"> DH           </td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-9-3"  
 class="td11"> DSS      </td><td  style="white-space:wrap; text-align:left;" id="TBL-31-9-4"  
-class="td11"> <!--l. 481--><p class="noindent" >AES 256 CBC  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-9-5"  
+class="td11"> <!--l. 481--><p class="noindent" >AES 256 CBC  </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-9-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-31-10-"><td  style="white-space:nowrap; text-align:left;" id="TBL-31-10-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_DH_RSA_WITH_AES_256_CBC_SHA  </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-10-2"  
 class="td11"> DH           </td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-10-3"  
 class="td11"> RSA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-31-10-4"  
-class="td11"> <!--l. 481--><p class="noindent" >AES 256 CBC  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-10-5"  
+class="td11"> <!--l. 481--><p class="noindent" >AES 256 CBC  </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-10-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-31-11-"><td  style="white-space:nowrap; text-align:left;" id="TBL-31-11-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_DHE_DSS_WITH_AES_256_CBC_SHA </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-11-2"  
 class="td11"> DHE         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-11-3"  
 class="td11"> DSS      </td><td  style="white-space:wrap; text-align:left;" id="TBL-31-11-4"  
-class="td11"> <!--l. 481--><p class="noindent" >AES 256 CBC  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-11-5"  
+class="td11"> <!--l. 481--><p class="noindent" >AES 256 CBC  </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-11-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-31-12-"><td  style="white-space:nowrap; text-align:left;" id="TBL-31-12-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_DHE_RSA_WITH_AES_256_CBC_SHA </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-12-2"  
 class="td11"> DHE         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-12-3"  
 class="td11"> RSA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-31-12-4"  
-class="td11"> <!--l. 481--><p class="noindent" >AES 256 CBC  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-12-5"  
+class="td11"> <!--l. 481--><p class="noindent" >AES 256 CBC  </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-12-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-31-13-"><td  style="white-space:nowrap; text-align:left;" id="TBL-31-13-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_DH_anon_WITH_AES_256_CBC_SHA </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-13-2"  
 class="td11"> DH           </td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-13-3"  
 class="td11"> NULL   </td><td  style="white-space:wrap; text-align:left;" id="TBL-31-13-4"  
-class="td11"> <!--l. 481--><p class="noindent" >AES 256 CBC  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-13-5"  
+class="td11"> <!--l. 481--><p class="noindent" >AES 256 CBC  </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-31-13-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-31-14-"><td  style="white-space:nowrap; text-align:left;" id="TBL-31-14-1"  
 class="td11">                                  </td></tr></table>
  <div class="caption" 
@@ -2277,12 +2291,13 @@ class="ec-lmbx-10x-x-109">émentaires de la RFC 4132</span></a></span>
 href="rapport_Auditli5.html#Xrfc4132">44</a>]</span> apporte également une liste supplémentaire utilisant l&#8217;algorithme de chiffrement Camellia (cf.
 tableau <a 
 href="#x12-198001r7">5.7<!--tex4ht:ref: algosTLSRFCCAM --></a>).
+</p>
    <div class="table">
                                                                                                   
 
                                                                                                   
 <!--l. 490--><p class="indent" >   <a 
- id="x12-198001r7"></a><hr class="float"><div class="float" 
+ id="x12-198001r7"></a></p><hr class="float" /><div class="float" 
 >
                                                                                                   
 
@@ -2290,12 +2305,12 @@ href="#x12-198001r7">5.7<!--tex4ht:ref: algosTLSRFCCAM --></a>).
  <table id="TBL-35" class="tabular" 
 cellspacing="0" cellpadding="0" rules="groups" 
 ><colgroup id="TBL-35-1g"><col 
-id="TBL-35-1"></colgroup><colgroup id="TBL-35-2g"><col 
-id="TBL-35-2"></colgroup><colgroup id="TBL-35-3g"><col 
-id="TBL-35-3"></colgroup><colgroup id="TBL-35-4g"><col 
-id="TBL-35-4"></colgroup><colgroup id="TBL-35-5g"><col 
-id="TBL-35-5"></colgroup><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+id="TBL-35-1" /></colgroup><colgroup id="TBL-35-2g"><col 
+id="TBL-35-2" /></colgroup><colgroup id="TBL-35-3g"><col 
+id="TBL-35-3" /></colgroup><colgroup id="TBL-35-4g"><col 
+id="TBL-35-4" /></colgroup><colgroup id="TBL-35-5g"><col 
+id="TBL-35-5" /></colgroup><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-35-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-35-1-1"  
 class="td11"> <span 
 class="ec-lmbx-10x-x-109">Identifiant                                      </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-35-1-2"  
@@ -2304,11 +2319,11 @@ class="ec-lmbx-10x-x-109">KeyExch </span></td><td  style="white-space:nowrap; te
 class="td11"> <span 
 class="ec-lmbx-10x-x-109">Authn </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-35-1-4"  
 class="td11"> <!--l. 520--><p class="noindent" ><span 
-class="ec-lmbx-10x-x-109">Enc</span>      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-35-1-5"  
+class="ec-lmbx-10x-x-109">Enc</span>      </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-35-1-5"  
 class="td11"> <span 
 class="ec-lmbx-10x-x-109">MAC </span></td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-35-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-35-2-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_RSA_WITH_CAMELLIA_128_CBC_SHA     </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-35-2-2"  
@@ -2316,10 +2331,10 @@ class="td11"> RSA         </td><td  style="white-space:nowrap; text-align:left;"
 class="td11"> RSA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-35-2-4"  
 class="td11"> <!--l. 520--><p class="noindent" >Camellia
   128
-  CBC      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-35-2-5"  
+  CBC      </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-35-2-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-35-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-35-3-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_DH_DSS_WITH_CAMELLIA_128_CBC_SHA  </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-35-3-2"  
@@ -2327,10 +2342,10 @@ class="td11"> DH           </td><td  style="white-space:nowrap; text-align:left;
 class="td11"> DSS      </td><td  style="white-space:wrap; text-align:left;" id="TBL-35-3-4"  
 class="td11"> <!--l. 520--><p class="noindent" >Camellia
   128
-  CBC      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-35-3-5"  
+  CBC      </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-35-3-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-35-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-35-4-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_DH_RSA_WITH_CAMELLIA_128_CBC_SHA  </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-35-4-2"  
@@ -2338,10 +2353,10 @@ class="td11"> DH           </td><td  style="white-space:nowrap; text-align:left;
 class="td11"> RSA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-35-4-4"  
 class="td11"> <!--l. 520--><p class="noindent" >Camellia
   128
-  CBC      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-35-4-5"  
+  CBC      </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-35-4-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-35-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-35-5-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_DHE_DSS_WITH_CAMELLIA_128_CBC_SHA </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-35-5-2"  
@@ -2349,10 +2364,10 @@ class="td11"> DHE         </td><td  style="white-space:nowrap; text-align:left;"
 class="td11"> DSS      </td><td  style="white-space:wrap; text-align:left;" id="TBL-35-5-4"  
 class="td11"> <!--l. 520--><p class="noindent" >Camellia
   128
-  CBC      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-35-5-5"  
+  CBC      </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-35-5-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-35-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-35-6-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_DHE_RSA_WITH_CAMELLIA_128_CBC_SHA </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-35-6-2"  
@@ -2360,10 +2375,10 @@ class="td11"> DHE         </td><td  style="white-space:nowrap; text-align:left;"
 class="td11"> RSA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-35-6-4"  
 class="td11"> <!--l. 520--><p class="noindent" >Camellia
   128
-  CBC      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-35-6-5"  
+  CBC      </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-35-6-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-35-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-35-7-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_DH_anon_WITH_CAMELLIA_128_CBC_SHA </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-35-7-2"  
@@ -2371,10 +2386,10 @@ class="td11"> DH           </td><td  style="white-space:nowrap; text-align:left;
 class="td11"> NULL   </td><td  style="white-space:wrap; text-align:left;" id="TBL-35-7-4"  
 class="td11"> <!--l. 520--><p class="noindent" >Camellia
   128
-  CBC      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-35-7-5"  
+  CBC      </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-35-7-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-35-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-35-8-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_RSA_WITH_CAMELLIA_256_CBC_SHA     </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-35-8-2"  
@@ -2382,10 +2397,10 @@ class="td11"> RSA         </td><td  style="white-space:nowrap; text-align:left;"
 class="td11"> RSA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-35-8-4"  
 class="td11"> <!--l. 520--><p class="noindent" >Camellia
   256
-  CBC      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-35-8-5"  
+  CBC      </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-35-8-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-35-9-"><td  style="white-space:nowrap; text-align:left;" id="TBL-35-9-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_DH_DSS_WITH_CAMELLIA_256_CBC_SHA  </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-35-9-2"  
@@ -2393,10 +2408,10 @@ class="td11"> DH           </td><td  style="white-space:nowrap; text-align:left;
 class="td11"> DSS      </td><td  style="white-space:wrap; text-align:left;" id="TBL-35-9-4"  
 class="td11"> <!--l. 520--><p class="noindent" >Camellia
   256
-  CBC      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-35-9-5"  
+  CBC      </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-35-9-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-35-10-"><td  style="white-space:nowrap; text-align:left;" id="TBL-35-10-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_DH_RSA_WITH_CAMELLIA_256_CBC_SHA  </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-35-10-2"  
@@ -2404,10 +2419,10 @@ class="td11"> DH           </td><td  style="white-space:nowrap; text-align:left;
 class="td11"> RSA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-35-10-4"  
 class="td11"> <!--l. 520--><p class="noindent" >Camellia
   256
-  CBC      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-35-10-5"  
+  CBC      </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-35-10-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-35-11-"><td  style="white-space:nowrap; text-align:left;" id="TBL-35-11-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_DHE_DSS_WITH_CAMELLIA_256_CBC_SHA </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-35-11-2"  
@@ -2415,10 +2430,10 @@ class="td11"> DHE         </td><td  style="white-space:nowrap; text-align:left;"
 class="td11"> DSS      </td><td  style="white-space:wrap; text-align:left;" id="TBL-35-11-4"  
 class="td11"> <!--l. 520--><p class="noindent" >Camellia
   256
-  CBC      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-35-11-5"  
+  CBC      </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-35-11-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-35-12-"><td  style="white-space:nowrap; text-align:left;" id="TBL-35-12-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_DHE_RSA_WITH_CAMELLIA_256_CBC_SHA </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-35-12-2"  
@@ -2426,10 +2441,10 @@ class="td11"> DHE         </td><td  style="white-space:nowrap; text-align:left;"
 class="td11"> RSA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-35-12-4"  
 class="td11"> <!--l. 520--><p class="noindent" >Camellia
   256
-  CBC      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-35-12-5"  
+  CBC      </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-35-12-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-35-13-"><td  style="white-space:nowrap; text-align:left;" id="TBL-35-13-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_DH_anon_WITH_CAMELLIA_256_CBC_SHA </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-35-13-2"  
@@ -2437,10 +2452,10 @@ class="td11"> DH           </td><td  style="white-space:nowrap; text-align:left;
 class="td11"> NULL   </td><td  style="white-space:wrap; text-align:left;" id="TBL-35-13-4"  
 class="td11"> <!--l. 520--><p class="noindent" >Camellia
   256
-  CBC      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-35-13-5"  
+  CBC      </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-35-13-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-35-14-"><td  style="white-space:nowrap; text-align:left;" id="TBL-35-14-1"  
 class="td11">                                       </td></tr></table>
  <div class="caption" 
@@ -2460,13 +2475,14 @@ class="ec-lmbx-10x-x-109">émentaires de la RFC 4162</span></a></span>
 href="rapport_Auditli5.html#Xrfc4162">37</a>]</span> ajoute l&#8217;algorithme de chiffrement SEED, dont la liste est consultable sur le tableau
 <a 
 href="#x12-199001r8">5.8<!--tex4ht:ref: algosTLSRFCSEED --></a>.
+</p>
    <div class="table">
                                                                                                   
 
                                                                                                   
 <!--l. 529--><p class="indent" >   <a 
  id="x12-199001r8"></a><a 
- id="x12-201001r51"></a><hr class="float"><div class="float" 
+ id="x12-201001r51"></a></p><hr class="float" /><div class="float" 
 >
                                                                                                   
 
@@ -2474,12 +2490,12 @@ href="#x12-199001r8">5.8<!--tex4ht:ref: algosTLSRFCSEED --></a>.
  <table id="TBL-39" class="tabular" 
 cellspacing="0" cellpadding="0" rules="groups" 
 ><colgroup id="TBL-39-1g"><col 
-id="TBL-39-1"></colgroup><colgroup id="TBL-39-2g"><col 
-id="TBL-39-2"></colgroup><colgroup id="TBL-39-3g"><col 
-id="TBL-39-3"></colgroup><colgroup id="TBL-39-4g"><col 
-id="TBL-39-4"></colgroup><colgroup id="TBL-39-5g"><col 
-id="TBL-39-5"></colgroup><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+id="TBL-39-1" /></colgroup><colgroup id="TBL-39-2g"><col 
+id="TBL-39-2" /></colgroup><colgroup id="TBL-39-3g"><col 
+id="TBL-39-3" /></colgroup><colgroup id="TBL-39-4g"><col 
+id="TBL-39-4" /></colgroup><colgroup id="TBL-39-5g"><col 
+id="TBL-39-5" /></colgroup><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-39-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-39-1-1"  
 class="td11"> <span 
 class="ec-lmbx-10x-x-109">Identifiant                           </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-39-1-2"  
@@ -2488,65 +2504,65 @@ class="ec-lmbx-10x-x-109">KeyExch </span></td><td  style="white-space:nowrap; te
 class="td11"> <span 
 class="ec-lmbx-10x-x-109">Authn </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-39-1-4"  
 class="td11"> <!--l. 547--><p class="noindent" ><span 
-class="ec-lmbx-10x-x-109">Enc</span>                 </td><td  style="white-space:nowrap; text-align:left;" id="TBL-39-1-5"  
+class="ec-lmbx-10x-x-109">Enc</span>                 </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-39-1-5"  
 class="td11"> <span 
 class="ec-lmbx-10x-x-109">MAC </span></td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-39-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-39-2-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_RSA_WITH_SEED_CBC_SHA     </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-39-2-2"  
 class="td11"> RSA         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-39-2-3"  
 class="td11"> RSA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-39-2-4"  
-class="td11"> <!--l. 547--><p class="noindent" >SEED CBC         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-39-2-5"  
+class="td11"> <!--l. 547--><p class="noindent" >SEED CBC         </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-39-2-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-39-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-39-3-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_DH_DSS_WITH_SEED_CBC_SHA  </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-39-3-2"  
 class="td11"> DH           </td><td  style="white-space:nowrap; text-align:left;" id="TBL-39-3-3"  
 class="td11"> DSS      </td><td  style="white-space:wrap; text-align:left;" id="TBL-39-3-4"  
-class="td11"> <!--l. 547--><p class="noindent" >SEED CBC         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-39-3-5"  
+class="td11"> <!--l. 547--><p class="noindent" >SEED CBC         </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-39-3-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-39-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-39-4-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_DH_RSA_WITH_SEED_CBC_SHA  </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-39-4-2"  
 class="td11"> DH           </td><td  style="white-space:nowrap; text-align:left;" id="TBL-39-4-3"  
 class="td11"> RSA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-39-4-4"  
-class="td11"> <!--l. 547--><p class="noindent" >SEED CBC         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-39-4-5"  
+class="td11"> <!--l. 547--><p class="noindent" >SEED CBC         </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-39-4-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-39-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-39-5-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_DHE_DSS_WITH_SEED_CBC_SHA </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-39-5-2"  
 class="td11"> DHE         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-39-5-3"  
 class="td11"> DSS      </td><td  style="white-space:wrap; text-align:left;" id="TBL-39-5-4"  
-class="td11"> <!--l. 547--><p class="noindent" >SEED CBC         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-39-5-5"  
+class="td11"> <!--l. 547--><p class="noindent" >SEED CBC         </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-39-5-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-39-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-39-6-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_DHE_RSA_WITH_SEED_CBC_SHA </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-39-6-2"  
 class="td11"> DHE         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-39-6-3"  
 class="td11"> RSA     </td><td  style="white-space:wrap; text-align:left;" id="TBL-39-6-4"  
-class="td11"> <!--l. 547--><p class="noindent" >SEED CBC         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-39-6-5"  
+class="td11"> <!--l. 547--><p class="noindent" >SEED CBC         </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-39-6-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-39-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-39-7-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_DH_anon_WITH_SEED_CBC_SHA </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-39-7-2"  
 class="td11"> DH           </td><td  style="white-space:nowrap; text-align:left;" id="TBL-39-7-3"  
 class="td11"> NULL   </td><td  style="white-space:wrap; text-align:left;" id="TBL-39-7-4"  
-class="td11"> <!--l. 547--><p class="noindent" >SEED CBC         </td><td  style="white-space:nowrap; text-align:left;" id="TBL-39-7-5"  
+class="td11"> <!--l. 547--><p class="noindent" >SEED CBC         </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-39-7-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-39-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-39-8-1"  
 class="td11">                               </td></tr></table>
  <div class="caption" 
@@ -2564,9 +2580,9 @@ class="ec-lmbx-10x-x-109">Extensions TLS</span></a></span>
    Des extensions TLS du hello client sont décrites dans les RFC 3546 <span class="cite">[<a 
 href="rapport_Auditli5.html#Xrfc3546">4</a>]</span>, 4366 <span class="cite">[<a 
 href="rapport_Auditli5.html#Xrfc4366">5</a>]</span>, 4492 <span class="cite">[<a 
-href="rapport_Auditli5.html#Xrfc4492">3</a>]</span> et 4507
-<span class="cite">[<a 
+href="rapport_Auditli5.html#Xrfc4492">3</a>]</span> et 4507 <span class="cite">[<a 
 href="rapport_Auditli5.html#Xrfc4507">57</a>]</span><span class="frenchb-nbsp">&nbsp;</span>:
+</p>
       <ul class="itemize1">
       <li class="itemize"><span 
 class="ec-lmbx-10x-x-109">Server Name Indication</span><span class="frenchb-nbsp">&nbsp;</span>: permet d&#8217;indiquer au serveur quel est le nom du serveur qu&#8217;il demande,
@@ -3591,7 +3607,7 @@ class="ec-lmtt-10x-x-109">(t1_lib.c)</span></span></span>.
 
                                                                                                   
    <a 
- id="x12-201053r9"></a><hr class="float"><div class="float" 
+ id="x12-201053r9"></a><hr class="float" /><div class="float" 
 >
                                                                                                   
 
@@ -3599,64 +3615,64 @@ class="ec-lmtt-10x-x-109">(t1_lib.c)</span></span></span>.
  <table id="TBL-43" class="tabular" 
 cellspacing="0" cellpadding="0" rules="groups" 
 ><colgroup id="TBL-43-1g"><col 
-id="TBL-43-1"></colgroup><colgroup id="TBL-43-2g"><col 
-id="TBL-43-2"></colgroup><tr 
-class="hline"><td><hr></td><td><hr></td></tr><tr  
+id="TBL-43-1" /></colgroup><colgroup id="TBL-43-2g"><col 
+id="TBL-43-2" /></colgroup><tr 
+class="hline"><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-43-1-"><td  style="white-space:wrap; text-align:left;" id="TBL-43-1-1"  
 class="td11"> <!--l. 638--><p class="noindent" ><span 
-class="ec-lmbx-10x-x-109">Extension</span>                                                                    </td><td  style="white-space:nowrap; text-align:left;" id="TBL-43-1-2"  
+class="ec-lmbx-10x-x-109">Extension</span>                                                                    </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-43-1-2"  
 class="td11"> <span 
 class="ec-lmbx-10x-x-109">Impl</span><span 
 class="ec-lmbx-10x-x-109">ément</span><span 
 class="ec-lmbx-10x-x-109">ée </span></td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-43-2-"><td  style="white-space:wrap; text-align:left;" id="TBL-43-2-1"  
-class="td11"> <!--l. 638--><p class="noindent" >Server Name Indication                                                               </td><td  style="white-space:nowrap; text-align:left;" id="TBL-43-2-2"  
+class="td11"> <!--l. 638--><p class="noindent" >Server Name Indication                                                               </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-43-2-2"  
 class="td11"> oui (<span 
 class="ec-lmtt-10x-x-109">t1_lib.c</span>)  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-43-3-"><td  style="white-space:wrap; text-align:left;" id="TBL-43-3-1"  
-class="td11"> <!--l. 638--><p class="noindent" >Maximum Fragment Length Negotiation                                        </td><td  style="white-space:nowrap; text-align:left;" id="TBL-43-3-2"  
+class="td11"> <!--l. 638--><p class="noindent" >Maximum Fragment Length Negotiation                                        </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-43-3-2"  
 class="td11"> non trouvée      </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-43-4-"><td  style="white-space:wrap; text-align:left;" id="TBL-43-4-1"  
-class="td11"> <!--l. 638--><p class="noindent" >Client Certificate URLs                                                              </td><td  style="white-space:nowrap; text-align:left;" id="TBL-43-4-2"  
+class="td11"> <!--l. 638--><p class="noindent" >Client Certificate URLs                                                              </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-43-4-2"  
 class="td11"> non trouvée      </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-43-5-"><td  style="white-space:wrap; text-align:left;" id="TBL-43-5-1"  
-class="td11"> <!--l. 638--><p class="noindent" >Trusted CA Indication                                                                </td><td  style="white-space:nowrap; text-align:left;" id="TBL-43-5-2"  
+class="td11"> <!--l. 638--><p class="noindent" >Trusted CA Indication                                                                </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-43-5-2"  
 class="td11"> non trouvée      </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-43-6-"><td  style="white-space:wrap; text-align:left;" id="TBL-43-6-1"  
-class="td11"> <!--l. 638--><p class="noindent" >Truncated HMAC                                                                      </td><td  style="white-space:nowrap; text-align:left;" id="TBL-43-6-2"  
+class="td11"> <!--l. 638--><p class="noindent" >Truncated HMAC                                                                      </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-43-6-2"  
 class="td11"> non trouvée      </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-43-7-"><td  style="white-space:wrap; text-align:left;" id="TBL-43-7-1"  
-class="td11"> <!--l. 638--><p class="noindent" >Certificate Status Request                                                           </td><td  style="white-space:nowrap; text-align:left;" id="TBL-43-7-2"  
+class="td11"> <!--l. 638--><p class="noindent" >Certificate Status Request                                                           </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-43-7-2"  
 class="td11"> oui (<span 
 class="ec-lmtt-10x-x-109">t1_lib.c</span>)  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-43-8-"><td  style="white-space:wrap; text-align:left;" id="TBL-43-8-1"  
-class="td11"> <!--l. 638--><p class="noindent" >Supported Elliptic Curves                                                           </td><td  style="white-space:nowrap; text-align:left;" id="TBL-43-8-2"  
+class="td11"> <!--l. 638--><p class="noindent" >Supported Elliptic Curves                                                           </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-43-8-2"  
 class="td11"> oui (<span 
 class="ec-lmtt-10x-x-109">t1_lib.c</span>)  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-43-9-"><td  style="white-space:wrap; text-align:left;" id="TBL-43-9-1"  
-class="td11"> <!--l. 638--><p class="noindent" >Session Ticket                                                                           </td><td  style="white-space:nowrap; text-align:left;" id="TBL-43-9-2"  
+class="td11"> <!--l. 638--><p class="noindent" >Session Ticket                                                                           </p></td><td  style="white-space:nowrap; text-align:left;" id="TBL-43-9-2"  
 class="td11"> oui (<span 
 class="ec-lmtt-10x-x-109">t1_lib.c</span>)  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-43-10-"><td  style="white-space:wrap; text-align:left;" id="TBL-43-10-1"  
-class="td11"> <!--l. 638--><p class="noindent" >                                                           </td></tr></table>
+class="td11"> <!--l. 638--><p class="noindent" >                                                           </p></td></tr></table>
  <div class="caption" 
 ><span class="id"><span 
 class="ec-lmcsc-10x-x-109">Table</span>&#x00A0;5.9: </span><span  
@@ -3682,7 +3698,7 @@ href="#x12-2040004" id="x12-2040004">Audit 5.4<span class="frenchb-nbsp">&nbsp;<
 <h5 class="subsubsectionHead"><span class="titlemark">5.2.4.1   </span> <a 
 href="#x12-2050001" id="x12-2050001">Spécifications</a></h5>
 <!--l. 652--><p class="noindent" >La version 1.1 de TLS est spécifiée par la RFC 4346 <span class="cite">[<a 
-href="rapport_Auditli5.html#Xrfc4346">15</a>]</span>. Différences avec la version 1.0<span class="frenchb-nbsp">&nbsp;</span>:
+href="rapport_Auditli5.html#Xrfc4346">15</a>]</span>. Différences avec la version 1.0<span class="frenchb-nbsp">&nbsp;</span>: </p>
       <ul class="itemize1">
       <li class="itemize">l&#8217;IV  implicite  est  remplacé  par  une  IV  explicite  (protection  contre  les  attaques  sur  CBC<span class="frenchb-nbsp">&nbsp;</span>:
       <a 
@@ -3702,12 +3718,13 @@ class="ec-lmbx-10x-x-109">émentaires de la RFC 5054</span></a></span>
    La RFC 5054 <span class="cite">[<a 
 href="rapport_Auditli5.html#Xrfc5054">65</a>]</span> ajoute l&#8217;échange de clef/authentification SRP, listé sur le tableau <a 
 href="#x12-206001r10">5.10<!--tex4ht:ref: algosTLS1.1RFC5054 --></a>
+</p>
    <div class="table">
                                                                                                   
 
                                                                                                   
 <!--l. 663--><p class="indent" >   <a 
- id="x12-206001r10"></a><hr class="float"><div class="float" 
+ id="x12-206001r10"></a></p><hr class="float" /><div class="float" 
 >
                                                                                                   
 
@@ -3715,12 +3732,12 @@ href="#x12-206001r10">5.10<!--tex4ht:ref: algosTLS1.1RFC5054 --></a>
  <table id="TBL-46" class="tabular" 
 cellspacing="0" cellpadding="0" rules="groups" 
 ><colgroup id="TBL-46-1g"><col 
-id="TBL-46-1"></colgroup><colgroup id="TBL-46-2g"><col 
-id="TBL-46-2"></colgroup><colgroup id="TBL-46-3g"><col 
-id="TBL-46-3"></colgroup><colgroup id="TBL-46-4g"><col 
-id="TBL-46-4"></colgroup><colgroup id="TBL-46-5g"><col 
-id="TBL-46-5"></colgroup><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+id="TBL-46-1" /></colgroup><colgroup id="TBL-46-2g"><col 
+id="TBL-46-2" /></colgroup><colgroup id="TBL-46-3g"><col 
+id="TBL-46-3" /></colgroup><colgroup id="TBL-46-4g"><col 
+id="TBL-46-4" /></colgroup><colgroup id="TBL-46-5g"><col 
+id="TBL-46-5" /></colgroup><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-46-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-46-1-1"  
 class="td11"> <span 
 class="ec-lmbx-10x-x-109">Identifiant                                      </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-46-1-2"  
@@ -3729,41 +3746,41 @@ class="ec-lmbx-10x-x-109">KeyExch  </span></td><td  style="white-space:nowrap; t
 class="td11"> <span 
 class="ec-lmbx-10x-x-109">Authn      </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-46-1-4"  
 class="td11"> <!--l. 686--><p class="noindent" ><span 
-class="ec-lmbx-10x-x-109">Enc</span> </td><td  style="white-space:nowrap; text-align:left;" id="TBL-46-1-5"  
+class="ec-lmbx-10x-x-109">Enc</span> </p> </td><td  style="white-space:nowrap; text-align:left;" id="TBL-46-1-5"  
 class="td11"> <span 
 class="ec-lmbx-10x-x-109">MAC </span></td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-46-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-46-2-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_SRP_SHA_WITH_3DES_EDE_CBC_SHA     </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-46-2-2"  
 class="td11"> SRP SHA1  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-46-2-3"  
 class="td11"> SRP SHA1  </td><td  style="white-space:wrap; text-align:left;" id="TBL-46-2-4"  
 class="td11"> <!--l. 686--><p class="noindent" >3DES
-  CBC </td><td  style="white-space:nowrap; text-align:left;" id="TBL-46-2-5"  
+  CBC </p> </td><td  style="white-space:nowrap; text-align:left;" id="TBL-46-2-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-46-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-46-3-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_SRP_SHA_RSA_WITH_3DES_EDE_CBC_SHA </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-46-3-2"  
 class="td11"> SRP SHA1  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-46-3-3"  
 class="td11"> RSA          </td><td  style="white-space:wrap; text-align:left;" id="TBL-46-3-4"  
 class="td11"> <!--l. 686--><p class="noindent" >3DES
-  CBC </td><td  style="white-space:nowrap; text-align:left;" id="TBL-46-3-5"  
+  CBC </p> </td><td  style="white-space:nowrap; text-align:left;" id="TBL-46-3-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-46-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-46-4-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_SRP_SHA_DSS_WITH_3DES_EDE_CBC_SHA </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-46-4-2"  
 class="td11"> SRP SHA1  </td><td  style="white-space:nowrap; text-align:left;" id="TBL-46-4-3"  
 class="td11"> DSS           </td><td  style="white-space:wrap; text-align:left;" id="TBL-46-4-4"  
 class="td11"> <!--l. 686--><p class="noindent" >3DES
-  CBC </td><td  style="white-space:nowrap; text-align:left;" id="TBL-46-4-5"  
+  CBC </p> </td><td  style="white-space:nowrap; text-align:left;" id="TBL-46-4-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-46-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-46-5-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_SRP_SHA_WITH_AES_128_CBC_SHA      </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-46-5-2"  
@@ -3771,10 +3788,10 @@ class="td11"> SRP SHA1  </td><td  style="white-space:nowrap; text-align:left;" i
 class="td11"> SRP SHA1  </td><td  style="white-space:wrap; text-align:left;" id="TBL-46-5-4"  
 class="td11"> <!--l. 686--><p class="noindent" >AES
   128
-  CBC </td><td  style="white-space:nowrap; text-align:left;" id="TBL-46-5-5"  
+  CBC </p> </td><td  style="white-space:nowrap; text-align:left;" id="TBL-46-5-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-46-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-46-6-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_SRP_SHA_RSA_WITH_AES_128_CBC_SHA  </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-46-6-2"  
@@ -3782,10 +3799,10 @@ class="td11"> SRP SHA1  </td><td  style="white-space:nowrap; text-align:left;" i
 class="td11"> RSA          </td><td  style="white-space:wrap; text-align:left;" id="TBL-46-6-4"  
 class="td11"> <!--l. 686--><p class="noindent" >AES
   128
-  CBC </td><td  style="white-space:nowrap; text-align:left;" id="TBL-46-6-5"  
+  CBC </p> </td><td  style="white-space:nowrap; text-align:left;" id="TBL-46-6-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-46-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-46-7-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_SRP_SHA_DSS_WITH_AES_128_CBC_SHA  </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-46-7-2"  
@@ -3793,10 +3810,10 @@ class="td11"> SRP SHA1  </td><td  style="white-space:nowrap; text-align:left;" i
 class="td11"> DSS           </td><td  style="white-space:wrap; text-align:left;" id="TBL-46-7-4"  
 class="td11"> <!--l. 686--><p class="noindent" >AES
   128
-  CBC </td><td  style="white-space:nowrap; text-align:left;" id="TBL-46-7-5"  
+  CBC </p> </td><td  style="white-space:nowrap; text-align:left;" id="TBL-46-7-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-46-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-46-8-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_SRP_SHA_WITH_AES_256_CBC_SHA      </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-46-8-2"  
@@ -3804,10 +3821,10 @@ class="td11"> SRP SHA1  </td><td  style="white-space:nowrap; text-align:left;" i
 class="td11"> SRP SHA1  </td><td  style="white-space:wrap; text-align:left;" id="TBL-46-8-4"  
 class="td11"> <!--l. 686--><p class="noindent" >AES
   256
-  CBC </td><td  style="white-space:nowrap; text-align:left;" id="TBL-46-8-5"  
+  CBC </p> </td><td  style="white-space:nowrap; text-align:left;" id="TBL-46-8-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-46-9-"><td  style="white-space:nowrap; text-align:left;" id="TBL-46-9-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_SRP_SHA_RSA_WITH_AES_256_CBC_SHA  </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-46-9-2"  
@@ -3815,10 +3832,10 @@ class="td11"> SRP SHA1  </td><td  style="white-space:nowrap; text-align:left;" i
 class="td11"> RSA          </td><td  style="white-space:wrap; text-align:left;" id="TBL-46-9-4"  
 class="td11"> <!--l. 686--><p class="noindent" >AES
   256
-  CBC </td><td  style="white-space:nowrap; text-align:left;" id="TBL-46-9-5"  
+  CBC </p> </td><td  style="white-space:nowrap; text-align:left;" id="TBL-46-9-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-46-10-"><td  style="white-space:nowrap; text-align:left;" id="TBL-46-10-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_SRP_SHA_DSS_WITH_AES_256_CBC_SHA  </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-46-10-2"  
@@ -3826,10 +3843,10 @@ class="td11"> SRP SHA1  </td><td  style="white-space:nowrap; text-align:left;" i
 class="td11"> DSS           </td><td  style="white-space:wrap; text-align:left;" id="TBL-46-10-4"  
 class="td11"> <!--l. 686--><p class="noindent" >AES
   256
-  CBC </td><td  style="white-space:nowrap; text-align:left;" id="TBL-46-10-5"  
+  CBC </p> </td><td  style="white-space:nowrap; text-align:left;" id="TBL-46-10-5"  
 class="td11"> SHA1  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-46-11-"><td  style="white-space:nowrap; text-align:left;" id="TBL-46-11-1"  
 class="td11">                                       </td></tr></table>
  <div class="caption" 
@@ -3844,7 +3861,7 @@ class="content">Algorithmes supplémentaires RFC 5054 TLSv1.1</span></div><!--tex
 <!--l. 691--><p class="noindent" ><span class="paragraphHead"><a 
 href="#x12-2070001" id="x12-2070001"><span 
 class="ec-lmbx-10x-x-109">Extensions TLS</span></a></span>
-   Une extension TLS du hello client est décrite dans la RFC 5054<span class="frenchb-nbsp">&nbsp;</span>:
+   Une extension TLS du hello client est décrite dans la RFC 5054<span class="frenchb-nbsp">&nbsp;</span>: </p>
       <ul class="itemize1">
       <li class="itemize"><span 
 class="ec-lmbx-10x-x-109">srp</span><span class="frenchb-nbsp">&nbsp;</span>: permet d&#8217;indiquer le support d&#8217;algorithmes d&#8217;échange de clefs/authentification SRP<span class="frenchb-thinspace">&nbsp;</span>;</li></ul>
@@ -3872,15 +3889,16 @@ class="ec-lmtt-10x-x-109">ssl/tls1.h</span></span></span><span class="frenchb-nb
 <!--l. 711--><p class="nopar" >
 <a 
  id="x12-208001r248"></a>
+</p>
 <h5 class="subsubsectionHead"><span class="titlemark">5.2.4.3   </span> <a 
 href="#x12-2090003" id="x12-2090003">Failles</a></h5>
    <h4>5.2.4.3.1   <a 
 href="#x12-2100005.2.4.3.1" id="x12-2100005.2.4.3.1">CVE-2012-2333</a></h4>
 <!--l. 716--><p class="indent" >   Un <span 
-class="ec-lmri-10x-x-109">integer underflow </span>permettait de causer un déni de service dans les protocoles TLS 1.1, 1.2 et DTLS.
-Cette faille <span class="cite">[<a 
-href="rapport_Auditli5.html#XCVE20122333">10</a>]</span> a été publiée le 10 mai 2012 par Codenomicon et affecte les versions d&#8217;OpenSSL
-suivantes<span class="frenchb-nbsp">&nbsp;</span>:
+class="ec-lmri-10x-x-109">integer underflow </span>permettait de causer un déni de service dans les protocoles TLS 1.1, 1.2 et DTLS. Cette
+faille <span class="cite">[<a 
+href="rapport_Auditli5.html#XCVE20122333">10</a>]</span> a été publiée le 10 mai 2012 par Codenomicon et affecte les versions d&#8217;OpenSSL suivantes<span class="frenchb-nbsp">&nbsp;</span>:
+</p>
       <ul class="itemize1">
       <li class="itemize">&#x003C; 0.9.8x
       </li>
@@ -3888,7 +3906,7 @@ suivantes<span class="frenchb-nbsp">&nbsp;</span>:
       </li>
       <li class="itemize">1.0.1x &#x003C; 1.0.0c</li></ul>
 <!--l. 723--><p class="indent" >   Cette faille a été trouvée grâce à l&#8217;outil Fuzz-o-Matic développé par Codenomicon.
-<!--l. 725--><p class="indent" >   La correction suivante a été appliquée le même jour par l&#8217;équipe d&#8217;OpenSSL<span class="frenchb-nbsp">&nbsp;</span>: <!--l. 726-->
+</p><!--l. 725--><p class="indent" >   La correction suivante a été appliquée le même jour par l&#8217;équipe d&#8217;OpenSSL<span class="frenchb-nbsp">&nbsp;</span>: </p><!--l. 726-->
 <div class="lstlisting" id="listing-17"><span class="label"><a 
  id="x12-210001r1"></a></span><span 
 class="lmsy9-">-</span><span 
@@ -4281,17 +4299,18 @@ class="ec-lmtt-10x-x-109">rec-&#x003E;data</span></span></span>, <span class="ob
 class="ec-lmtt-10x-x-109">rec-&#x003E;input</span></span></span> et <span class="obeylines-h"><span class="verb"><span 
 class="ec-lmtt-10x-x-109">rec-&#x003E;length</span></span></span> au-delà de la
 longueur du paquet et ainsi créer une erreur de segmentation.
+</p>
    <h4>5.2.4.3.2   <a 
 href="#x12-2110005.2.4.3.2" id="x12-2110005.2.4.3.2">Lucky Thirteen CVE-2013-0169</a></h4>
 <!--l. 748--><p class="indent" >   Cette attaque <span class="cite">[<a 
 href="rapport_Auditli5.html#XCVE20130169">46</a>]</span> a été trouvée par Nadhem Alfardan et Kenny Paterson de l&#8217;Université de Londres le 5 février
-2005 et a été corrigée par Adam Langley et Emilia Kasper. Versions touchées<span class="frenchb-nbsp">&nbsp;</span>:
-      <ul class="itemize1">
-      <li class="itemize"><span 
-class="lmsy-10x-x-109">&#x2264; </span>1.0.1c
+2005 et a été corrigée par Adam Langley et Emilia Kasper. Versions touchées<span class="frenchb-nbsp">&nbsp;</span>: </p>
                                                                                                   
 
                                                                                                   
+      <ul class="itemize1">
+      <li class="itemize"><span 
+class="lmsy-10x-x-109">&#x2264; </span>1.0.1c
       </li>
       <li class="itemize"><span 
 class="lmsy-10x-x-109">&#x2264; </span>1.0.0j
@@ -4300,19 +4319,20 @@ class="lmsy-10x-x-109">&#x2264; </span>1.0.0j
 <!--l. 755--><p class="indent" >   Cette attaque reprend le principe de l&#8217;attaque de Vaudenay (<a 
 href="#x12-1930005.2.2.3.2">5.2.2.3.2<!--tex4ht:ref: Vaudenay --></a>).<br 
 class="newline" />
-<!--l. 758--><p class="indent" >   Lorsqu&#8217;un message chiffré incorrect est reçu, un message d&#8217;erreur fatale est renvoyé vers l&#8217;expéditeur.
+</p><!--l. 758--><p class="indent" >   Lorsqu&#8217;un message chiffré incorrect est reçu, un message d&#8217;erreur fatale est renvoyé vers l&#8217;expéditeur.
 Cependant, le temps de génération de ce message d&#8217;erreur dépend du nombre d&#8217;octets valides, utilisé par un haché
 MAC. Un attaquant peut donc injecter des messages chiffrés erronés dans une session TLS/DTLS en mode CBC, et
 mesurer le temps nécessaire à la génération du message d&#8217;erreur, afin de progressivement déterminer le contenu en
 clair de la session.<br 
 class="newline" />
-<!--l. 761--><p class="indent" >   Il faut <span 
+</p><!--l. 761--><p class="indent" >   Il faut <span 
 class="rm-lmr-10x-x-109">2</span><sup><span 
 class="rm-lmr-8">23</span></sup> sessions TLS pour retrouver un bloc en clair. Pour mener l&#8217;attaque, le client TLS doit alors
 continuer en permanence à ouvrir une nouvelle session, dès que la précédente s&#8217;est terminée en erreur
 fatale.
 <a 
  id="x12-211001r243"></a>
+</p>
 <h4 class="subsectionHead"><span class="titlemark">5.2.5   </span> <a 
 href="#x12-2120005" id="x12-2120005">Audit 5.5<span class="frenchb-nbsp">&nbsp;</span>: TLS version 1.2</a></h4>
 <a 
@@ -4321,6 +4341,7 @@ href="#x12-2120005" id="x12-2120005">Audit 5.5<span class="frenchb-nbsp">&nbsp;<
 href="#x12-2130001" id="x12-2130001">Spécifications</a></h5>
 <!--l. 768--><p class="noindent" >La version 1.2 de TLS est décrite dans la RFC 5246 <span class="cite">[<a 
 href="rapport_Auditli5.html#Xrfc5246">16</a>]</span>.
+</p>
 <!--l. 770--><p class="noindent" ><span class="paragraphHead"><a 
 href="#x12-2140001" id="x12-2140001"><span 
 class="ec-lmbx-10x-x-109">Algorithmes suppl</span><span 
@@ -4329,6 +4350,7 @@ class="ec-lmbx-10x-x-109">émentaires de la RFC 5289</span></a></span>
 href="rapport_Auditli5.html#Xrfc5289">56</a>]</span> ajoute les codes MAC SHA256 et SHA384 ainsi que le mode GCM (Galois Counter Mode),
 rapportés dans le tableau <a 
 href="#x12-214001r11">5.11<!--tex4ht:ref: algosTLSRFCv1.2 --></a>.
+</p>
    <div class="table">
                                                                                                   
 
@@ -4340,7 +4362,7 @@ href="#x12-214001r11">5.11<!--tex4ht:ref: algosTLSRFCv1.2 --></a>.
  id="x13-222001r2"></a><a 
  id="x13-222004r5"></a><a 
  id="x13-222010r5"></a><a 
- id="x13-222016r7"></a><hr class="float"><div class="float" 
+ id="x13-222016r7"></a></p><hr class="float" /><div class="float" 
 >
                                                                                                   
 
@@ -4348,12 +4370,12 @@ href="#x12-214001r11">5.11<!--tex4ht:ref: algosTLSRFCv1.2 --></a>.
  <table id="TBL-49" class="tabular" 
 cellspacing="0" cellpadding="0" rules="groups" 
 ><colgroup id="TBL-49-1g"><col 
-id="TBL-49-1"></colgroup><colgroup id="TBL-49-2g"><col 
-id="TBL-49-2"></colgroup><colgroup id="TBL-49-3g"><col 
-id="TBL-49-3"></colgroup><colgroup id="TBL-49-4g"><col 
-id="TBL-49-4"></colgroup><colgroup id="TBL-49-5g"><col 
-id="TBL-49-5"></colgroup><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+id="TBL-49-1" /></colgroup><colgroup id="TBL-49-2g"><col 
+id="TBL-49-2" /></colgroup><colgroup id="TBL-49-3g"><col 
+id="TBL-49-3" /></colgroup><colgroup id="TBL-49-4g"><col 
+id="TBL-49-4" /></colgroup><colgroup id="TBL-49-5g"><col 
+id="TBL-49-5" /></colgroup><tr 
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-49-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-49-1-1"  
 class="td11"> <span 
 class="ec-lmbx-10x-x-109">Identifiant                                        </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-1-2"  
@@ -4362,11 +4384,11 @@ class="ec-lmbx-10x-x-109">KeyExch </span></td><td  style="white-space:nowrap; te
 class="td11"> <span 
 class="ec-lmbx-10x-x-109">Authn  </span></td><td  style="white-space:wrap; text-align:left;" id="TBL-49-1-4"  
 class="td11"> <!--l. 811--><p class="noindent" ><span 
-class="ec-lmbx-10x-x-109">Enc</span> </td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-1-5"  
+class="ec-lmbx-10x-x-109">Enc</span> </p> </td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-1-5"  
 class="td11"> <span 
 class="ec-lmbx-10x-x-109">MAC    </span></td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-49-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-49-2-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256 </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-2-2"  
@@ -4374,10 +4396,10 @@ class="td11"> ECDHE    </td><td  style="white-space:nowrap; text-align:left;" id
 class="td11"> ECDSA  </td><td  style="white-space:wrap; text-align:left;" id="TBL-49-2-4"  
 class="td11"> <!--l. 811--><p class="noindent" >AES
   128
-  CBC </td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-2-5"  
+  CBC </p> </td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-2-5"  
 class="td11"> SHA256  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-49-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-49-3-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384 </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-3-2"  
@@ -4385,10 +4407,10 @@ class="td11"> ECDHE    </td><td  style="white-space:nowrap; text-align:left;" id
 class="td11"> ECDSA  </td><td  style="white-space:wrap; text-align:left;" id="TBL-49-3-4"  
 class="td11"> <!--l. 811--><p class="noindent" >AES
   256
-  CBC </td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-3-5"  
+  CBC </p> </td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-3-5"  
 class="td11"> SHA384  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-49-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-49-4-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA256  </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-4-2"  
@@ -4396,10 +4418,10 @@ class="td11"> ECDH      </td><td  style="white-space:nowrap; text-align:left;" i
 class="td11"> ECDSA  </td><td  style="white-space:wrap; text-align:left;" id="TBL-49-4-4"  
 class="td11"> <!--l. 811--><p class="noindent" >AES
   128
-  CBC </td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-4-5"  
+  CBC </p> </td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-4-5"  
 class="td11"> SHA256  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-49-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-49-5-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA384  </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-5-2"  
@@ -4407,10 +4429,10 @@ class="td11"> ECDH      </td><td  style="white-space:nowrap; text-align:left;" i
 class="td11"> ECDSA  </td><td  style="white-space:wrap; text-align:left;" id="TBL-49-5-4"  
 class="td11"> <!--l. 811--><p class="noindent" >AES
   256
-  CBC </td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-5-5"  
+  CBC </p> </td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-5-5"  
 class="td11"> SHA256  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-49-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-49-6-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256   </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-6-2"  
@@ -4418,10 +4440,10 @@ class="td11"> ECDHE    </td><td  style="white-space:nowrap; text-align:left;" id
 class="td11"> RSA      </td><td  style="white-space:wrap; text-align:left;" id="TBL-49-6-4"  
 class="td11"> <!--l. 811--><p class="noindent" >AES
   128
-  CBC </td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-6-5"  
+  CBC </p> </td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-6-5"  
 class="td11"> SHA256  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-49-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-49-7-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384   </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-7-2"  
@@ -4429,10 +4451,10 @@ class="td11"> ECDHE    </td><td  style="white-space:nowrap; text-align:left;" id
 class="td11"> RSA      </td><td  style="white-space:wrap; text-align:left;" id="TBL-49-7-4"  
 class="td11"> <!--l. 811--><p class="noindent" >AES
   256
-  CBC </td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-7-5"  
+  CBC </p> </td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-7-5"  
 class="td11"> SHA384  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-49-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-49-8-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_ECDH_RSA_WITH_AES_128_CBC_SHA256    </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-8-2"  
@@ -4440,10 +4462,10 @@ class="td11"> ECDH      </td><td  style="white-space:nowrap; text-align:left;" i
 class="td11"> RSA      </td><td  style="white-space:wrap; text-align:left;" id="TBL-49-8-4"  
 class="td11"> <!--l. 811--><p class="noindent" >AES
   128
-  CBC </td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-8-5"  
+  CBC </p> </td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-8-5"  
 class="td11"> SHA256  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-49-9-"><td  style="white-space:nowrap; text-align:left;" id="TBL-49-9-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_ECDH_RSA_WITH_AES_256_CBC_SHA384    </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-9-2"  
@@ -4451,10 +4473,10 @@ class="td11"> ECDH      </td><td  style="white-space:nowrap; text-align:left;" i
 class="td11"> RSA      </td><td  style="white-space:wrap; text-align:left;" id="TBL-49-9-4"  
 class="td11"> <!--l. 811--><p class="noindent" >AES
   256
-  CBC </td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-9-5"  
+  CBC </p> </td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-9-5"  
 class="td11"> SHA384  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-49-10-"><td  style="white-space:nowrap; text-align:left;" id="TBL-49-10-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-10-2"  
@@ -4462,10 +4484,10 @@ class="td11"> ECDHE    </td><td  style="white-space:nowrap; text-align:left;" id
 class="td11"> ECDSA  </td><td  style="white-space:wrap; text-align:left;" id="TBL-49-10-4"  
 class="td11"> <!--l. 811--><p class="noindent" >AES
   128
-  GCM </td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-10-5"  
+  GCM </p> </td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-10-5"  
 class="td11"> SHA256  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-49-11-"><td  style="white-space:nowrap; text-align:left;" id="TBL-49-11-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-11-2"  
@@ -4473,10 +4495,10 @@ class="td11"> ECDHE    </td><td  style="white-space:nowrap; text-align:left;" id
 class="td11"> ECDSA  </td><td  style="white-space:wrap; text-align:left;" id="TBL-49-11-4"  
 class="td11"> <!--l. 811--><p class="noindent" >AES
   256
-  GCM </td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-11-5"  
+  GCM </p> </td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-11-5"  
 class="td11"> SHA384  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-49-12-"><td  style="white-space:nowrap; text-align:left;" id="TBL-49-12-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_ECDH_ECDSA_WITH_AES_128_GCM_SHA256  </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-12-2"  
@@ -4484,10 +4506,10 @@ class="td11"> ECDH      </td><td  style="white-space:nowrap; text-align:left;" i
 class="td11"> ECDSA  </td><td  style="white-space:wrap; text-align:left;" id="TBL-49-12-4"  
 class="td11"> <!--l. 811--><p class="noindent" >AES
   128
-  GCM </td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-12-5"  
+  GCM </p> </td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-12-5"  
 class="td11"> SHA256  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-49-13-"><td  style="white-space:nowrap; text-align:left;" id="TBL-49-13-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_ECDH_ECDSA_WITH_AES_256_GCM_SHA384  </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-13-2"  
@@ -4495,10 +4517,10 @@ class="td11"> ECDH      </td><td  style="white-space:nowrap; text-align:left;" i
 class="td11"> ECDSA  </td><td  style="white-space:wrap; text-align:left;" id="TBL-49-13-4"  
 class="td11"> <!--l. 811--><p class="noindent" >AES
   256
-  GCM </td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-13-5"  
+  GCM </p> </td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-13-5"  
 class="td11"> SHA384  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-49-14-"><td  style="white-space:nowrap; text-align:left;" id="TBL-49-14-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256   </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-14-2"  
@@ -4506,10 +4528,10 @@ class="td11"> ECDHE    </td><td  style="white-space:nowrap; text-align:left;" id
 class="td11"> RSA      </td><td  style="white-space:wrap; text-align:left;" id="TBL-49-14-4"  
 class="td11"> <!--l. 811--><p class="noindent" >AES
   128
-  GCM </td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-14-5"  
+  GCM </p> </td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-14-5"  
 class="td11"> SHA256  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-49-15-"><td  style="white-space:nowrap; text-align:left;" id="TBL-49-15-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384   </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-15-2"  
@@ -4517,10 +4539,10 @@ class="td11"> ECDHE    </td><td  style="white-space:nowrap; text-align:left;" id
 class="td11"> RSA      </td><td  style="white-space:wrap; text-align:left;" id="TBL-49-15-4"  
 class="td11"> <!--l. 811--><p class="noindent" >AES
   256
-  GCM </td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-15-5"  
+  GCM </p> </td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-15-5"  
 class="td11"> SHA384  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-49-16-"><td  style="white-space:nowrap; text-align:left;" id="TBL-49-16-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_ECDH_RSA_WITH_AES_128_GCM_SHA256    </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-16-2"  
@@ -4528,10 +4550,10 @@ class="td11"> ECDH      </td><td  style="white-space:nowrap; text-align:left;" i
 class="td11"> RSA      </td><td  style="white-space:wrap; text-align:left;" id="TBL-49-16-4"  
 class="td11"> <!--l. 811--><p class="noindent" >AES
   128
-  GCM </td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-16-5"  
+  GCM </p> </td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-16-5"  
 class="td11"> SHA256  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-49-17-"><td  style="white-space:nowrap; text-align:left;" id="TBL-49-17-1"  
 class="td11"> <span 
 class="ec-lmtt-10x-x-109">TLS_ECDH_RSA_WITH_AES_256_GCM_SHA384    </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-17-2"  
@@ -4539,10 +4561,10 @@ class="td11"> ECDH      </td><td  style="white-space:nowrap; text-align:left;" i
 class="td11"> RSA      </td><td  style="white-space:wrap; text-align:left;" id="TBL-49-17-4"  
 class="td11"> <!--l. 811--><p class="noindent" >AES
   256
-  GCM </td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-17-5"  
+  GCM </p> </td><td  style="white-space:nowrap; text-align:left;" id="TBL-49-17-5"  
 class="td11"> SHA384  </td>
 </tr><tr 
-class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+class="hline"><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td><td><hr /></td></tr><tr  
  style="vertical-align:baseline;" id="TBL-49-18-"><td  style="white-space:nowrap; text-align:left;" id="TBL-49-18-1"  
 class="td11">                                         </td></tr></table>
  <div class="caption" 
@@ -4559,7 +4581,7 @@ class="content">Algorithmes supplémentaires - RFC 5289 TLSv1.2</span></div><!--t
 <h5 class="subsubsectionHead"><span class="titlemark">5.2.5.2   </span> <a 
 href="#x12-2150002" id="x12-2150002">Implémentation</a></h5>
 <!--l. 819--><p class="noindent" >On retrouve les constantes dans <span class="obeylines-h"><span class="verb"><span 
-class="ec-lmtt-10x-x-109">ssl/tls1.h</span></span></span><span class="frenchb-nbsp">&nbsp;</span>: <!--l. 820-->
+class="ec-lmtt-10x-x-109">ssl/tls1.h</span></span></span><span class="frenchb-nbsp">&nbsp;</span>: </p><!--l. 820-->
 <a 
  id="x12-215001r4"></a>
 <a 
@@ -4890,6 +4912,7 @@ href="#x12-2160003" id="x12-2160003">Failles</a></h5>
 href="#x12-2170005.2.5.3.1" id="x12-2170005.2.5.3.1">CVE-2012-2333</a></h4>
 <!--l. 846--><p class="indent" >   Voir <a 
 href="#x12-2100005.2.4.3.1">5.2.4.3.1<!--tex4ht:ref: CVE-2012-2333 --></a>
+</p>
    <h4>5.2.5.3.2   <a 
 href="#x12-2180005.2.5.3.2" id="x12-2180005.2.5.3.2">CVE-2013-6449</a></h4>
 <!--l. 850--><p class="indent" >   Cette faille a été découverte en novembre 2013 et a été corrigée le 19 décembre 2013 par l&#8217;équipe d&#8217;OpenSSL.
@@ -4897,7 +4920,7 @@ Elle affecte les versions &#x003C; 1.0.2. Elle consiste à créer un déni de servi
 données mal formée. Le crash se situe dans la fonction <span class="obeylines-h"><span class="verb"><span 
 class="ec-lmtt-10x-x-109">ssl_get_algorithm2</span></span></span> du fichier <span class="obeylines-h"><span class="verb"><span 
 class="ec-lmtt-10x-x-109">ssl/s3_lib.c</span></span></span> Le patch
-correctif<span class="frenchb-nbsp">&nbsp;</span>: <!--l. 853-->
+correctif<span class="frenchb-nbsp">&nbsp;</span>: </p><!--l. 853-->
 <a 
  id="x12-218001r5"></a>
 <a 
@@ -5152,5 +5175,5 @@ href="rapport_Auditch4.html#tailrapport_Auditch4.html" >prev-tail</a>] [<a
 href="rapport_Auditch5.html" >front</a>] [<a 
 href="rapport_Audit.html#rapport_Auditli5.html" >up</a>] </p></div>
 <!--l. 1--><p class="indent" >   <a 
- id="tailrapport_Auditch5.html"></a>       
+ id="tailrapport_Auditch5.html"></a>      </p> 
 </body></html> 

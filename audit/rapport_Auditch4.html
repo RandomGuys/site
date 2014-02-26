@@ -1,14 +1,17 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
-  "http://www.w3.org/TR/html4/loose.dtd">  
-<html xml:lang="fr" > 
+<?xml version="1.0" encoding="utf-8" ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">  
+<!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
+<html xml:lang="fr" xmlns="http://www.w3.org/1999/xhtml"  
+> 
 <head><title>4 Signature et authentification</title> 
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
-<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
-<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
-<!-- html,2,sections+ --> 
-<meta name="src" content="rapport_Audit.tex"> 
-<meta name="date" content="2014-02-25 17:35:00"> 
-<link rel="stylesheet" type="text/css" href="rapport_Audit.css"> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
+<!-- xhtml,2,sections+,charset=utf-8,html --> 
+<meta name="src" content="rapport_Audit.tex" /> 
+<meta name="date" content="2014-02-26 13:58:00" /> 
+<link rel="stylesheet" type="text/css" href="rapport_Audit.css" /> 
 </head><body 
 >
    <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
@@ -29,13 +32,14 @@ signature permet alors de garantir l&#8217;authenticité du signataire pour son d
 document après l&#8217;avoir signé rend la signature invalide, ce qui protège alors contre les fausses informations et la
 contrefaçon des signatures.<br 
 class="newline" />
-<!--l. 6--><p class="indent" >   De ce fait, il est important de faire attention à toute les formes de vulnérabilités des signatures afin de
+</p><!--l. 6--><p class="indent" >   De ce fait, il est important de faire attention à toute les formes de vulnérabilités des signatures afin de
 comprendre les attaques possibles sur la contrefaçon des signatures. Cette partie est consacrée à la bonne
 compréhension et l&#8217;implémentation qui sont définies dans la RFC, afin de se prémunir des différentes attaques
 possibles. On verra, cependant, qu&#8217;il existe quand même des failles au niveau des injections, surtout lorsque la
 librairie dépend trop du matériel.
 <a 
  id="x11-159001r182"></a>
+</p>
 <h3 class="sectionHead"><span class="titlemark">4.2   </span> <a 
 href="#x11-1600002" id="x11-1600002">Audits</a></h3>
 <a 
@@ -52,13 +56,13 @@ signature depuis un message sous le contrôle d&#8217;une clef privée. La vérific
 représentation du message depuis la représentation de la signature sous le contrôle de la clef publique
 correspondante.<br 
 class="newline" />
-<!--l. 14--><p class="indent" >   La signature se déroule en deux opérations qui sont la génération et la vérification. L&#8217;opération de génération
+</p><!--l. 14--><p class="indent" >   La signature se déroule en deux opérations qui sont la génération et la vérification. L&#8217;opération de génération
 consiste donc à générer une signature depuis un message avec la clef privée de l&#8217;utilisateur (signataire) et
 l&#8217;opération de vérification consiste à vérifier la signature en se basant sur le message en utilisant la clef publique
 du signataire. Ce schéma peut être utilisé dans de multiples applications telles que les certificats
 X.509.<br 
 class="newline" />
-<!--l. 18--><p class="indent" >   La norme spécifie deux types de schéma de signature qui sont<span class="frenchb-nbsp">&nbsp;</span>:
+</p><!--l. 18--><p class="indent" >   La norme spécifie deux types de schéma de signature qui sont<span class="frenchb-nbsp">&nbsp;</span>: </p>
       <ul class="itemize1">
       <li class="itemize"><span 
 class="ec-lmtt-10x-x-109">RSASSA-PSS</span><span class="frenchb-thinspace">&nbsp;</span>;
@@ -72,21 +76,25 @@ class="ec-lmtt-10x-x-109">RSASSA-PSS </span>est recommandé dans l&#8217;intérêt
 d&#8217;augmenter la robustesse d&#8217;un système. <span 
 class="ec-lmtt-10x-x-109">RSASSA-PKCS1-v1_5 </span>est toujours inclue pour des raisons de compatibilité
 avec les applications existantes et, même si elle est toujours appropriée dans les nouvelles applications, une
+                                                                                                  
+
+                                                                                                  
 transition vers <span 
 class="ec-lmtt-10x-x-109">RSASSA-PSS </span>est encouragée.<br 
 class="newline" />
-<!--l. 27--><p class="indent" >   La norme décrit un modèle général à suivre (qui est également utilisé pour IEEE Std 1363-2000)
+</p><!--l. 27--><p class="indent" >   La norme décrit un modèle général à suivre (qui est également utilisé pour IEEE Std 1363-2000)
 combinant les primitives de signature et de vérification avec une méthode d&#8217;encodage sur les signatures.
 L&#8217;opération de génération de signature applique une opération d&#8217;encodage de message à un message
 pour produire un message encodé, qui est ensuite converti en un entier représentatif du message.
 Une primitive de signature est alors appliquée sur la représentation du message pour produire la
 signature.<br 
 class="newline" />
-<!--l. 30--><p class="indent" >   Dans le sens inverse, l&#8217;opération de vérification de signature applique une primitive de vérification de signature
+</p><!--l. 30--><p class="indent" >   Dans le sens inverse, l&#8217;opération de vérification de signature applique une primitive de vérification de signature
 à la signature pour récupérer la représentation du message, qui est alors convertie dans un message de chaîne de
 caractères encodé. L&#8217;opération de vérification est appliquée au message et au message encodé pour déterminer s&#8217;ils
 consistent bien en l&#8217;un et l&#8217;autre.<br 
 class="newline" />
+</p>
 <!--l. 33--><p class="noindent" ><span class="paragraphHead"><a 
 href="#x11-1630001" id="x11-1630001"><span 
 class="ec-lmbx-10x-x-109">RSASSA-PSS</span><span class="frenchb-nbsp">&nbsp;</span><span 
@@ -110,11 +118,11 @@ fonction de hachage. De cette façon, l&#8217;encodage de tout entier dépendra de
 plus difficile pour un adversaire de substituer une autre fonction que ce qui a été sélectionné par le
 signataire.<br 
 class="newline" />
-<!--l. 37--><p class="indent" >   La comparaison entre fonctions de hachage est seulement utilisée pour empêcher la substitution de fonction de
+</p><!--l. 37--><p class="indent" >   La comparaison entre fonctions de hachage est seulement utilisée pour empêcher la substitution de fonction de
 hachage, et n&#8217;est pas nécessaire si la fonction de hachage est substituée d&#8217;une autre façon (e.g., le vérificateur
 n&#8217;accepte qu&#8217;une fonction de hachage désignée).<br 
 class="newline" />
-<!--l. 40--><p class="indent" >   Ce qui est différent pour <span 
+</p><!--l. 40--><p class="indent" >   Ce qui est différent pour <span 
 class="ec-lmtt-10x-x-109">RSASSA-PSS </span>des autres méthodes de signature RSA, c&#8217;est qu&#8217;il est probabiliste plutôt
 que déterministe, du fait de l&#8217;incorporation d&#8217;un aléa. Cette valeur d&#8217;aléa augmente la sécurité de la méthode.
 Cependant, le fait que la valeur soit aléatoire n&#8217;est pas critique pour la sécurité. Dans les situations où l&#8217;aléatoire
@@ -122,6 +130,7 @@ n&#8217;est pas possible, une valeur fixe ou une séquence de nombres peut être e
 similaire.
 <a 
  id="x11-163001r185"></a>
+</p>
 <h5 class="subsubsectionHead"><span class="titlemark">4.2.1.2   </span> <a 
 href="#x11-1640002" id="x11-1640002">Description de la faille</a></h5>
      L&#8217;Université du Michigan a réussi l&#8217;exploit de récupérer la clef privée d&#8217;un certificat RSA en un peu plus de
@@ -131,12 +140,12 @@ href="rapport_Auditli5.html#Xopensslvuln2010">23</a>]</span>. L&#8217;attaque fo
 href="rapport_Auditli5.html#Xfault2008lawson">36</a>]</span> sur la méthode d&#8217;authentification. La technique
 est donc très poussée, mais le résultat en vaut la chandelle. L&#8217;injection de fautes doit se faire sur
 quelques bits pour ne pas faire dysfonctionner le système tout entier. Les signatures erronées produites
-révéleront de l&#8217;information sur la clef privée. Avec le bon matériel et 100h d&#8217;attente, la clef peut être
-reforgée.<br 
-class="newline" />
                                                                                                   
 
                                                                                                   
+révéleront de l&#8217;information sur la clef privée. Avec le bon matériel et 100h d&#8217;attente, la clef peut être
+reforgée.<br 
+class="newline" />
    La technique consite à renseigner de fausses signatures afin de vérifier les fautes avec la clef publique de la
 machine. Lorsque la signature est identifiée comme fausse, elle est envoyée à un analyseur contenant l&#8217;algorithme du
 <span 
@@ -457,8 +466,9 @@ class="lmmi-10x-x-109">e </span>des entiers pour
 l&#8217;opération d&#8217;exponentiation modulaire<span class="frenchb-nbsp">&nbsp;</span>:
    <center class="math-display" >
 <img 
-src="rapport_Audit48x.png" alt="me [s]
-" class="math-display" ></center>
+src="rapport_Audit48x.png" alt="  e
+m  [s]
+" class="math-display"  /></center>
    En contrôlant le voltage, on arrive à savoir qu&#8217;un bit en particulier est mauvais. Bit après bit on reconstruit
 la clef privée, avec une signature erronée pour chacun des exposants de toute les fenêtres. L&#8217;étude
 montre que 650 signatures corrompues suffisent pour retrouver 100% d&#8217;une clef privée RSA de 1024
@@ -474,18 +484,19 @@ class="ec-lmbx-10x-x-109">ée.</span><br
 class="newline" /></a></span>
    Le logiciel utilisé pour l&#8217;étude est OpenSSL 0.9.8i. L&#8217;attaque se fait sur la librairie d&#8217;authentification OpenSSL
 sous un système SPARC Linux qui implémente FPGA pour les systèmes cartes à puces.
+</p>
 <!--l. 76--><p class="noindent" ><span class="paragraphHead"><a 
 href="#x11-1670003" id="x11-1670003"><span 
 class="ec-lmbx-10x-x-109">Fonction Fixed-window modular exponentiation.</span><br 
 class="newline" /></a></span>
-   Cette fonction est accessible dans plusieurs fonctions de chiffrement<span class="frenchb-nbsp">&nbsp;</span>:
+   Cette fonction est accessible dans plusieurs fonctions de chiffrement<span class="frenchb-nbsp">&nbsp;</span>: </p>
+                                                                                                  
+
+                                                                                                  
       <ul class="itemize1">
       <li class="itemize">RSA<span class="frenchb-thinspace">&nbsp;</span>;
       </li>
       <li class="itemize">ElGamal<span class="frenchb-thinspace">&nbsp;</span>;
-                                                                                                  
-
-                                                                                                  
       </li>
       <li class="itemize">DSA<span class="frenchb-thinspace">&nbsp;</span>;
       </li>
@@ -501,11 +512,12 @@ class="lmmi-10x-x-109">w </span>bits, et partitionne l&#8217;exposant dans ces f
 comme <span 
 class="ec-lmri-10x-x-109">square-and-multiply</span>. <br 
 class="newline" />
-<!--l. 89--><p class="indent" >   C&#8217;est le fait que la fenêtre soit fixe qui la rend insensible à une attaque par timing.<br 
+</p><!--l. 89--><p class="indent" >   C&#8217;est le fait que la fenêtre soit fixe qui la rend insensible à une attaque par timing.<br 
 class="newline" />
-<!--l. 91--><p class="indent" >   L&#8217;algorithme FWE est donnée en <span 
+</p><!--l. 91--><p class="indent" >   L&#8217;algorithme FWE est donnée en <span 
 class="ec-lmri-10x-x-109">Listing </span><a 
 href="#x11-167001r2">4.2<!--tex4ht:ref: fwe --></a>
+</p>
    <!--l. 93-->
 <a 
  id="x11-167001r2"></a>
@@ -801,6 +813,7 @@ class="ec-lmri-10x-x-109">attack"</span><br
 class="newline" />
 <a 
  id="x11-167015r189"></a>
+</p>
 <h5 class="subsubsectionHead"><span class="titlemark">4.2.1.4   </span> <a 
 href="#x11-1680004" id="x11-1680004">Conclusion</a></h5>
      Lorsque le système est vulnérable, OpenSSL ne le détecte pas forcément. Le risque est donc très fort,
@@ -808,6 +821,9 @@ et les contre-mesures sont parfois difficiles à trouver dans les phases de tests
 soulève un choix de programmation qui semble à première vue anodin, mais qui peut avoir de lourdes
 conséquences.<br 
 class="newline" />
+                                                                                                  
+
+                                                                                                  
    Toutefois, il faut pouvoir contrôler la machine (en ayant un accès au BIOS par exemple) pour pouvoir exploiter
 cette faille car il faut pouvoir toucher directement à l&#8217;alimentation de la faille.<br 
 class="newline" />
@@ -815,9 +831,6 @@ class="newline" />
 cours de développement afin de réaliser cette attaque à distance.
 <a 
  id="x11-168001r184"></a>
-                                                                                                  
-
-                                                                                                  
 <h4 class="subsectionHead"><span class="titlemark">4.2.2   </span> <a 
 href="#x11-1690002" id="x11-1690002">Audit 4.2<span class="frenchb-nbsp">&nbsp;</span>: Malformation des signatures DSA/ECDSA</a></h4>
 <a 
@@ -832,7 +845,7 @@ class="ec-lmri-10x-x-109">Elliptic Curve Digital</span>
 class="ec-lmri-10x-x-109">Signature Algorithm</span>) de façon déterministe. DSA et ECDSA sont deux standards de signature électronique qui
 offrent l&#8217;intégrité et authenticité dans de nombreux protocoles.<br 
 class="newline" />
-<!--l. 124--><p class="indent" >   Une caractéristique de DSA et ECDSA est qu&#8217;ils ont besoin de produire, pour chaque génération de signature,
+</p><!--l. 124--><p class="indent" >   Une caractéristique de DSA et ECDSA est qu&#8217;ils ont besoin de produire, pour chaque génération de signature,
 une valeur aléatoire toute fraîche (<span 
 class="ec-lmtt-10x-x-109">k</span>). Pour une bonne sécurité, <span 
 class="ec-lmtt-10x-x-109">k </span>doit être choisi aléatoirement et
@@ -842,13 +855,13 @@ De ce fait, un système qui génère mal ou pas suffisamment d&#8217;entropie lors 
 nombre aléatoire peut poser de grosses failles dans le déploiement du schéma de signature DSA et
 ECDSA.<br 
 class="newline" />
-<!--l. 126--><p class="indent" >   Cette méthode d&#8217;utilisation de l&#8217;aléatoire avec DSA et ECDSA fait son implémentation plus difficile à tester.
+</p><!--l. 126--><p class="indent" >   Cette méthode d&#8217;utilisation de l&#8217;aléatoire avec DSA et ECDSA fait son implémentation plus difficile à tester.
 Les tests automatiques ne sont pas fiables lorsqu&#8217;il s&#8217;agit de détecter si l&#8217;implémentation utilise une source
 aléatoire de grande qualité. De ce fait, le processus d&#8217;implémentation est alors plus vulnérable à un
 échec catastrophique, souvent découvert après le déploiement du système et suite à des attaques
 réussies.<br 
 class="newline" />
-<!--l. 128--><p class="indent" >   Il est possible de retourner DSA et ECDSA en une utilisation déterministe en utilisant un processus
+</p><!--l. 128--><p class="indent" >   Il est possible de retourner DSA et ECDSA en une utilisation déterministe en utilisant un processus
 déterministe de génération d&#8217;une valeur "aléatoire", k. Ce processus doit remplir quelques caractéristiques
 cryptographique afin de maintenir les propriétés de vérifiabilité et d&#8217;infalsifiabilité attendues par cette méthode de
 signature. De ce fait, pour une personne ne connaissent pas la clef privée de la signature, la transformation du
@@ -857,17 +870,21 @@ class="ec-lmtt-10x-x-109">k</span>, doit être calculatoirement indiscernable du 
 uniforme.
 <a 
  id="x11-170001r195"></a>
+</p>
 <h5 class="subsubsectionHead"><span class="titlemark">4.2.2.2   </span> <a 
 href="#x11-1710002" id="x11-1710002">Description de la faille</a></h5>
 <!--l. 132--><p class="noindent" >En 2008, une vulnérabilité sur la malformation des signatures survient sur OpenSSL (re-analysé en Novembre 2012)
 <span class="cite">[<a 
 href="rapport_Auditli5.html#Xopenssl2009secadv">61</a>]</span> <span class="cite">[<a 
 href="rapport_Auditli5.html#Xcve-2008-5077">68</a>]</span>.
-<!--l. 134--><p class="indent" >   La cause vient de plusieurs fonctions implémentant la fonction EVP_VerifyFinal(). Elles valident
-de fausses signatures au lieu de retourner des erreurs, parmi les signatures corrompues peuvent se
-trouver<span class="frenchb-nbsp">&nbsp;</span>:
+</p><!--l. 134--><p class="indent" >   La cause vient de plusieurs fonctions implémentant la fonction EVP_VerifyFinal(). Elles valident de
+fausses signatures au lieu de retourner des erreurs, parmi les signatures corrompues peuvent se trouver<span class="frenchb-nbsp">&nbsp;</span>:
+</p>
       <ul class="itemize1">
       <li class="itemize">des signatures DSA<span class="frenchb-thinspace">&nbsp;</span>;
+                                                                                                  
+
+                                                                                                  
       </li>
       <li class="itemize">des signatures ECDSA.<br 
 class="newline" /></li></ul>
@@ -875,22 +892,21 @@ class="newline" /></li></ul>
 class="ec-lmtt-10x-x-109">EVP_VerifyFinal</span>
 <span class="cite">[<a 
 href="rapport_Auditli5.html#Xcve-2009-0021">67</a>]</span>.
-<!--l. 142--><p class="indent" >   La conséquence est très grave, car cette faille permet une attaque en <span 
+</p><!--l. 142--><p class="indent" >   La conséquence est très grave, car cette faille permet une attaque en <span 
 class="ec-lmri-10x-x-109">Man in the Middle</span>, en faisant
 par exemple une attaque par <span 
 class="ec-lmri-10x-x-109">phishing </span>en HTTPS où la validation de la chaîne des certificats serait
 valide.
-                                                                                                  
-
-                                                                                                  
 <a 
  id="x11-171001r196"></a>
+</p>
 <h5 class="subsubsectionHead"><span class="titlemark">4.2.2.3   </span> <a 
 href="#x11-1720003" id="x11-1720003">Tests</a></h5>
 <!--l. 146--><p class="noindent" >Si la faille est toujours exploitable, les conséquences sont très graves. Nous pouvons tester sur d&#8217;anciennes versions
 OpenSSL si cette faille persiste.
 <a 
  id="x11-172001r197"></a>
+</p>
 <h5 class="subsubsectionHead"><span class="titlemark">4.2.2.4   </span> <a 
 href="#x11-1730004" id="x11-1730004">Implémentation</a></h5>
 <!--l. 150--><p class="noindent" ><span class="paragraphHead"><a 
@@ -900,6 +916,7 @@ class="ec-lmbx-10x-x-109">ée.</span><br
 class="newline" /></a></span>
    La faille concerne toutes les versions antérieures à OpenSSL 0.9.8j, lorsqu&#8217;un client SSL/TLS utilise des clefs
 DSA/ECDSA pour s&#8217;authentifier sur un serveur.
+</p>
 <!--l. 154--><p class="noindent" ><span class="paragraphHead"><a 
 href="#x11-1750004" id="x11-1750004"><span 
 class="ec-lmbx-10x-x-109">Fonction.</span><br 
@@ -908,6 +925,7 @@ class="newline" /></a></span>
 class="ec-lmri-10x-x-109">Listing </span><a 
 href="#x11-175001r3">4.3<!--tex4ht:ref: evp --></a>) est accessible sous le paquetage <span 
 class="ec-lmtt-10x-x-109">openssl/crypto/evp/p_verify.c</span>.
+</p>
    <!--l. 158-->
 <a 
  id="x11-175001r3"></a>
@@ -1573,8 +1591,12 @@ class="content">EVP_VerifyFinal.c</span></div><!--tex4ht:label?: x11-175001r4 --
 Mais dans certains cas cette fonction retournait toujours &#8217;0&#8217;.
 <a 
  id="x11-175040r198"></a>
+</p>
 <h5 class="subsubsectionHead"><span class="titlemark">4.2.2.5   </span> <a 
 href="#x11-1760005" id="x11-1760005">Conclusion</a></h5>
+                                                                                                  
+
+                                                                                                  
      Ici, la faille persistera tant que le serveur et le client resteront à une version antérieure à OpenSSL 0.9.8j<span class="frenchb-thinspace">&nbsp;</span>; les
 clefs, quant à elles, ne sont pas vulnérables, et peuvent être conservées. Malheureusement, le nombre de serveurs
 tournant sous OpenSSL 0.9.8 et versions antérieures est très élevé.<br 

@@ -1,0 +1,222 @@
+\select@language {french}
+\contentsline {section}{Introduction}{9}{chapter*.4}
+\contentsline {chapter}{\numberline {1}Entropie}{10}{chapter.1}
+\contentsline {section}{\numberline {1.1}D\IeC {\'e}finitions et contexte}{10}{section.1.1}
+\contentsline {subsection}{\numberline {1.1.1}Introduction}{10}{subsection.1.1.1}
+\contentsline {subsection}{\numberline {1.1.2}Estimation de l'entropie g\IeC {\'e}n\IeC {\'e}r\IeC {\'e}e par la source}{10}{subsection.1.1.2}
+\contentsline {subsection}{\numberline {1.1.3}Concept d'entropie}{10}{subsection.1.1.3}
+\contentsline {paragraph}{D\IeC {\'e}finition.\\}{10}{section*.5}
+\contentsline {paragraph}{D\IeC {\'e}finition.\\}{11}{section*.6}
+\contentsline {paragraph}{Propri\IeC {\'e}t\IeC {\'e}.\\}{11}{section*.7}
+\contentsline {paragraph}{Min-entropy.\\}{11}{section*.8}
+\contentsline {subsection}{\numberline {1.1.4}Source d'entropie}{11}{subsection.1.1.4}
+\contentsline {paragraph}{Approche th\IeC {\'e}orique.\\}{11}{section*.9}
+\contentsline {paragraph}{Mod\IeC {\`e}le conceptuel.\\}{12}{section*.10}
+\contentsline {subsection}{\numberline {1.1.5}Standards}{13}{subsection.1.1.5}
+\contentsline {subsubsection}{\numberline {1.1.5.1}RFC 4086}{13}{subsubsection.1.1.5.1}
+\contentsline {subsubsubsection}{\numberline {1.1.5.1.1}Sous Linux}{13}{subsubsubsection.1.1.5.1.1}
+\contentsline {subsubsubsection}{\numberline {1.1.5.1.2}Sous Windows}{14}{subsubsubsection.1.1.5.1.2}
+\contentsline {subsubsubsection}{\numberline {1.1.5.1.3}Sous OpenBSD et FreeBSD}{15}{subsubsubsection.1.1.5.1.3}
+\contentsline {subsubsubsection}{\numberline {1.1.5.1.4}Autres syst\IeC {\`e}mes}{15}{subsubsubsection.1.1.5.1.4}
+\contentsline {subsubsection}{\numberline {1.1.5.2}FIPS 140}{15}{subsubsection.1.1.5.2}
+\contentsline {section}{\numberline {1.2}Une backdoor dans nos syt\IeC {\`e}mes cryptographiques?}{16}{section.1.2}
+\contentsline {subsection}{\numberline {1.2.1}L'affaire Snowden et les documents top secrets de la NSA}{16}{subsection.1.2.1}
+\contentsline {subsection}{\numberline {1.2.2}Le NIST et l'algorithme Dual EC DRBG}{17}{subsection.1.2.2}
+\contentsline {subsection}{\numberline {1.2.3}... Et OpenSSL ?}{18}{subsection.1.2.3}
+\contentsline {section}{\numberline {1.3}Audits}{18}{section.1.3}
+\contentsline {subsection}{\numberline {1.3.1}Audit 1.1 : Le cas Debian 4.0 et OpenSSL 0.9.8}{18}{subsection.1.3.1}
+\contentsline {subsubsection}{\numberline {1.3.1.1}Normes vis\IeC {\'e}es}{18}{subsubsection.1.3.1.1}
+\contentsline {subsubsection}{\numberline {1.3.1.2}Description de la faille}{19}{subsubsection.1.3.1.2}
+\contentsline {subsubsection}{\numberline {1.3.1.3}Tests}{20}{subsubsection.1.3.1.3}
+\contentsline {subsubsection}{\numberline {1.3.1.4}Impl\IeC {\'e}mentation}{20}{subsubsection.1.3.1.4}
+\contentsline {paragraph}{Configuration utilis\IeC {\'e}e.\\}{20}{section*.11}
+\contentsline {paragraph}{Fonction.\\}{20}{section*.12}
+\contentsline {subsubsection}{\numberline {1.3.1.5}Conclusion}{21}{subsubsection.1.3.1.5}
+\contentsline {subsection}{\numberline {1.3.2}Audit 1.2 : Le cas LinuxMintDebianEdition sous Android}{21}{subsection.1.3.2}
+\contentsline {subsubsection}{\numberline {1.3.2.1}Normes vis\IeC {\'e}es}{21}{subsubsection.1.3.2.1}
+\contentsline {subsubsection}{\numberline {1.3.2.2}Description de la faille}{21}{subsubsection.1.3.2.2}
+\contentsline {subsubsection}{\numberline {1.3.2.3}Impl\IeC {\'e}mentation}{21}{subsubsection.1.3.2.3}
+\contentsline {paragraph}{Configuration utilis\IeC {\'e}e.\\}{21}{section*.13}
+\contentsline {paragraph}{Fonction.\\}{21}{section*.14}
+\contentsline {subsubsection}{\numberline {1.3.2.4}Conclusion}{22}{subsubsection.1.3.2.4}
+\contentsline {subsection}{\numberline {1.3.3}Audit 1.3 : NetBSD 6.0 et OpenSSH}{22}{subsection.1.3.3}
+\contentsline {subsubsection}{\numberline {1.3.3.1}Norme vis\IeC {\'e}e}{22}{subsubsection.1.3.3.1}
+\contentsline {subsubsection}{\numberline {1.3.3.2}Description de la faille}{22}{subsubsection.1.3.3.2}
+\contentsline {subsubsection}{\numberline {1.3.3.3}Impl\IeC {\'e}mentation}{22}{subsubsection.1.3.3.3}
+\contentsline {paragraph}{Configuration utilis\IeC {\'e}e.\\}{22}{section*.15}
+\contentsline {paragraph}{Fonctions.\\}{23}{section*.16}
+\contentsline {subsubsection}{\numberline {1.3.3.4}Conclusion}{23}{subsubsection.1.3.3.4}
+\contentsline {section}{\numberline {1.4}Recommandations sur la conception}{24}{section.1.4}
+\contentsline {subsection}{\numberline {1.4.1}Mod\IeC {\'e}lisation et validation}{24}{subsection.1.4.1}
+\contentsline {subsection}{\numberline {1.4.2}Source d'entropie absolue}{24}{subsection.1.4.2}
+\contentsline {subsection}{\numberline {1.4.3}Bruit de la source}{24}{subsection.1.4.3}
+\contentsline {subsection}{\numberline {1.4.4}Composant de conditionnement}{25}{subsection.1.4.4}
+\contentsline {subsection}{\numberline {1.4.5}Batterie de tests}{25}{subsection.1.4.5}
+\contentsline {subsubsection}{\numberline {1.4.5.1}Tests sur le bruit}{25}{subsubsection.1.4.5.1}
+\contentsline {subsubsection}{\numberline {1.4.5.2}Tests sur le conditionnement}{26}{subsubsection.1.4.5.2}
+\contentsline {section}{\numberline {1.5}Tests effectifs sur l'entropie fournie par les sources d'entropie}{26}{section.1.5}
+\contentsline {subsection}{\numberline {1.5.1}D\IeC {\'e}terminer si les donn\IeC {\'e}es sont IID}{26}{subsection.1.5.1}
+\contentsline {paragraph}{D\IeC {\'e}finition.\\}{26}{section*.17}
+\contentsline {subsubsection}{\numberline {1.5.1.1}Tests sur l'ind\IeC {\'e}pendance et la stabilit\IeC {\'e}}{26}{subsubsection.1.5.1.1}
+\contentsline {subsubsubsection}{\numberline {1.5.1.1.1}Score de compression}{29}{subsubsubsection.1.5.1.1.1}
+\contentsline {paragraph}{Calcul du score.\\}{29}{section*.18}
+\contentsline {subsubsubsection}{\numberline {1.5.1.1.2}Scores \textit {Over/Under Runs} (2)}{30}{subsubsubsection.1.5.1.1.2}
+\contentsline {paragraph}{D\IeC {\'e}finition.\\}{30}{section*.19}
+\contentsline {paragraph}{Exemple de Run test.\\}{31}{section*.20}
+\contentsline {paragraph}{Calcul des scores \textit {Over/Under Runs}.\\}{31}{section*.21}
+\contentsline {paragraph}{Exemple.\\}{32}{section*.22}
+\contentsline {subsubsubsection}{\numberline {1.5.1.1.3}Score excursion}{32}{subsubsubsection.1.5.1.1.3}
+\contentsline {paragraph}{D\IeC {\'e}finition.\\}{32}{section*.23}
+\contentsline {paragraph}{Calcul du score.\\}{32}{section*.24}
+\contentsline {paragraph}{Exemple.\\}{32}{section*.25}
+\contentsline {subsubsubsection}{\numberline {1.5.1.1.4}Scores Runs directionnels (3)}{32}{subsubsubsection.1.5.1.1.4}
+\contentsline {paragraph}{Calcul des scores pour des donn\IeC {\'e}es quelconques.\\}{33}{section*.26}
+\contentsline {paragraph}{Donn\IeC {\'e}es binaires.\\}{33}{section*.27}
+\contentsline {paragraph}{Poids de Hamming.\\}{33}{section*.28}
+\contentsline {subsubsubsection}{\numberline {1.5.1.1.5}Score de covariance}{33}{subsubsubsection.1.5.1.1.5}
+\contentsline {paragraph}{Calcul du score.\\}{33}{section*.29}
+\contentsline {paragraph}{Exemple.\\}{34}{section*.30}
+\contentsline {subsubsubsection}{\numberline {1.5.1.1.6}Score de collision (3)}{34}{subsubsubsection.1.5.1.1.6}
+\contentsline {paragraph}{Calcul des scores.\\}{34}{section*.31}
+\contentsline {paragraph}{Exemple.\\}{35}{section*.32}
+\contentsline {subsubsection}{\numberline {1.5.1.2}Test statistique sp\IeC {\'e}cifique : $\chi ^2$\relax }{35}{subsubsection.1.5.1.2}
+\contentsline {paragraph}{D\IeC {\'e}finition.\\}{35}{section*.33}
+\contentsline {paragraph}{Approximation.\\}{35}{section*.34}
+\contentsline {subsection}{\numberline {1.5.2}D\IeC {\'e}terminer l'entropie minimale des sources IID}{36}{subsection.1.5.2}
+\contentsline {paragraph}{Calcul de l'entropie minimale.\\}{36}{section*.35}
+\contentsline {paragraph}{Exemple.\\}{36}{section*.36}
+\contentsline {chapter}{\numberline {2}G\IeC {\'e}n\IeC {\'e}ration des clefs}{37}{chapter.2}
+\contentsline {section}{\numberline {2.1}D\IeC {\'e}finitions et contexte}{37}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}Clefs cryptographiques}{37}{subsection.2.1.1}
+\contentsline {subsubsection}{\numberline {2.1.1.1}Clefs d'algorithmes sym\IeC {\'e}triques}{37}{subsubsection.2.1.1.1}
+\contentsline {subsubsection}{\numberline {2.1.1.2}Clefs d'algorithmes asym\IeC {\'e}triques}{38}{subsubsection.2.1.1.2}
+\contentsline {subsection}{\numberline {2.1.2}M\IeC {\'e}thode de g\IeC {\'e}n\IeC {\'e}ration et s\IeC {\'e}curit\IeC {\'e}}{38}{subsection.2.1.2}
+\contentsline {subsubsection}{\numberline {2.1.2.1}G\IeC {\'e}n\IeC {\'e}ration de clefs quelconques}{38}{subsubsection.2.1.2.1}
+\contentsline {subsubsection}{\numberline {2.1.2.2}G\IeC {\'e}n\IeC {\'e}ration de paires de clefs asym\IeC {\'e}triques}{38}{subsubsection.2.1.2.2}
+\contentsline {section}{\numberline {2.2}Audits}{39}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Audit 2.1 : G\IeC {\'e}n\IeC {\'e}ration d'entiers premiers, et de grands nombres}{39}{subsection.2.2.1}
+\contentsline {subsubsection}{\numberline {2.2.1.1}Description de la librairie BIGNUMBER}{39}{subsubsection.2.2.1.1}
+\contentsline {subsubsection}{\numberline {2.2.1.2}Normes vis\IeC {\'e}es}{41}{subsubsection.2.2.1.2}
+\contentsline {paragraph}{RFC 2409 : Internet Key Exchange\\}{41}{section*.37}
+\contentsline {paragraph}{RFC 3526 : More Modular Exponential (MODP) Diffie-Hellman groups for Internet Key Exchange (IKE)\\}{41}{section*.38}
+\contentsline {subsubsection}{\numberline {2.2.1.3}Impl\IeC {\'e}mentation}{42}{subsubsection.2.2.1.3}
+\contentsline {paragraph}{Version vis\IeC {\'e}e. \\}{42}{section*.39}
+\contentsline {paragraph}{Exemples de fonctions. \\}{42}{section*.40}
+\contentsline {paragraph}{Analyse de la g\IeC {\'e}n\IeC {\'e}ration d'entiers premiers.\\}{42}{section*.41}
+\contentsline {subsubsection}{\numberline {2.2.1.4}Conclusion}{43}{subsubsection.2.2.1.4}
+\contentsline {subsection}{\numberline {2.2.2}Audit 2.2 : Le g\IeC {\'e}n\IeC {\'e}rateur de Diffie-Hellman}{43}{subsection.2.2.2}
+\contentsline {subsubsection}{\numberline {2.2.2.1}Normes vis\IeC {\'e}es}{43}{subsubsection.2.2.2.1}
+\contentsline {subsubsection}{\numberline {2.2.2.2}Description de la faille}{43}{subsubsection.2.2.2.2}
+\contentsline {subsubsection}{\numberline {2.2.2.3}Impl\IeC {\'e}mentation}{44}{subsubsection.2.2.2.3}
+\contentsline {paragraph}{Configuration vis\IeC {\'e}e.\\}{44}{section*.42}
+\contentsline {paragraph}{Fonction.\\}{44}{section*.43}
+\contentsline {subsubsection}{\numberline {2.2.2.4}Conclusion}{45}{subsubsection.2.2.2.4}
+\contentsline {subsection}{\numberline {2.2.3}Audit 2.3 : Diffie-Hellman Eph\IeC {\'e}m\IeC {\`e}re en mode FIPS}{45}{subsection.2.2.3}
+\contentsline {subsubsection}{\numberline {2.2.3.1}Normes vis\IeC {\'e}es}{45}{subsubsection.2.2.3.1}
+\contentsline {subsubsection}{\numberline {2.2.3.2}Description de la faille}{45}{subsubsection.2.2.3.2}
+\contentsline {subsubsection}{\numberline {2.2.3.3}Impl\IeC {\'e}mentation}{45}{subsubsection.2.2.3.3}
+\contentsline {paragraph}{Configuration vis\IeC {\'e}e.\\}{45}{section*.44}
+\contentsline {paragraph}{Fonction.\\}{45}{section*.45}
+\contentsline {paragraph}{Solution logicielle.\\}{46}{section*.46}
+\contentsline {subsubsection}{\numberline {2.2.3.4}Conclusion}{46}{subsubsection.2.2.3.4}
+\contentsline {chapter}{\numberline {3}Chiffrement et Protocoles}{47}{chapter.3}
+\contentsline {section}{\numberline {3.1}D\IeC {\'e}finitions et contexte}{47}{section.3.1}
+\contentsline {section}{\numberline {3.2}Audits}{47}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Audit 3.1 : Les "Manger's attack" sur RSA-OAEP}{47}{subsection.3.2.1}
+\contentsline {subsubsection}{\numberline {3.2.1.1}Normes vis\IeC {\'e}es}{47}{subsubsection.3.2.1.1}
+\contentsline {paragraph}{OAEP : \textit {Optimal Asymmetric Encryption Padding}. \\}{47}{section*.47}
+\contentsline {paragraph}{R\IeC {\'e}seau de Feistel. \\}{48}{section*.48}
+\contentsline {paragraph}{RSA-OAEP. \\}{48}{section*.49}
+\contentsline {paragraph}{RSAES-OAEP-ENCRYPT. \\}{48}{section*.50}
+\contentsline {paragraph}{Note.\\}{50}{section*.51}
+\contentsline {paragraph}{RSAES-OAEP-DECRYPT (K, C, L). \\}{51}{section*.52}
+\contentsline {paragraph}{Note. \\}{52}{section*.53}
+\contentsline {paragraph}{RSAES-PKCS1-v1\_ 5. \\}{52}{section*.54}
+\contentsline {paragraph}{Note. \\}{52}{section*.55}
+\contentsline {subsubsection}{\numberline {3.2.1.2}Faille}{53}{subsubsection.3.2.1.2}
+\contentsline {subsubsection}{\numberline {3.2.1.3}Impl\IeC {\'e}mentation}{53}{subsubsection.3.2.1.3}
+\contentsline {paragraph}{Configuration vis\IeC {\'e}e.\\}{53}{section*.56}
+\contentsline {paragraph}{Fonction.\\}{53}{section*.57}
+\contentsline {subsubsection}{\numberline {3.2.1.4}Conclusion}{54}{subsubsection.3.2.1.4}
+\contentsline {subsection}{\numberline {3.2.2}Audit 3.2 : Chiffrement SSLv3 ou TLS 1.0 en mode CBC}{54}{subsection.3.2.2}
+\contentsline {subsubsection}{\numberline {3.2.2.1}Normes vis\IeC {\'e}es}{54}{subsubsection.3.2.2.1}
+\contentsline {paragraph}{SSL version 3 \\}{54}{section*.58}
+\contentsline {paragraph}{CBC : \textit {Cipher Block Chaining} \\}{55}{section*.59}
+\contentsline {subsubsection}{\numberline {3.2.2.2}Description de la faille}{56}{subsubsection.3.2.2.2}
+\contentsline {subsubsection}{\numberline {3.2.2.3}Tests}{56}{subsubsection.3.2.2.3}
+\contentsline {subsubsection}{\numberline {3.2.2.4}Recommandations}{57}{subsubsection.3.2.2.4}
+\contentsline {subsection}{\numberline {3.2.3}Audit 3.3 : Non-validation des certificats SSL}{57}{subsection.3.2.3}
+\contentsline {subsubsection}{\numberline {3.2.3.1}Normes vis\IeC {\'e}es}{57}{subsubsection.3.2.3.1}
+\contentsline {paragraph}{RFC 5246 \\}{57}{section*.60}
+\contentsline {subsubsection}{\numberline {3.2.3.2}Description de la faille}{57}{subsubsection.3.2.3.2}
+\contentsline {subsubsection}{\numberline {3.2.3.3}Difficult\IeC {\'e}s du code OpenSSL}{58}{subsubsection.3.2.3.3}
+\contentsline {subsubsection}{\numberline {3.2.3.4}Exemple : Trillian}{59}{subsubsection.3.2.3.4}
+\contentsline {subsubsection}{\numberline {3.2.3.5}Conclusion}{59}{subsubsection.3.2.3.5}
+\contentsline {chapter}{\numberline {4}Signature et authentification}{60}{chapter.4}
+\contentsline {section}{\numberline {4.1}D\IeC {\'e}finitions et contexte}{60}{section.4.1}
+\contentsline {section}{\numberline {4.2}Audits}{60}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Audit 4.1 : Attaque par injection de fautes sur les certificats RSA}{60}{subsection.4.2.1}
+\contentsline {subsubsection}{\numberline {4.2.1.1}Normes vis\IeC {\'e}es}{60}{subsubsection.4.2.1.1}
+\contentsline {paragraph}{RSASSA-PSS : \\}{61}{section*.61}
+\contentsline {subsubsection}{\numberline {4.2.1.2}Description de la faille}{61}{subsubsection.4.2.1.2}
+\contentsline {subsubsection}{\numberline {4.2.1.3}Impl\IeC {\'e}mentation}{62}{subsubsection.4.2.1.3}
+\contentsline {paragraph}{Configuration utilis\IeC {\'e}e.\\}{62}{section*.62}
+\contentsline {paragraph}{Fonction Fixed-window modular exponentiation.\\}{62}{section*.63}
+\contentsline {subsubsection}{\numberline {4.2.1.4}Conclusion}{63}{subsubsection.4.2.1.4}
+\contentsline {subsection}{\numberline {4.2.2}Audit 4.2 : Malformation des signatures DSA/ECDSA}{63}{subsection.4.2.2}
+\contentsline {subsubsection}{\numberline {4.2.2.1}Normes vis\IeC {\'e}es}{63}{subsubsection.4.2.2.1}
+\contentsline {subsubsection}{\numberline {4.2.2.2}Description de la faille}{64}{subsubsection.4.2.2.2}
+\contentsline {subsubsection}{\numberline {4.2.2.3}Tests}{64}{subsubsection.4.2.2.3}
+\contentsline {subsubsection}{\numberline {4.2.2.4}Impl\IeC {\'e}mentation}{64}{subsubsection.4.2.2.4}
+\contentsline {paragraph}{Configuration vis\IeC {\'e}e.\\}{64}{section*.64}
+\contentsline {paragraph}{Fonction.\\}{64}{section*.65}
+\contentsline {subsubsection}{\numberline {4.2.2.5}Conclusion}{65}{subsubsection.4.2.2.5}
+\contentsline {chapter}{\numberline {5}Protocoles SSL/TLS}{66}{chapter.5}
+\contentsline {section}{\numberline {5.1}D\IeC {\'e}finitions et contexte}{66}{section.5.1}
+\contentsline {paragraph}{hello client}{67}{section*.66}
+\contentsline {paragraph}{hello serveur}{67}{section*.67}
+\contentsline {section}{\numberline {5.2}Audits}{68}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Audit 5.1 : SSL version 2 }{68}{subsection.5.2.1}
+\contentsline {subsubsection}{\numberline {5.2.1.1}Sp\IeC {\'e}cifications}{68}{subsubsection.5.2.1.1}
+\contentsline {paragraph}{Remarque}{68}{section*.68}
+\contentsline {subsubsection}{\numberline {5.2.1.2}Impl\IeC {\'e}mentation}{68}{subsubsection.5.2.1.2}
+\contentsline {subsection}{\numberline {5.2.2}Audit 5.2 : SSL version 3}{69}{subsection.5.2.2}
+\contentsline {subsubsection}{\numberline {5.2.2.1}Sp\IeC {\'e}cifications}{69}{subsubsection.5.2.2.1}
+\contentsline {subsubsection}{\numberline {5.2.2.2}Impl\IeC {\'e}mentation}{70}{subsubsection.5.2.2.2}
+\contentsline {paragraph}{Attention}{70}{section*.69}
+\contentsline {paragraph}{Remarque}{70}{section*.70}
+\contentsline {subsubsection}{\numberline {5.2.2.3}Failles}{71}{subsubsection.5.2.2.3}
+\contentsline {subsubsubsection}{\numberline {5.2.2.3.1}CVE-2013-4353}{71}{subsubsubsection.5.2.2.3.1}
+\contentsline {subsubsubsection}{\numberline {5.2.2.3.2}Attaque sur le padding CBC de Serge Vaudenay}{71}{subsubsubsection.5.2.2.3.2}
+\contentsline {subsubsubsection}{\numberline {5.2.2.3.3}CVE-2011-4576}{72}{subsubsubsection.5.2.2.3.3}
+\contentsline {subsection}{\numberline {5.2.3}Audit 5.3 : TLS version 1}{72}{subsection.5.2.3}
+\contentsline {subsubsection}{\numberline {5.2.3.1}Sp\IeC {\'e}cifications}{72}{subsubsection.5.2.3.1}
+\contentsline {paragraph}{Algorithmes suppl\IeC {\'e}mentaires de la RFC 3268}{73}{section*.71}
+\contentsline {paragraph}{Algorithmes suppl\IeC {\'e}mentaires de la RFC 4132}{74}{section*.72}
+\contentsline {paragraph}{Algorithmes suppl\IeC {\'e}mentaires de la RFC 4162}{74}{section*.73}
+\contentsline {paragraph}{Extensions TLS}{75}{section*.74}
+\contentsline {subsubsection}{\numberline {5.2.3.2}Impl\IeC {\'e}mentation}{75}{subsubsection.5.2.3.2}
+\contentsline {subsubsection}{\numberline {5.2.3.3}Failles}{76}{subsubsection.5.2.3.3}
+\contentsline {subsubsubsection}{\numberline {5.2.3.3.1}Attaque sur le padding CBC de Serge Vaudenay}{76}{subsubsubsection.5.2.3.3.1}
+\contentsline {subsection}{\numberline {5.2.4}Audit 5.4 : TLS version 1.1}{76}{subsection.5.2.4}
+\contentsline {subsubsection}{\numberline {5.2.4.1}Sp\IeC {\'e}cifications}{76}{subsubsection.5.2.4.1}
+\contentsline {paragraph}{Algorithmes suppl\IeC {\'e}mentaires de la RFC 5054}{77}{section*.75}
+\contentsline {paragraph}{Extensions TLS}{77}{section*.76}
+\contentsline {subsubsection}{\numberline {5.2.4.2}Impl\IeC {\'e}mentation}{77}{subsubsection.5.2.4.2}
+\contentsline {subsubsection}{\numberline {5.2.4.3}Failles}{78}{subsubsection.5.2.4.3}
+\contentsline {subsubsubsection}{\numberline {5.2.4.3.1}CVE-2012-2333}{78}{subsubsubsection.5.2.4.3.1}
+\contentsline {subsubsubsection}{\numberline {5.2.4.3.2}Lucky Thirteen CVE-2013-0169}{78}{subsubsubsection.5.2.4.3.2}
+\contentsline {subsection}{\numberline {5.2.5}Audit 5.5 : TLS version 1.2}{79}{subsection.5.2.5}
+\contentsline {subsubsection}{\numberline {5.2.5.1}Sp\IeC {\'e}cifications}{79}{subsubsection.5.2.5.1}
+\contentsline {paragraph}{Algorithmes suppl\IeC {\'e}mentaires de la RFC 5289}{79}{section*.77}
+\contentsline {subsubsection}{\numberline {5.2.5.2}Impl\IeC {\'e}mentation}{79}{subsubsection.5.2.5.2}
+\contentsline {subsubsection}{\numberline {5.2.5.3}Failles}{80}{subsubsection.5.2.5.3}
+\contentsline {subsubsubsection}{\numberline {5.2.5.3.1}CVE-2012-2333}{80}{subsubsubsection.5.2.5.3.1}
+\contentsline {subsubsubsection}{\numberline {5.2.5.3.2}CVE-2013-6449}{80}{subsubsubsection.5.2.5.3.2}
+\contentsline {chapter}{\numberline {6}Observations et alternatives}{81}{chapter.6}
+\contentsline {section}{\numberline {6.1}Code OpenSSL}{81}{section.6.1}
+\contentsline {subsection}{\numberline {6.1.1}Documentation}{81}{subsection.6.1.1}
+\contentsline {subsection}{\numberline {6.1.2}Lisibilit\IeC {\'e} du code}{81}{subsection.6.1.2}
+\contentsline {section}{\numberline {6.2}Construction du projet}{83}{section.6.2}
+\contentsline {section}{\numberline {6.3}Alternatives}{83}{section.6.3}
+\contentsline {section}{Conclusion}{84}{section.6.3}
